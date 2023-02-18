@@ -8,6 +8,7 @@ specifiers:
   '@types/node': 18.13.0
   '@types/react': 18.0.28
   '@types/react-dom': 18.0.11
+  dayjs: ^1.11.7
   eslint: 8.34.0
   eslint-config-next: 13.1.6
   http-proxy: ^1.18.1
@@ -22,6 +23,7 @@ specifiers:
 
 dependencies:
   '@next/font': 13.1.6
+  dayjs: 1.11.7
   http-proxy: 1.18.1
   mongodb: 5.0.1
   next: 13.1.6_biqbaboplfbrettd7655fr4n2y
@@ -1617,6 +1619,10 @@ packages:
       whatwg-mimetype: 3.0.0
       whatwg-url: 11.0.0
     dev: true
+
+  /dayjs/1.11.7:
+    resolution: {integrity: sha512-+Yw9U6YO5TQohxLcIkrXBeY73WP3ejHWVvx8XCk3gxvQDCTEmS48ZrSZCKciI7Bhl/uCMyxYtE9UqRILmFphkQ==}
+    dev: false
 
   /debug/3.2.7:
     resolution: {integrity: sha512-CFjzYYAi4ThfiQvizrFQevTTXHtnCqWfe7x1AhgEscTz6ZbLbfoLRLPugTQyBth6f8ZERVUSyWHFD/7Wu4t1XQ==}

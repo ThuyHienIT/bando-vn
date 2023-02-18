@@ -8,4 +8,15 @@ type FacilityItem = {
   address: string;
   phoneNumber: string;
   id: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+type BookingItem = {
+  facilityId: string;
+  from: string;
+  to: string;
+  userEmail: string;
+  createdAt: string;
+  updatedAt: string;
 };

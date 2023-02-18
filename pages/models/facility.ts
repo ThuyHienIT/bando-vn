@@ -1,5 +1,8 @@
 import path from 'path';
 import { promises as fs } from 'fs';
+import dayjs from 'dayjs';
+import { RequsetError } from '../lib/errorClasses';
+import { bookingModel } from './booking';
 
 const DB_DIR = path.join(process.cwd(), 'db');
 const DB_NAME = 'facilities.json';
@@ -22,4 +25,9 @@ async function loadById(id?: string) {
   return data.find((i) => i.id === id);
 }
 
-export const facilityModel = { loadFacilities, loadById };
+async function book(data: BookingItem) {
+  // insert to booking
+  return await bookingModel.insert(data);
+}
+
+export const facilityModel = { loadFacilities, loadById, book };

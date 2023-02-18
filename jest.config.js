@@ -24,6 +24,7 @@ const customJestConfig = {
     '@enums': '<rootDir>/config/enums',
   },
   testEnvironment: 'jest-environment-jsdom',
+  modulePathIgnorePatterns: ['<rootDir>/db/', '<rootDir>/dbtest/'],
 };
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
