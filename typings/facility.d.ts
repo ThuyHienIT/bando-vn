@@ -13,6 +13,7 @@ type FacilityItem = {
 };
 
 type BookingItem = {
+  id: string;
   facilityId: string;
   from: string;
   to: string;

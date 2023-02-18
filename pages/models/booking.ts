@@ -5,15 +5,38 @@ import { RequsetError } from '../lib/errorClasses';
 import { dbModel } from './db';
 import { facilityModel } from './facility';
 
-const DB_DIR = path.join(process.cwd(), 'db');
 const DB_NAME = 'booking.json';
 
 async function insert(data: BookingItem) {
   const errMessage = await verifyPayload(data);
   if (errMessage) throw new RequsetError(400, errMessage);
 
-  // insert to booking
   const inserted = await dbModel.insertOne<BookingItem>(DB_NAME, data);
+  return inserted;
+}
+
+async function loadById<T>(id: string) {
+  const bookings = await dbModel.loadDb<BookingItem>(DB_NAME);
+
+  const data = bookings.find((i) => i.id === id);
+
+  return data as T;
+}
+
+async function update(data: Partial<BookingItem>) {
+  const errMessage = verifyFromTo(data.from, data.to);
+
+  if (errMessage) throw new RequsetError(400, errMessage);
+  if (!data.id) throw new RequsetError(400, 'Booking is not found');
+
+  const booking = await loadById<BookingItem>(data.id);
+  if (!booking) throw new RequsetError(400, 'Booking is not found');
+
+  booking.from = data.from as string;
+  booking.to = data.to as string;
+
+  // insert to booking
+  const inserted = await dbModel.update<BookingItem>(DB_NAME, booking);
   return inserted;
 }
 
@@ -22,11 +45,8 @@ async function verifyPayload(payload: BookingItem) {
   const missingFields = keyToVerify.filter((i) => !Boolean(payload[i]));
   if (missingFields.length > 0) return `Missing fields: ${missingFields.join(', ')}`;
 
-  // from and to validation
-  const today = new Date();
-  if (dayjs(payload.from).isAfter(payload.to)) return 'From should be before To';
-  if (dayjs(payload.from).isBefore(today) || dayjs(payload.to).isBefore(today))
-    return 'From and To should be after current time';
+  const fromToErrMsg = verifyFromTo(payload.from, payload.to);
+  if (fromToErrMsg) return fromToErrMsg;
 
   const facility = await facilityModel.loadById(payload.facilityId);
   if (!Boolean(facility)) return 'Facility cannot be found';
@@ -34,4 +54,16 @@ async function verifyPayload(payload: BookingItem) {
   return '';
 }
 
-export const bookingModel = { insert };
+function verifyFromTo(from: string = '', to: string = '') {
+  if (!from || !to) return 'From or To is missing';
+
+  // from and to validation
+  const today = new Date();
+  if (dayjs(from).isAfter(to)) return 'From should be before To';
+  if (dayjs(from).isBefore(today) || dayjs(to).isBefore(today))
+    return 'From and To should be after current time';
+
+  return '';
+}
+
+export const bookingModel = { insert, update };
