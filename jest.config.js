@@ -19,7 +19,8 @@ const customJestConfig = {
   // For example:
 
   moduleNameMapper: {
-    '@/(.*)$': '<rootDir>/src/$1',
+    '@models/(.*)': '<rootDir>/pages/models/$1',
+    '@apis/(.*)': '<rootDir>/pages/api/$1',
   },
   testEnvironment: 'jest-environment-jsdom',
 };
