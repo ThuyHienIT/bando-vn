@@ -21,6 +21,7 @@ const customJestConfig = {
   moduleNameMapper: {
     '@models/(.*)': '<rootDir>/pages/models/$1',
     '@apis/(.*)': '<rootDir>/pages/api/$1',
+    '@enums': '<rootDir>/config/enums',
   },
   testEnvironment: 'jest-environment-jsdom',
 };

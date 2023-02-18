@@ -20,7 +20,8 @@
       "@app/*": ["./*"],
       "@components/*": ["./app/(components)/*"],
       "@models/*": ["./pages/models/*"],
-      "@apis/*": ["./pages/apis/*"]
+      "@apis/*": ["./pages/api/*"],
+      "@enums": ["./config/enums"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "./typings/*.d.ts"],
