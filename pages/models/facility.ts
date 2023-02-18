@@ -13,4 +13,13 @@ async function loadFacilities(type?: FacilityTypeEnum) {
   return data;
 }
 
-export const facilityModel = { loadFacilities };
+async function loadById(id?: string) {
+  const fileContent = await fs.readFile(path.resolve(DB_DIR, DB_NAME), 'utf-8');
+  const data: FacilityItem[] = JSON.parse(fileContent.toString());
+
+  if (!id) return null;
+
+  return data.find((i) => i.id === id);
+}
+
+export const facilityModel = { loadFacilities, loadById };
