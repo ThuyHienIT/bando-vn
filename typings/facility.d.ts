@@ -8,8 +8,8 @@ type FacilityItem = {
   address: string;
   phoneNumber: string;
   id: string;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string;
+  updatedAt?: string;
 };
 
 type BookingItem = {
@@ -18,6 +18,6 @@ type BookingItem = {
   from: string;
   to: string;
   userEmail: string;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string;
+  updatedAt?: string;
 };

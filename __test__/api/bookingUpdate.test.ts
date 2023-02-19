@@ -1,6 +1,31 @@
 import { createMocks } from 'node-mocks-http';
 import handleRoute from '@apis/booking/update';
 import { randomUUID } from 'crypto';
+import { generateBooking, generateFacility } from '../helpers';
+import { dbModel } from '@models/db';
+import { FacilityTypeEnum } from '@enums';
+
+const FAC_DB_NAME = 'facilities.json';
+const BOOKING_DB_NAME = 'bookings.json';
+let BOOKING_ID: string = '';
+
+beforeAll(async () => {
+  const fac1: FacilityItem = generateFacility(FacilityTypeEnum.Room);
+
+  await dbModel.prepareDb(FAC_DB_NAME);
+  await dbModel.insertOne<FacilityItem>(FAC_DB_NAME, fac1);
+
+  const booking1 = generateBooking(fac1.id);
+
+  await dbModel.prepareDb(BOOKING_DB_NAME);
+  const insertedBooking = await dbModel.insertOne<BookingItem>(BOOKING_DB_NAME, booking1);
+  BOOKING_ID = insertedBooking.id;
+});
+
+afterAll(async () => {
+  await dbModel.clearDb(FAC_DB_NAME);
+  await dbModel.clearDb(BOOKING_DB_NAME);
+});
 
 describe('/api/[booking]/[update]', () => {
   test('not found', async () => {
@@ -21,7 +46,7 @@ describe('/api/[booking]/[update]', () => {
     const { req, res } = createMocks({
       method: 'POST',
       body: {
-        id: 'f388e068-eb4b-4924-bf62-ca4b1e005aca',
+        id: BOOKING_ID,
         from: '2022-04-23T10:30:00Z',
         to: '2022-04-23T11:00:00Z',
       },
@@ -35,7 +60,7 @@ describe('/api/[booking]/[update]', () => {
     const { req, res } = createMocks({
       method: 'POST',
       body: {
-        id: 'f388e068-eb4b-4924-bf62-ca4b1e005aca',
+        id: BOOKING_ID,
         from: '2022-04-23T10:30:00Z',
         to: '2022-04-23T08:00:00Z',
       },
@@ -49,7 +74,7 @@ describe('/api/[booking]/[update]', () => {
     const { req, res } = createMocks({
       method: 'POST',
       body: {
-        id: 'f388e068-eb4b-4924-bf62-ca4b1e005aca',
+        id: BOOKING_ID,
         from: '2023-04-23T10:30:00Z',
         to: '2023-04-23T11:00:00Z',
       },
@@ -59,7 +84,7 @@ describe('/api/[booking]/[update]', () => {
 
     expect(res._getStatusCode()).toBe(200);
     expect(JSON.parse(res._getData())).toMatchObject({
-      id: 'f388e068-eb4b-4924-bf62-ca4b1e005aca',
+      id: BOOKING_ID,
       from: '2023-04-23T10:30:00Z',
       to: '2023-04-23T11:00:00Z',
     });

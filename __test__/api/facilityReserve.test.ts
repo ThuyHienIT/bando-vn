@@ -1,12 +1,32 @@
 import { createMocks } from 'node-mocks-http';
 import handleRoute from '@apis/facility/reserve';
+import { dbModel } from '@models/db';
+import { generateFacility } from '../helpers';
+import { FacilityTypeEnum } from '@enums';
+import { promises as fs } from 'fs';
+import path from 'path';
+
+const DB_NAME = 'facilities.json';
+let FAC_ID = '';
 
 describe('/api/[facility]/[reserve]', () => {
+  beforeAll(async () => {
+    const fac = generateFacility(FacilityTypeEnum.Room, 'Facility Reserve');
+    FAC_ID = fac.id;
+
+    await dbModel.prepareDb(DB_NAME);
+    await dbModel.insertOne<FacilityItem>(DB_NAME, fac);
+  });
+
+  afterAll(async () => {
+    await dbModel.clearDb(DB_NAME);
+  });
+
   test('submit missing data: userEmail is empty', async () => {
     const { req, res } = createMocks({
       method: 'POST',
       body: {
-        facilityId: '11825af9-95bb-453e-9f31-2796598123b52',
+        facilityId: 'invalid-facility-id',
         from: '2022-04-23T23:30:00Z',
         to: '2022-05-23T24:00:00Z',
         userEmail: '',
@@ -21,7 +41,7 @@ describe('/api/[facility]/[reserve]', () => {
     const { req, res } = createMocks({
       method: 'POST',
       body: {
-        facilityId: '11825af9-95bb-453e-9f31-2796598123b52',
+        facilityId: 'invalid-facility-id',
         from: '2022-04-23T23:30:00Z',
         to: '2022-05-23T24:00:00Z',
         userEmail: 'kqthang1505@gmail.com',
@@ -66,7 +86,7 @@ describe('/api/[facility]/[reserve]', () => {
     const { req, res } = createMocks({
       method: 'POST',
       body: {
-        facilityId: '11825af9-95bb-453e-9f31-2796598123b5',
+        facilityId: FAC_ID,
         from: '2023-04-23T10:30:00Z',
         to: '2023-04-23T11:00:00Z',
         userEmail: 'kqthang1505@gmail.com',
@@ -75,11 +95,12 @@ describe('/api/[facility]/[reserve]', () => {
 
     await handleRoute(req, res);
 
+    const updatedData = JSON.parse(res._getData());
+
     expect(res._getStatusCode()).toBe(200);
 
-    const updatedData = JSON.parse(res._getData());
     expect(updatedData).toMatchObject({
-      facilityId: '11825af9-95bb-453e-9f31-2796598123b5',
+      facilityId: FAC_ID,
       from: '2023-04-23T10:30:00Z',
       to: '2023-04-23T11:00:00Z',
       userEmail: 'kqthang1505@gmail.com',

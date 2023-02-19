@@ -8,7 +8,6 @@ export default async function routeHandler(req: NextApiRequest, res: NextApiResp
 
     return res.status(200).json(data);
   } catch (e: any) {
-    console.log('Fetching facilities ERROR::', e);
     return res.status(500).json({ message: 'Something went wrong. Please try again later.' });
   }
 }

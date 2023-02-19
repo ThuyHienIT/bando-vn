@@ -3,13 +3,13 @@ import { promises as fs } from 'fs';
 import dayjs from 'dayjs';
 import { RequsetError } from '../lib/errorClasses';
 import { bookingModel } from './booking';
+import { dbModel } from './db';
 
 const DB_DIR = path.join(process.cwd(), 'db');
 const DB_NAME = 'facilities.json';
 
 async function loadFacilities(type?: FacilityTypeEnum) {
-  const fileContent = await fs.readFile(path.resolve(DB_DIR, DB_NAME), 'utf-8');
-  const data: FacilityItem[] = JSON.parse(fileContent.toString());
+  const data = await dbModel.loadDb<FacilityItem>(DB_NAME);
 
   if (type) return data.filter((i) => i.type === type);
 
@@ -17,9 +17,7 @@ async function loadFacilities(type?: FacilityTypeEnum) {
 }
 
 async function loadById(id?: string) {
-  const fileContent = await fs.readFile(path.resolve(DB_DIR, DB_NAME), 'utf-8');
-  const data: FacilityItem[] = JSON.parse(fileContent.toString());
-
+  const data = await dbModel.loadDb<FacilityItem>(DB_NAME);
   if (!id) return null;
 
   return data.find((i) => i.id === id);
