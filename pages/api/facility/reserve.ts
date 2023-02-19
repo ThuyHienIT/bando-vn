@@ -1,7 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { facilityModel } from '@models/facility';
-import { bookingModel } from '@app/pages/models/booking';
-import { RequsetError } from '@app/pages/lib/errorClasses';
 
 export default async function routeHandler(req: NextApiRequest, res: NextApiResponse) {
   try {

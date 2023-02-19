@@ -3,8 +3,6 @@ import handleRoute from '@apis/facility/reserve';
 import { dbModel } from '@models/db';
 import { generateFacility } from '../helpers';
 import { FacilityTypeEnum } from '@enums';
-import { promises as fs } from 'fs';
-import path from 'path';
 
 const DB_NAME = 'facilities.json';
 let FAC_ID = '';

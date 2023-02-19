@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer renders footer unchanged 1`] = `
+<div>
+  <footer
+    class="ant-layout-footer"
+    style="padding: 8px 0px;"
+  >
+    <div
+      class="sc-bcXHqe kobKKs"
+    >
+      <span
+        class="ant-typography ant-typography-secondary css-dev-only-do-not-override-diro6f"
+      >
+        <small>
+          © Created by Thang Kieu
+        </small>
+      </span>
+    </div>
+  </footer>
+</div>
+`;

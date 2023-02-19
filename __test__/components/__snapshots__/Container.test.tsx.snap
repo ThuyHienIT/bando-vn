@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Container renders container unchanged 1`] = `
+<div>
+  <div
+    class="sc-bcXHqe kobKKs"
+  >
+    Hello World!
+  </div>
+</div>
+`;

@@ -18,9 +18,9 @@ interface Props {
 export const BasicLayout = memo<Props>(function BasicLayout(props) {
   return (
     <Layout>
-      <Header>Header</Header>
+      <Header />
       <Content className="site-layout">{props.children}</Content>
-      <Footer>Footer</Footer>
+      <Footer />
     </Layout>
   );
 });

@@ -3,7 +3,7 @@
 import Image from 'next/image';
 // import { memo } from 'react';
 // import { Card, Typography } from 'antd';
-import { FacilityItemCmp } from '@app/app/(client)/components/FacilityItem';
+import { FacilityItemCmp } from '@components/FacilityItem';
 import { Col, Row, Typography } from 'antd';
 import styled from 'styled-components';
 import Link from 'next/link';
