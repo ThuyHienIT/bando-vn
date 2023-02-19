@@ -8,6 +8,7 @@ type FacilityItem = {
   address: string;
   phoneNumber: string;
   id: string;
+  thumbnail?: string;
   createdAt?: string;
   updatedAt?: string;
 };

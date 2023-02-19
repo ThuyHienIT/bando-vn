@@ -22,6 +22,7 @@ const customJestConfig = {
     '@models/(.*)': '<rootDir>/pages/models/$1',
     '@apis/(.*)': '<rootDir>/pages/api/$1',
     '@enums': '<rootDir>/config/enums',
+    '@components/(.*)': '<rootDir>/app/(client)/components/$1',
   },
   testEnvironment: 'jest-environment-jsdom',
   modulePathIgnorePatterns: ['<rootDir>/db/', '<rootDir>/dbtest/'],
