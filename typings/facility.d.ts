@@ -21,4 +21,5 @@ type BookingItem = {
   userEmail: string;
   createdAt?: string;
   updatedAt?: string;
+  facility?: FacilityItem;
 };

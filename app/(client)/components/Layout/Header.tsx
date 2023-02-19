@@ -3,6 +3,7 @@
 import { ProfileOutlined } from '@ant-design/icons';
 import { Layout, Typography } from 'antd';
 import Image from 'next/image';
+import Link from 'next/link';
 import { memo } from 'react';
 import styled from 'styled-components';
 import { UserProfile } from '../UserProfile';
@@ -36,10 +37,12 @@ export const Header = memo<Props>(function Header(props) {
   return (
     <HeaderStyle>
       <HeaderContent>
-        <Logo>
-          <Image src="/logo.png" alt="Facility Booking" width={30} height={30} />
-          <Typography.Title level={4}>Facility Booking</Typography.Title>
-        </Logo>
+        <Link href="/">
+          <Logo>
+            <Image src="/logo.png" alt="Facility Booking" width={30} height={30} />
+            <Typography.Title level={4}>Facility Booking</Typography.Title>
+          </Logo>
+        </Link>
         <UserProfile />
       </HeaderContent>
     </HeaderStyle>
