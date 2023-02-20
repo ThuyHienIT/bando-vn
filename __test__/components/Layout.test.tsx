@@ -1,8 +1,7 @@
-import { render, screen } from '@testing-library/react';
-// import Home from '../pages/index'
 import '@testing-library/jest-dom';
+
 import { BasicLayout } from '@components/Layout/Layout';
-import 'jest-styled-components';
+import { render } from '@testing-library/react';
 
 describe('Layout', () => {
   it('renders header unchanged', () => {

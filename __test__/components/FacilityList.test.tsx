@@ -1,11 +1,10 @@
-import '../lib/matchMedia.mock';
 import '@testing-library/jest-dom';
-import 'jest-styled-components';
 
-import { render, screen } from '@testing-library/react';
 import { generateFacility } from '__test__/helpers';
-import { FacilityTypeEnum } from '@enums';
+
 import { FacilityList } from '@components/FacilityList';
+import { FacilityTypeEnum } from '@enums';
+import { render, screen } from '@testing-library/react';
 
 describe('Facility List', () => {
   it('renders facility card as expected', () => {

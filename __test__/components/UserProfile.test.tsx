@@ -1,8 +1,7 @@
-import { fireEvent, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import 'jest-styled-components';
+
 import { UserProfile } from '@components/UserProfile';
-import { act } from 'react-dom/test-utils';
+import { render } from '@testing-library/react';
 
 describe('UserProfile', () => {
   // it('Showing Your Bookings when click on the button', async () => {

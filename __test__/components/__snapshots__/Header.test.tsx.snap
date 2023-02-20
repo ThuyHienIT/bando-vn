@@ -1,33 +1,86 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Header renders header unchanged 1`] = `
+.c1 {
+  max-width: 1080px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 16px;
+  padding-right: 16px;
+  width: 100%;
+}
+
+.c0 {
+  border-bottom: 2px solid #dddddd;
+}
+
+.c0.c0.c0 {
+  background-color: #fff;
+}
+
+.c2 {
+  height: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.c3 .ant-typography {
+  margin-bottom: 0;
+}
+
 <div>
   <header
-    class="ant-layout-header sc-gswNZR cjbgdl"
+    class="ant-layout-header c0"
   >
     <div
-      class="sc-bcXHqe kobKKs sc-dkrFOg bSnOdh"
+      class="c1 c2"
     >
-      <div
-        class="sc-hLBbgP cRaTMW"
+      <a
+        href="/"
       >
-        <img
-          alt="Facility Booking"
-          data-nimg="1"
-          decoding="async"
-          height="30"
-          loading="lazy"
-          src="/_next/image?url=%2Flogo.png&w=64&q=75"
-          srcset="/_next/image?url=%2Flogo.png&w=32&q=75 1x, /_next/image?url=%2Flogo.png&w=64&q=75 2x"
-          style="color: transparent;"
-          width="30"
-        />
-        <h4
-          class="ant-typography css-dev-only-do-not-override-diro6f"
+        <div
+          class="c3"
         >
-          Facility Booking
-        </h4>
-      </div>
+          <img
+            alt="Facility Booking"
+            data-nimg="1"
+            decoding="async"
+            height="30"
+            loading="lazy"
+            src="/_next/image?url=%2Flogo.png&w=64&q=75"
+            srcset="/_next/image?url=%2Flogo.png&w=32&q=75 1x, /_next/image?url=%2Flogo.png&w=64&q=75 2x"
+            style="color: transparent;"
+            width="30"
+          />
+          <h4
+            class="ant-typography css-dev-only-do-not-override-diro6f"
+          >
+            Facility Booking
+          </h4>
+        </div>
+      </a>
       <button
         class="ant-btn css-dev-only-do-not-override-diro6f ant-btn-circle ant-btn-default ant-dropdown-trigger"
         type="button"

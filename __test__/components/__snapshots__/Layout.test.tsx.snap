@@ -7,6 +7,11 @@ exports[`Layout renders header unchanged 1`] = `
   margin-right: auto;
   padding-left: 16px;
   padding-right: 16px;
+  width: 100%;
+}
+
+.c0 {
+  border-bottom: 2px solid #dddddd;
 }
 
 .c0.c0.c0 {
@@ -45,12 +50,6 @@ exports[`Layout renders header unchanged 1`] = `
   margin-bottom: 0;
 }
 
-.c4 {
-  max-width: 1080px;
-  margin: 16px auto;
-  padding: 0 16px;
-}
-
 <div>
   <section
     class="ant-layout css-dev-only-do-not-override-diro6f"
@@ -61,26 +60,30 @@ exports[`Layout renders header unchanged 1`] = `
       <div
         class="c1 c2"
       >
-        <div
-          class="c3"
+        <a
+          href="/"
         >
-          <img
-            alt="Facility Booking"
-            data-nimg="1"
-            decoding="async"
-            height="30"
-            loading="lazy"
-            src="/_next/image?url=%2Flogo.png&w=64&q=75"
-            srcset="/_next/image?url=%2Flogo.png&w=32&q=75 1x, /_next/image?url=%2Flogo.png&w=64&q=75 2x"
-            style="color: transparent;"
-            width="30"
-          />
-          <h4
-            class="ant-typography css-dev-only-do-not-override-diro6f"
+          <div
+            class="c3"
           >
-            Facility Booking
-          </h4>
-        </div>
+            <img
+              alt="Facility Booking"
+              data-nimg="1"
+              decoding="async"
+              height="30"
+              loading="lazy"
+              src="/_next/image?url=%2Flogo.png&w=64&q=75"
+              srcset="/_next/image?url=%2Flogo.png&w=32&q=75 1x, /_next/image?url=%2Flogo.png&w=64&q=75 2x"
+              style="color: transparent;"
+              width="30"
+            />
+            <h4
+              class="ant-typography css-dev-only-do-not-override-diro6f"
+            >
+              Facility Booking
+            </h4>
+          </div>
+        </a>
         <button
           class="ant-btn css-dev-only-do-not-override-diro6f ant-btn-circle ant-btn-default ant-dropdown-trigger"
           type="button"
@@ -108,9 +111,13 @@ exports[`Layout renders header unchanged 1`] = `
       </div>
     </header>
     <main
-      class="ant-layout-content c4 site-layout"
+      class="ant-layout-content site-layout"
     >
-      Hello World!
+      <div
+        class="c1 main-container"
+      >
+        Hello World!
+      </div>
     </main>
     <footer
       class="ant-layout-footer"

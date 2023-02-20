@@ -1,9 +1,10 @@
-import { render, screen } from '@testing-library/react';
-// import Home from '../pages/index'
 import '@testing-library/jest-dom';
-import { FacilityItemCmp } from '@components/FacilityItem';
+
 import { generateFacility } from '__test__/helpers';
+
+import { FacilityItemCmp } from '@components/FacilityItem';
 import { FacilityTypeEnum } from '@enums';
+import { render, screen } from '@testing-library/react';
 
 describe('Facility Item', () => {
   it('renders facility card as expected', () => {
