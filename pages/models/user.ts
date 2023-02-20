@@ -3,7 +3,7 @@
 import { bookingModel } from './booking';
 
 async function loadBookings(userEmail: string, type?: FacilityTypeEnum) {
-  const bookings = await bookingModel.loadBookingsByUser(userEmail, type);
+  const bookings = await bookingModel.loadByUser(userEmail, type);
 
   return bookings;
 }

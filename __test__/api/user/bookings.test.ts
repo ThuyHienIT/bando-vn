@@ -1,12 +1,11 @@
 import { createMocks } from 'node-mocks-http';
+
 import handleRoute from '@apis/user/bookings';
-import { facilityModel } from '@models/facility';
 import { FacilityTypeEnum } from '@enums';
-import { userModel } from '@models/user';
 import { dbModel } from '@models/db';
-import { randomUUID } from 'crypto';
-import { generateBooking, generateFacility } from '../helpers';
-import { bookingModel } from '@models/booking';
+import { userModel } from '@models/user';
+
+import { generateBooking, generateFacility } from '../../helpers';
 
 const FAC_DB_NAME = 'facilities.json';
 const BOOKING_DB_NAME = 'bookings.json';
@@ -32,8 +31,8 @@ describe('/api/[user]/bookings', () => {
   });
 
   afterAll(async () => {
-    // await dbModel.clearDb(FAC_DB_NAME);
-    // await dbModel.clearDb(BOOKING_DB_NAME);
+    await dbModel.clearDb(FAC_DB_NAME);
+    await dbModel.clearDb(BOOKING_DB_NAME);
   });
 
   test('return 404 if cannot found user', async () => {

@@ -1,6 +1,6 @@
 import { createMocks } from 'node-mocks-http';
+
 import handleRoute from '@apis/facility/[id]';
-import { facilityModel } from '@models/facility';
 import { dbModel } from '@models/db';
 
 const DB_NAME = 'facilities.json';

@@ -1,9 +1,11 @@
-import { createMocks } from 'node-mocks-http';
-import handleRoute from '@apis/booking/update';
 import { randomUUID } from 'crypto';
-import { generateBooking, generateFacility } from '../helpers';
-import { dbModel } from '@models/db';
+import { createMocks } from 'node-mocks-http';
+
+import handleRoute from '@apis/booking/update';
 import { FacilityTypeEnum } from '@enums';
+import { dbModel } from '@models/db';
+
+import { generateBooking, generateFacility } from '../../helpers';
 
 const FAC_DB_NAME = 'facilities.json';
 const BOOKING_DB_NAME = 'bookings.json';
