@@ -15,6 +15,7 @@ export const configProviders: ConfigProviderProps = {
     token: {
       colorPrimary: '#509f53',
       fontFamily: 'Roboto, sans-serif',
+      colorBgLayout: '#ffffff',
     },
   },
 };

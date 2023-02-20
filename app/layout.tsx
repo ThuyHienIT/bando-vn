@@ -1,6 +1,9 @@
-import { BasicLayout } from '@components/Layout/Layout';
-import { App } from '@components/App';
 import './globals.css';
+
+import { App } from '@components/App';
+import { BasicLayout } from '@components/Layout/Layout';
+
+import StyledComponentsRegistry from './lib/registry';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -11,9 +14,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       */}
       <head />
       <body>
-        <App>
-          <BasicLayout>{children}</BasicLayout>
-        </App>
+        <StyledComponentsRegistry>
+          <App>
+            <BasicLayout>{children}</BasicLayout>
+          </App>
+        </StyledComponentsRegistry>
       </body>
     </html>
   );

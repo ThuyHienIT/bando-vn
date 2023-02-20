@@ -1,15 +1,17 @@
 'use client';
 
-import { ProfileOutlined } from '@ant-design/icons';
 import { Layout, Typography } from 'antd';
 import Image from 'next/image';
 import Link from 'next/link';
 import { memo } from 'react';
 import styled from 'styled-components';
+
 import { UserProfile } from '../UserProfile';
 import { Container } from './Container';
 
 const HeaderStyle = styled(Layout.Header)`
+  border-bottom: 2px solid #dddddd;
+
   &&& {
     background-color: #fff;
   }
