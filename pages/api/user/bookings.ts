@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { bookingModel } from '@models/booking';
+
 import { userModel } from '@models/user';
 
 export default async function routeHandler(req: NextApiRequest, res: NextApiResponse) {
