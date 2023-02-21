@@ -60,7 +60,8 @@ async function loadByUser(userEmail: string, type?: FacilityTypeEnum) {
   const bookings = await loadBookings();
 
   let userBookings = bookings.filter((i) => i.userEmail === userEmail);
-  if (type) userBookings = userBookings.filter((i) => i.facility?.type === type);
+  if (type)
+    userBookings = userBookings.filter((i) => i.facility?.type === type);
 
   return userBookings;
 }
@@ -72,19 +73,48 @@ async function loadByFacilityId(id: string) {
   return foundBookings;
 }
 
+async function cancel(id: string) {
+  // insert to booking
+  const removed = await dbModel.remove(DB_NAME, id);
+  if (!removed) throw new RequsetError(400, 'Cannot cancel this booking');
+
+  return { message: 'Cancel booking successful' };
+}
+
+export const bookingModel = {
+  insert,
+  update,
+  cancel,
+  loadByUser,
+  loadById,
+  loadByFacilityId,
+};
+
+// UTILITIES
 async function verifyBooking(payload: BookingItem) {
-  const keyToVerify: Array<keyof BookingItem> = ['facilityId', 'from', 'to', 'userEmail'];
+  const keyToVerify: Array<keyof BookingItem> = [
+    'facilityId',
+    'from',
+    'to',
+    'userEmail',
+  ];
   const missingFields = keyToVerify.filter((i) => !Boolean(payload[i]));
-  if (missingFields.length > 0) return `Missing fields: ${missingFields.join(', ')}`;
+  if (missingFields.length > 0)
+    return `Missing fields: ${missingFields.join(', ')}`;
 
   const fromToErrMsg = verifyFromTo(payload.from, payload.to);
   if (fromToErrMsg) return fromToErrMsg;
 
   const facility = await facilityModel.loadById(payload.facilityId);
-  if (!Boolean(facility)) return 'Facility cannot be found ' + payload.facilityId;
+  if (!Boolean(facility))
+    return 'Facility cannot be found ' + payload.facilityId;
 
   // verify if the slot is occupied
-  const slotValidateMsg = verifySlot(payload.facilityId, payload.from, payload.to);
+  const slotValidateMsg = verifySlot(
+    payload.facilityId,
+    payload.from,
+    payload.to
+  );
   if (slotValidateMsg) return slotValidateMsg;
 
   return '';
@@ -124,5 +154,3 @@ async function verifySlot(facilityId: string, from: string, to: string) {
 
   return '';
 }
-
-export const bookingModel = { insert, update, loadByUser, loadById, loadByFacilityId };

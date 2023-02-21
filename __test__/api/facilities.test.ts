@@ -1,8 +1,9 @@
 import { createMocks } from 'node-mocks-http';
+
 import handleRoute from '@apis/facilities';
-import { facilityModel } from '@models/facility';
 import { FacilityTypeEnum } from '@enums';
 import { dbModel } from '@models/db';
+import { facilityModel } from '@models/facility';
 
 const DB_NAME = 'facilities.json';
 beforeAll(async () => {
@@ -18,7 +19,7 @@ beforeAll(async () => {
     amenities:
       'Friend ok nation international line another within.\nUp rate when sometimes probably measure with. Product town sort. Include even alone certain.',
     type: 'room',
-    operationHours: [['8:00', '19:00']],
+    operationHours: ['8:00', '19:00'],
     offDays: ['2022-04-23T23:18:53Z'],
   });
 
@@ -32,7 +33,7 @@ beforeAll(async () => {
     amenities:
       'Friend ok nation international line another within.\nUp rate when sometimes probably measure with. Product town sort. Include even alone certain.',
     type: 'facility',
-    operationHours: [['8:00', '19:00']],
+    operationHours: ['8:00', '19:00'],
     offDays: ['2022-04-23T23:18:53Z'],
   });
 });

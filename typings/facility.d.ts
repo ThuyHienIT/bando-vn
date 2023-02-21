@@ -3,7 +3,7 @@ type FacilityItem = {
   name: string;
   description: string;
   amenities: string;
-  operationHours: [string, string][]; // [[from, to], [from, to]]
+  operationHours: [string, string];
   offDays: string[];
   address: string;
   phoneNumber: string;

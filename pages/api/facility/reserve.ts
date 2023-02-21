@@ -1,9 +1,11 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import { tryParseJson } from 'pages/lib/tryParseJSON';
+
 import { facilityModel } from '@models/facility';
 
 export default async function routeHandler(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const data = await facilityModel.book(req.body);
+    const data = await facilityModel.book(tryParseJson(req.body));
 
     return res.status(200).json(data);
   } catch (e: any) {

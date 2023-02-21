@@ -14,7 +14,7 @@ export function generateFacility(
     amenities:
       'Friend ok nation international line another within.\nUp rate when sometimes probably measure with. Product town sort. Include even alone certain.',
     type: type,
-    operationHours: [['8:00', '19:00']],
+    operationHours: ['8:00', '19:00'],
     offDays: ['2022-04-23T23:18:53Z'],
   };
 }
