@@ -20,7 +20,10 @@ interface Props {
   to?: Dayjs;
   data?: FacilityItem;
   opened: boolean;
+  isUpdate?: boolean;
+  bookingId?: string;
   onClose(): void;
+  onDone?(item?: BookingItem): void;
 }
 
 type FormValues = {
@@ -28,7 +31,7 @@ type FormValues = {
   from: Dayjs;
   to: Dayjs;
 };
-export function BookingModal({ onClose, ...props }: Props) {
+export function BookingModal({ onClose, onDone, ...props }: Props) {
   const [form] = useForm<FormValues>();
   const [loading, setLoading] = useState(false);
   const [api, contextHolder] = notification.useNotification();
@@ -44,7 +47,11 @@ export function BookingModal({ onClose, ...props }: Props) {
           .set('minute', 0)
           .set('second', 0);
 
-        const resp = await request('/api/facility/reserve', {
+        const url = props.isUpdate
+          ? '/api/booking/update'
+          : '/api/facility/reserve';
+
+        const resp = await request(url, {
           method: 'POST',
           body: JSON.stringify({
             facilityId: props.data?.id,
@@ -57,26 +64,28 @@ export function BookingModal({ onClose, ...props }: Props) {
               .add(values.to.get('hour'), 'hour')
               .add(values.to.get('minute'), 'minute'),
             userEmail: 'kqthang1505@gmail.com',
+            ...(props.bookingId ? { id: props.bookingId } : {}),
           }),
         });
 
         api.success({
-          message: `Reserve a slot on ${values.date.format(
-            'DD MMM YYYY'
-          )}, from ${values.from.format('HH:mm')} - to ${values.to.format(
-            'HH:mm'
-          )} successfully`,
-          duration: 200,
+          message: props.isUpdate
+            ? 'Update booking successful'
+            : `Reserve a slot on ${values.date.format(
+                'DD MMM YYYY'
+              )}, from ${values.from.format('HH:mm')} - to ${values.to.format(
+                'HH:mm'
+              )} successfully`,
         });
-        onClose();
-      } catch (e: RequestError) {
+        onDone?.(resp);
+      } catch (e: any) {
         console.log('e', e);
         api.error({ message: e.message });
       } finally {
         setLoading(false);
       }
     },
-    [onClose, props.data?.id, api]
+    [props.isUpdate, props.data?.id, props.bookingId, api, onDone]
   );
 
   const handleOK = useCallback(() => {

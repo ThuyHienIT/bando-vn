@@ -18,6 +18,7 @@ async function loadBookings() {
   const updatedBookings = bookings.map(({ facilityId, ...b }) => ({
     ...b,
     facility: facilitiesCol[facilityId],
+    facilityId,
   }));
 
   return updatedBookings as Omit<BookingItem, 'facilityId'>[];
@@ -32,7 +33,7 @@ async function insert(data: BookingItem) {
 }
 
 async function loadById<T>(id: string) {
-  const bookings = await dbModel.loadDb<BookingItem>(DB_NAME);
+  const bookings = await loadBookings();
 
   const data = bookings.find((i) => i.id === id);
 
@@ -53,7 +54,9 @@ async function update(data: Partial<BookingItem>) {
 
   // insert to booking
   const inserted = await dbModel.update<BookingItem>(DB_NAME, booking);
-  return inserted;
+  const updated = await loadById(inserted.id);
+
+  return updated;
 }
 
 async function loadByUser(userEmail: string, type?: FacilityTypeEnum) {

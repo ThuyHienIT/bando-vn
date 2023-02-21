@@ -1,14 +1,12 @@
 'use client';
 
-import Image from 'next/image';
-// import { memo } from 'react';
-// import { Card, Typography } from 'antd';
-import { FacilityItemCmp } from '@components/FacilityItem';
 import { Col, Empty, Row, Typography } from 'antd';
-import styled from 'styled-components';
 import Link from 'next/link';
 import { useMemo } from 'react';
+import styled from 'styled-components';
+
 import { DoubleRightOutlined } from '@ant-design/icons';
+
 import { BookingItem } from './BookingItem';
 
 const ColStyle = styled(Col)``;
@@ -29,6 +27,8 @@ interface Props {
   max?: number;
   viewAllLink?: string;
   className?: string;
+  onCancel?(item: BookingItem): void;
+  onEdit?(item: BookingItem): void;
 }
 
 export function BookingList(props: Props) {
@@ -46,7 +46,11 @@ export function BookingList(props: Props) {
         <ListStyle gutter={16}>
           {listData.map((item) => (
             <ColStyle key={item.id} md={6}>
-              <BookingItem data={item} />
+              <BookingItem
+                data={item}
+                onCancel={props.onCancel}
+                onEdit={props.onEdit}
+              />
             </ColStyle>
           ))}
         </ListStyle>
