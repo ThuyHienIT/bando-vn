@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 
-import { RequsetError } from '../lib/errorClasses';
+import { RequestError } from '../lib/errorClasses';
 import { dbModel } from './db';
 import { facilityModel } from './facility';
 
@@ -25,7 +25,7 @@ async function loadBookings() {
 
 async function insert(data: BookingItem) {
   const errMessage = await verifyBooking(data);
-  if (errMessage) throw new RequsetError(400, errMessage);
+  if (errMessage) throw new RequestError(400, errMessage);
 
   const inserted = await dbModel.insertOne<BookingItem>(DB_NAME, data);
   return inserted;
@@ -42,11 +42,11 @@ async function loadById<T>(id: string) {
 async function update(data: Partial<BookingItem>) {
   const errMessage = verifyFromTo(data.from, data.to);
 
-  if (errMessage) throw new RequsetError(400, errMessage);
-  if (!data.id) throw new RequsetError(400, 'Booking is not found');
+  if (errMessage) throw new RequestError(400, errMessage);
+  if (!data.id) throw new RequestError(400, 'Booking is not found');
 
   const booking = await loadById<BookingItem>(data.id);
-  if (!booking) throw new RequsetError(400, 'Booking is not found');
+  if (!booking) throw new RequestError(400, 'Booking is not found');
 
   booking.from = data.from as string;
   booking.to = data.to as string;
@@ -76,7 +76,7 @@ async function loadByFacilityId(id: string) {
 async function cancel(id: string) {
   // insert to booking
   const removed = await dbModel.remove(DB_NAME, id);
-  if (!removed) throw new RequsetError(400, 'Cannot cancel this booking');
+  if (!removed) throw new RequestError(400, 'Cannot cancel this booking');
 
   return { message: 'Cancel booking successful' };
 }

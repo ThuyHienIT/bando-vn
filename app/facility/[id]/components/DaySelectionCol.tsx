@@ -62,7 +62,11 @@ export const DaySelectionCol = memo(function DaySelectionCol(props: Props) {
 
       const pos = e.clientY - containerTop + containerScrollTop;
       const [hour, min] = positionToTime(pos, 40);
-      const from = props.date.clone().set('second', 0).set('hour', hour).set('minute', min);
+      const from = props.date
+        .clone()
+        .set('second', 0)
+        .set('hour', hour)
+        .set('minute', min);
 
       props.onClick?.([from, from.clone().add(30, 'minute')]);
     },
@@ -70,25 +74,25 @@ export const DaySelectionCol = memo(function DaySelectionCol(props: Props) {
   );
 
   const occupiedSlots = useMemo(() => {
-    return props.occupiedSlots?.map(([from, to]) => {
-      if (!props.date.isSame(from, 'date')) return <></>;
+    return props.occupiedSlots
+      ?.filter(([from]) => props.date.isSame(from, 'date'))
+      .map(([from, to]) => {
+        const fromDayjs = dayjs(from);
+        const toDayjs = dayjs(to);
 
-      const fromDayjs = dayjs(from);
-      const toDayjs = dayjs(to);
-
-      return (
-        <SlotStyle
-          key={from + to}
-          style={{
-            top: timeToPosition(fromDayjs.format('HH:mm'), 40),
-            height: durationToHeight(toDayjs.diff(fromDayjs, 'minute')),
-          }}
-          onClick={disabledClick}
-        >
-          Booked
-        </SlotStyle>
-      );
-    });
+        return (
+          <SlotStyle
+            key={from + to}
+            style={{
+              top: timeToPosition(fromDayjs.format('HH:mm'), 40),
+              height: durationToHeight(toDayjs.diff(fromDayjs, 'minute')),
+            }}
+            onClick={disabledClick}
+          >
+            Booked
+          </SlotStyle>
+        );
+      });
   }, [props.date, props.occupiedSlots]);
 
   const notWorkingSlots = useMemo(() => {
@@ -96,12 +100,16 @@ export const DaySelectionCol = memo(function DaySelectionCol(props: Props) {
 
     const [fromStr, toStr] = props.operationHours;
 
-    const fromMin = dayjs(fromStr, 'HH:mm').diff(dayjs('00:00', 'HH:mm'), 'minute');
+    const fromMin = dayjs(fromStr, 'HH:mm').diff(
+      dayjs('00:00', 'HH:mm'),
+      'minute'
+    );
     const toMin = dayjs('23:59', 'HH:mm').diff(dayjs(toStr, 'HH:mm'), 'minute');
 
     return (
       <>
         <NotWorkingBox
+          key="morning"
           style={{
             top: 0,
             height: durationToHeight(fromMin),
@@ -109,6 +117,7 @@ export const DaySelectionCol = memo(function DaySelectionCol(props: Props) {
           onClick={disabledClick}
         />
         <NotWorkingBox
+          key="evening"
           style={{
             top: timeToPosition(toStr, 40),
             height: durationToHeight(toMin),
@@ -117,10 +126,12 @@ export const DaySelectionCol = memo(function DaySelectionCol(props: Props) {
         />
       </>
     );
-  }, [props.operationHours]);
+  }, [props.disabled, props.operationHours]);
 
   useEffect(() => {
-    const scroller = document.getElementById('js-weekview-container') as HTMLDivElement;
+    const scroller = document.getElementById(
+      'js-weekview-container'
+    ) as HTMLDivElement;
     scrollerRef.current = scroller;
   }, []);
 

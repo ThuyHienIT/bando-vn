@@ -1,7 +1,7 @@
 import { randomUUID } from 'crypto';
 import dayjs from 'dayjs';
 import { promises as fs } from 'fs';
-import { RequsetError } from 'pages/lib/errorClasses';
+import { RequestError } from 'pages/lib/errorClasses';
 import path from 'path';
 
 import { tryParseJson } from '../lib/tryParseJSON';
@@ -86,7 +86,7 @@ async function remove(dbName: string, id: string) {
   let data = await loadDb<RecordType>(dbName);
   const foundItemIdx = data.findIndex((i) => i.id === id);
 
-  if (foundItemIdx < 0) throw new RequsetError(400, 'Item not found');
+  if (foundItemIdx < 0) throw new RequestError(400, 'Item not found');
   data.splice(foundItemIdx, 1);
 
   await writeFile(dbName, JSON.stringify(data, null, 2));

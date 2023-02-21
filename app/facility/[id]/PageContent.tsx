@@ -1,10 +1,11 @@
 'use client';
 
-import { Calendar, Col, Row, Typography } from 'antd';
+import { Col, Row, Typography } from 'antd';
 import { Dayjs } from 'dayjs';
 import { useState } from 'react';
 import styled from 'styled-components';
 
+import { MonthCalendar } from './components/MonthCalendar';
 import { WeekView } from './components/WeekView';
 
 const CalendarContainer = styled(Row)`
@@ -33,7 +34,10 @@ export function PageContent(props: Props) {
       </Typography.Title>
       <CalendarContainer gutter={16}>
         <Col md={8}>
-          <Calendar fullscreen={false} onChange={setSelectedDate} />
+          <MonthCalendar
+            defaultValue={selectedDate}
+            onChange={setSelectedDate}
+          />
           <Typography.Title level={5} style={{ marginTop: 32 }}>
             About this facility:
           </Typography.Title>
