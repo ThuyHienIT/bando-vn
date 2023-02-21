@@ -1,9 +1,9 @@
 'use client';
 
-import { ConfigProvider, Layout } from 'antd';
+import { ConfigProvider } from 'antd';
 import { memo } from 'react';
-import styled from 'styled-components';
 import { ThemeProvider } from 'styled-components';
+
 import { configProviders } from '../antd-theme';
 import { theme } from '../theme';
 

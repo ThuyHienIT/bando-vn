@@ -8,19 +8,21 @@ import { Container } from './Container';
 import { Footer } from './Footer';
 import { Header } from './Header';
 
-const Content = styled(Layout.Content)``;
+const LayoutStyle = styled(Layout)`
+  min-height: 100vh;
+`;
 
 interface Props {
   children: React.ReactNode;
 }
 export const BasicLayout = memo<Props>(function BasicLayout(props) {
   return (
-    <Layout>
+    <LayoutStyle>
       <Header />
-      <Content className="site-layout">
+      <Layout.Content>
         <Container className="main-container">{props.children}</Container>
-      </Content>
+      </Layout.Content>
       <Footer />
-    </Layout>
+    </LayoutStyle>
   );
 });

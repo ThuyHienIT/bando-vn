@@ -1,9 +1,10 @@
 'use client';
 
-import { CalendarOutlined, ProfileOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Dropdown, Menu, MenuProps } from 'antd';
+import { Button, Dropdown, MenuProps } from 'antd';
 import Link from 'next/link';
 import { memo, useMemo } from 'react';
+
+import { CalendarOutlined, UserOutlined } from '@ant-design/icons';
 
 export const UserProfile = memo(function UserProfile() {
   const items = useMemo<MenuProps['items']>(
