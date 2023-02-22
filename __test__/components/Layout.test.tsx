@@ -2,8 +2,8 @@ import '@testing-library/jest-dom';
 
 import { userInitialState } from '__test__/helpers';
 import { RecoilRoot } from 'recoil';
+import { BasicLayout } from 'src/(client)/components/Layout/Layout';
 
-import { BasicLayout } from '@components/Layout/Layout';
 import { render } from '@testing-library/react';
 
 describe('Layout', () => {

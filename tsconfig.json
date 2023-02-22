@@ -18,10 +18,12 @@
     "baseUrl": ".",
     "paths": {
       "@models/*": ["./models/*"],
-      "@lib/*": ["./lib/*"],
+      "@lib/*": ["./src/lib/*"],
       "@apis/*": ["./pages/api/*"],
       "@enums": ["./config/enums"],
-      "@components/*": ["./app/(client)/components/*"]
+      "@components/*": ["src/components/*"],
+      "@pages/*": ["src/pages/*"],
+      "@recoil/*": ["src/recoil/*"]
     }
   },
   "include": [
@@ -29,7 +31,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "./typings/*.d.ts"
+    "./typings/*.d.ts",
+    "additional.d.ts"
   ],
   "exclude": ["node_modules"]
 }

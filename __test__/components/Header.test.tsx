@@ -3,8 +3,8 @@ import '@testing-library/jest-dom';
 
 import { userInitialState } from '__test__/helpers';
 import { RecoilRoot } from 'recoil';
+import { Header } from 'src/(client)/components/Layout/Header';
 
-import { Header } from '@components/Layout/Header';
 import { render, screen } from '@testing-library/react';
 
 describe('Header', () => {

@@ -1,8 +1,8 @@
 import '@testing-library/jest-dom';
 
 import { generateBooking } from '__test__/helpers';
+import { BookingList } from 'src/(client)/components/BookingList';
 
-import { BookingList } from '@components/BookingList';
 import { FacilityTypeEnum } from '@enums';
 import { render, screen } from '@testing-library/react';
 

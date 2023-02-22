@@ -1,8 +1,8 @@
 import '@testing-library/jest-dom';
 
 import { generateFacility } from '__test__/helpers';
+import { FacilityItemCmp } from 'src/(client)/components/FacilityItem';
 
-import { FacilityItemCmp } from '@components/FacilityItem';
 import { FacilityTypeEnum } from '@enums';
 import { render, screen } from '@testing-library/react';
 

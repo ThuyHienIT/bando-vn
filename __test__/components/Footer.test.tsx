@@ -1,7 +1,9 @@
-import { render, screen } from '@testing-library/react';
 // import Home from '../pages/index'
 import '@testing-library/jest-dom';
-import { Footer } from '@components/Layout/Footer';
+
+import { Footer } from 'src/(client)/components/Layout/Footer';
+
+import { render } from '@testing-library/react';
 
 describe('Footer', () => {
   it('renders footer unchanged', () => {

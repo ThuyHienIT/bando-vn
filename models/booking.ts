@@ -1,6 +1,7 @@
 import dayjs, { Dayjs } from 'dayjs';
 
-import { RequestError } from '../lib/errorClasses';
+import { RequestError } from '@lib/errorClasses';
+
 import { dbModel } from './db';
 import { facilityModel } from './facility';
 
