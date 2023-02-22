@@ -1,11 +1,11 @@
-import { FacilityTypeEnum } from '@enums';
 import { FacilityList } from '@components/FacilityList';
+import { FacilityTypeEnum } from '@enums';
+import { facilityModel } from '@models/facility';
 
 export default async function Facilities() {
-  const facilitiesResp = await fetch(
-    `http://localhost:3000/api/facilities?type=${FacilityTypeEnum.Facility}`
+  const facilities = await facilityModel.loadFacilities(
+    FacilityTypeEnum.Facility
   );
-  const facilities: FacilityItem[] = await facilitiesResp.json();
 
   return (
     <>

@@ -5,8 +5,8 @@ import React from 'react';
 import { App } from '@components/App';
 import { BasicLayout } from '@components/Layout/Layout';
 
-import { AntdStyleRegistry } from './lib/antd-registry';
-import StyledComponentsRegistry from './lib/registry';
+import { AntdStyleRegistry } from './(client)/lib/antd-registry';
+import StyledComponentsRegistry from './(client)/lib/registry';
 
 export default function RootLayout({
   children,

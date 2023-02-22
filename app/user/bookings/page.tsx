@@ -1,16 +1,18 @@
 import { FacilityTypeEnum } from '@enums';
+import { userModel } from '@models/user';
+
 import { PageContent } from './PageContent';
 
 export default async function Home() {
-  const roomsResp = await fetch(
-    `http://localhost:3000/api/user/bookings?type=${FacilityTypeEnum.Room}&email=kqthang1505@gmail.com`
-  );
-  const rooms: BookingItem[] = await roomsResp.json();
+  const rooms = (await userModel.loadBookings(
+    'kqthang1505@gmail.com',
+    FacilityTypeEnum.Room
+  )) as BookingItem[];
 
-  const facilitiesResp = await fetch(
-    `http://localhost:3000/api/user/bookings?type=${FacilityTypeEnum.Facility}&email=kqthang1505@gmail.com`
-  );
-  const facilities: BookingItem[] = await facilitiesResp.json();
+  const facilities = (await userModel.loadBookings(
+    'kqthang1505@gmail.com',
+    FacilityTypeEnum.Facility
+  )) as BookingItem[];
 
   return (
     <>
