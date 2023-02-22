@@ -1,11 +1,18 @@
 import './globals.css';
 
+import React from 'react';
+
 import { App } from '@components/App';
 import { BasicLayout } from '@components/Layout/Layout';
 
+import { AntdStyleRegistry } from './lib/antd-registry';
 import StyledComponentsRegistry from './lib/registry';
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
       {/*
@@ -15,9 +22,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head />
       <body>
         <StyledComponentsRegistry>
-          <App>
-            <BasicLayout>{children}</BasicLayout>
-          </App>
+          <AntdStyleRegistry>
+            <App>
+              <BasicLayout>{children}</BasicLayout>
+            </App>
+          </AntdStyleRegistry>
         </StyledComponentsRegistry>
       </body>
     </html>
