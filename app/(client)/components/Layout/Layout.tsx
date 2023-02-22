@@ -9,7 +9,9 @@ import { Footer } from './Footer';
 import { Header } from './Header';
 
 const LayoutStyle = styled(Layout)`
-  min-height: 100vh;
+  &&& {
+    min-height: 100vh;
+  }
 `;
 
 interface Props {
