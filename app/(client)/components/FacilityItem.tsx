@@ -1,11 +1,9 @@
 'use client';
 
-import Image from 'next/image';
-import { memo } from 'react';
 import { Button, Card, Typography } from 'antd';
+import Image from 'next/image';
 import Link from 'next/link';
 
-import CalendarOutlined from '@ant-design/icons/lib/icons/CalendarOutlined';
 import { EyeOutlined } from '@ant-design/icons';
 
 interface Props {
@@ -18,18 +16,18 @@ export function FacilityItemCmp(props: Props) {
       size="small"
       cover={
         props.data.thumbnail ? (
-          <Image alt={props.data.name} src={props.data.thumbnail} width={100} height={100} />
+          <Image
+            alt={props.data.name}
+            src={props.data.thumbnail}
+            width={100}
+            height={100}
+          />
         ) : null
       }
       actions={[
         <Link href={`/facility/${props.data.id}`} key="details">
           <Button type="text" size="small" icon={<EyeOutlined />}>
             Details
-          </Button>
-        </Link>,
-        <Link href={`/facility/${props.data.id}`} key="details">
-          <Button icon={<CalendarOutlined />} type="text" size="small">
-            Book
           </Button>
         </Link>,
       ]}

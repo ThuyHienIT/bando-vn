@@ -135,7 +135,7 @@ export function WeekView({ onBooked, onCancalled, ...props }: Props) {
         ))}
       </Wrapper>
 
-      <DateSelectionScroller id="js-weekview-container">
+      <DateSelectionScroller id="js-weekview-container" data-testid="scroller">
         <TimeDatesContainer>
           <TimeCol />
           <DateSelectionContent>

@@ -3,7 +3,10 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 import { facilityModel } from '@models/facility';
 
-export default async function routeHandler(req: NextApiRequest, res: NextApiResponse) {
+export default async function routeHandler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   try {
     const data = await facilityModel.book(tryParseJson(req.body));
 
@@ -13,6 +16,8 @@ export default async function routeHandler(req: NextApiRequest, res: NextApiResp
       return res.status(e.code).json({ message: e.message });
     }
 
-    return res.status(500).json({ message: 'Something went wrong. Please try again later.' });
+    return res
+      .status(500)
+      .json({ message: 'Something went wrong. Please try again later.' });
   }
 }

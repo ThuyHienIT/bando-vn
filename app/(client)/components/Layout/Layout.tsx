@@ -11,6 +11,7 @@ import { Header } from './Header';
 const LayoutStyle = styled(Layout)`
   &&& {
     min-height: 100vh;
+    overflow-y: auto;
   }
 `;
 

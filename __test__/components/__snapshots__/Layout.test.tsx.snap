@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Layout renders header unchanged 1`] = `
-.c1 {
+.c2 {
   max-width: 1080px;
   margin-left: auto;
   margin-right: auto;
@@ -10,15 +10,20 @@ exports[`Layout renders header unchanged 1`] = `
   width: 100%;
 }
 
-.c0 {
+.c5 {
+  padding: 8px 0;
+  border-top: 2px solid #dddddd;
+}
+
+.c1 {
   border-bottom: 2px solid #dddddd;
 }
 
-.c0.c0.c0 {
+.c1.c1.c1 {
   background-color: #fff;
 }
 
-.c2 {
+.c3 {
   height: 100%;
   display: -webkit-box;
   display: -webkit-flex;
@@ -34,7 +39,7 @@ exports[`Layout renders header unchanged 1`] = `
   align-items: center;
 }
 
-.c3 {
+.c4 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -46,25 +51,30 @@ exports[`Layout renders header unchanged 1`] = `
   gap: 8px;
 }
 
-.c3 .ant-typography {
+.c4 .ant-typography {
   margin-bottom: 0;
+}
+
+.c0.c0.c0 {
+  min-height: 100vh;
+  overflow-y: auto;
 }
 
 <div>
   <section
-    class="ant-layout css-dev-only-do-not-override-diro6f"
+    class="ant-layout c0 css-dev-only-do-not-override-diro6f"
   >
     <header
-      class="ant-layout-header c0"
+      class="ant-layout-header c1"
     >
       <div
-        class="c1 c2"
+        class="c2 c3"
       >
         <a
           href="/"
         >
           <div
-            class="c3"
+            class="c4"
           >
             <img
               alt="Facility Booking"
@@ -111,20 +121,20 @@ exports[`Layout renders header unchanged 1`] = `
       </div>
     </header>
     <main
-      class="ant-layout-content site-layout"
+      class="ant-layout-content"
     >
       <div
-        class="c1 main-container"
+        class="c2 main-container"
       >
         Hello World!
       </div>
     </main>
     <footer
-      class="ant-layout-footer"
+      class="ant-layout-footer c5"
       style="padding: 8px 0px;"
     >
       <div
-        class="c1"
+        class="c2"
       >
         <span
           class="ant-typography ant-typography-secondary css-dev-only-do-not-override-diro6f"

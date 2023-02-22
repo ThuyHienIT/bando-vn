@@ -1,8 +1,15 @@
 'use client';
 
-import { DatePicker, Form, Modal, notification, TimePicker } from 'antd';
+import {
+  Button,
+  DatePicker,
+  Form,
+  Modal,
+  notification,
+  TimePicker,
+} from 'antd';
 import { useForm } from 'antd/lib/form/Form';
-import request from 'app/lib/request';
+import request from 'app/(client)/lib/request';
 import { Dayjs } from 'dayjs';
 import { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
@@ -139,15 +146,22 @@ export function BookingModal({
       {contextHolder}
       <Modal
         open={props.opened}
-        onCancel={handleCancel}
+        onCancel={onClose}
         title={`Booking this slot of ${props.data?.name}`}
-        okText={props.isUpdate ? 'Update' : 'Book'}
-        cancelText={props.isUpdate ? 'Cancel this booking' : 'Cancel'}
         destroyOnClose
-        onOk={handleOK}
-        okButtonProps={{ loading }}
+        footer={
+          <>
+            <Button onClick={props.isUpdate ? handleCancel : onClose}>
+              {props.isUpdate ? 'Cancel this booking' : 'Cancel'}
+            </Button>
+            <Button type="primary" onClick={handleOK} loading={loading}>
+              {props.isUpdate ? 'Update' : 'Book'}
+            </Button>
+          </>
+        }
       >
         <Form
+          data-testid="booking-form"
           form={form}
           initialValues={{
             from: props.from,

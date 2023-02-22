@@ -14,7 +14,9 @@ const CalendarContainer = styled(Row)`
 `;
 
 const WeekViewContainer = styled(Col)`
-  display: flex;
+  && {
+    display: flex;
+  }
   flex-direction: column;
   height: 100%;
 `;

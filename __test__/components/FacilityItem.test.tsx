@@ -7,17 +7,31 @@ import { FacilityTypeEnum } from '@enums';
 import { render, screen } from '@testing-library/react';
 
 describe('Facility Item', () => {
-  it('renders facility card as expected', () => {
+  it('verify elements', () => {
     const facility = generateFacility(FacilityTypeEnum.Room);
     render(<FacilityItemCmp data={facility} />);
 
-    const bookBtn = screen.getByRole('button', { name: /book/i });
     const detailsBtn = screen.getByRole('button', { name: /details/i });
     const name = screen.getByRole('heading', { name: facility.name });
+    const link = screen.getByRole('link');
+    const img = screen.getByAltText(facility.name);
 
-    expect(bookBtn).toBeInTheDocument();
     expect(detailsBtn).toBeInTheDocument();
     expect(name).toBeInTheDocument();
+    expect(img).toBeInTheDocument();
+    expect(img.getAttribute('src')).toContain(
+      encodeURIComponent(facility.thumbnail || '')
+    );
+    expect(link.getAttribute('href')).toEqual(`/facility/${facility.id}`);
+  });
+
+  it('item without thumbnail', () => {
+    const facility = generateFacility(FacilityTypeEnum.Facility);
+    facility.thumbnail = '';
+    render(<FacilityItemCmp data={facility} />);
+
+    const img = screen.queryByAltText(facility.name);
+    expect(img).toBeNull();
   });
 
   it('renders facility card unchanged', () => {

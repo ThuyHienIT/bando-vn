@@ -87,6 +87,26 @@ export const PageContent = memo<Props>(function PageContent(props) {
     [handleCloseModal]
   );
 
+  const handleCancelled = useCallback(
+    (bookingid: string) => {
+      switch (editingBooking?.facility?.type) {
+        case FacilityTypeEnum.Room:
+          setRooms((rooms) => {
+            return rooms.filter((b) => b.id !== bookingid);
+          });
+          break;
+        case FacilityTypeEnum.Facility:
+          setFacilities((facilities) => {
+            return facilities.filter((b) => b.id !== bookingid);
+          });
+          break;
+      }
+
+      handleCloseModal();
+    },
+    [editingBooking?.facility?.type, handleCloseModal]
+  );
+
   const handleEditBooking = useCallback((data: BookingItem) => {
     setEditingBooking(data);
     setShowEditModal(true);
@@ -107,6 +127,8 @@ export const PageContent = memo<Props>(function PageContent(props) {
         onEdit={handleEditBooking}
       />
 
+      <Divider />
+
       <BookingList
         className={styles.list}
         heading="Facilities"
@@ -124,6 +146,7 @@ export const PageContent = memo<Props>(function PageContent(props) {
         bookingId={editingBooking?.id}
         onClose={handleCloseModal}
         onDone={handleUpdated}
+        onCancelled={handleCancelled}
         isUpdate
       />
     </>

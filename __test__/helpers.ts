@@ -16,6 +16,7 @@ export function generateFacility(
     type: type,
     operationHours: ['8:00', '19:00'],
     offDays: ['2022-04-23T23:18:53Z'],
+    thumbnail: 'https://picsum.photos/400/200',
   };
 }
 

@@ -41,7 +41,9 @@ export function BookingList(props: Props) {
   return (
     <div className={props.className}>
       <Typography.Title level={4}>{props.heading}</Typography.Title>
-      {listData.length === 0 && <Empty description="No data." />}
+      {listData.length === 0 && (
+        <Empty description={`You haven't booked any ${props.heading}`} />
+      )}
       {listData.length > 0 && (
         <ListStyle gutter={16}>
           {listData.map((item) => (
@@ -58,7 +60,7 @@ export function BookingList(props: Props) {
 
       {props.max && props.data.length > props.max && props.viewAllLink && (
         <LinkRow>
-          <Link href={props.viewAllLink}>
+          <Link data-testid="view-all" href={props.viewAllLink}>
             View all <DoubleRightOutlined />
           </Link>
         </LinkRow>

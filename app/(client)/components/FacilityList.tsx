@@ -1,14 +1,14 @@
 'use client';
 
-import Image from 'next/image';
+import { Col, Row, Typography } from 'antd';
+import Link from 'next/link';
+import { useMemo } from 'react';
+import styled from 'styled-components';
+
+import { DoubleRightOutlined } from '@ant-design/icons';
 // import { memo } from 'react';
 // import { Card, Typography } from 'antd';
 import { FacilityItemCmp } from '@components/FacilityItem';
-import { Col, Row, Typography } from 'antd';
-import styled from 'styled-components';
-import Link from 'next/link';
-import { useMemo } from 'react';
-import { DoubleRightOutlined } from '@ant-design/icons';
 
 const ColStyle = styled(Col)``;
 
@@ -20,6 +20,10 @@ const ListStyle = styled(Row)`
 
 const LinkRow = styled.div`
   text-align: right;
+`;
+
+const Wrapper = styled.div`
+  margin-top: 32px;
 `;
 
 interface Props {
@@ -38,7 +42,7 @@ export function FacilityList(props: Props) {
   }, [props.data, props.max]);
 
   return (
-    <div className={props.className}>
+    <Wrapper className={props.className}>
       <Typography.Title level={4}>{props.heading}</Typography.Title>
       <ListStyle gutter={16}>
         {listData.map((item) => (
@@ -49,11 +53,11 @@ export function FacilityList(props: Props) {
       </ListStyle>
       {props.max && props.data.length > props.max && props.viewAllLink && (
         <LinkRow>
-          <Link href={props.viewAllLink}>
+          <Link data-testid="view-all" href={props.viewAllLink}>
             View all <DoubleRightOutlined />
           </Link>
         </LinkRow>
       )}
-    </div>
+    </Wrapper>
   );
 }

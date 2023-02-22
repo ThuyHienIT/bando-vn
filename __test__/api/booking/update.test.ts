@@ -10,6 +10,7 @@ import { generateBooking, generateFacility } from '../../helpers';
 const FAC_DB_NAME = 'facilities.json';
 const BOOKING_DB_NAME = 'bookings.json';
 let BOOKING_ID: string = '';
+let FAC_ID: string = '';
 
 beforeAll(async () => {
   const fac1: FacilityItem = generateFacility(FacilityTypeEnum.Room);
@@ -20,8 +21,12 @@ beforeAll(async () => {
   const booking1 = generateBooking(fac1.id);
 
   await dbModel.prepareDb(BOOKING_DB_NAME);
-  const insertedBooking = await dbModel.insertOne<BookingItem>(BOOKING_DB_NAME, booking1);
+  const insertedBooking = await dbModel.insertOne<BookingItem>(
+    BOOKING_DB_NAME,
+    booking1
+  );
   BOOKING_ID = insertedBooking.id;
+  FAC_ID = fac1.id;
 });
 
 afterAll(async () => {
@@ -37,6 +42,8 @@ describe('/api/[booking]/[update]', () => {
         id: randomUUID(),
         from: '2022-04-23T23:30:00Z',
         to: '2022-05-23T24:00:00Z',
+        facilityId: FAC_ID,
+        userEmail: 'kqthang1505@gmail.com',
       },
     });
 
@@ -51,6 +58,8 @@ describe('/api/[booking]/[update]', () => {
         id: BOOKING_ID,
         from: '2022-04-23T10:30:00Z',
         to: '2022-04-23T11:00:00Z',
+        facilityId: FAC_ID,
+        userEmail: 'kqthang1505@gmail.com',
       },
     });
 
@@ -65,6 +74,8 @@ describe('/api/[booking]/[update]', () => {
         id: BOOKING_ID,
         from: '2022-04-23T10:30:00Z',
         to: '2022-04-23T08:00:00Z',
+        facilityId: FAC_ID,
+        userEmail: 'kqthang1505@gmail.com',
       },
     });
 
@@ -79,6 +90,8 @@ describe('/api/[booking]/[update]', () => {
         id: BOOKING_ID,
         from: '2023-04-23T10:30:00Z',
         to: '2023-04-23T11:00:00Z',
+        facilityId: FAC_ID,
+        userEmail: 'kqthang1505@gmail.com',
       },
     });
 
@@ -89,6 +102,8 @@ describe('/api/[booking]/[update]', () => {
       id: BOOKING_ID,
       from: '2023-04-23T10:30:00Z',
       to: '2023-04-23T11:00:00Z',
+      facilityId: FAC_ID,
+      userEmail: 'kqthang1505@gmail.com',
     });
   });
 });

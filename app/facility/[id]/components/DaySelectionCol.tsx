@@ -66,6 +66,7 @@ export const DaySelectionCol = memo(function DaySelectionCol({
 
   const handleClick = useCallback<React.MouseEventHandler<HTMLDivElement>>(
     (e) => {
+      console.log('clicked');
       if (!scrollerRef.current) return;
 
       const containerTop = scrollerRef.current.getBoundingClientRect().y;
@@ -137,6 +138,7 @@ export const DaySelectionCol = memo(function DaySelectionCol({
       $disabled={props.disabled}
       className={props.className}
       onClick={props.disabled ? undefined : handleClick}
+      data-testid="click-to-book"
     >
       <div role="presentation">
         {occupiedSlots}

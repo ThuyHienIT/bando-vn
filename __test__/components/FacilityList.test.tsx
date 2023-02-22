@@ -7,26 +7,44 @@ import { FacilityTypeEnum } from '@enums';
 import { render, screen } from '@testing-library/react';
 
 describe('Facility List', () => {
-  it('renders facility card as expected', () => {
-    const room = generateFacility(FacilityTypeEnum.Room, 'Venus Meeting Room');
-    const facility = generateFacility(FacilityTypeEnum.Facility, 'Earth Meeting Room');
-    render(<FacilityList data={[facility, room]} heading="Rooms" />);
+  it('less than max', () => {
+    const fac = generateFacility(FacilityTypeEnum.Facility);
+    fac.id = 'test-id';
+    const { container } = render(
+      <FacilityList heading="Facilities" max={2} data={[fac]} />
+    );
 
-    const item1name = screen.getByRole('heading', { name: room.name });
-    const item2name = screen.getByRole('heading', { name: facility.name });
+    const heading = screen.getByRole('heading', { name: 'Facilities' });
+    const link = screen.queryByTestId('view-all');
 
-    expect(item1name).toBeInTheDocument();
-    expect(item2name).toBeInTheDocument();
+    expect(heading).toBeInTheDocument();
+    expect(link).toBeNull();
+
+    expect(container).toMatchSnapshot();
   });
 
-  it('renders facility card unchanged', () => {
-    const room = generateFacility(FacilityTypeEnum.Room, 'Venus Meeting Room');
-    const facility = generateFacility(FacilityTypeEnum.Facility, 'Earth Meeting Room');
+  it('more than max', () => {
+    const fac1 = generateFacility(FacilityTypeEnum.Facility);
+    const fac2 = generateFacility(FacilityTypeEnum.Facility);
+    const fac3 = generateFacility(FacilityTypeEnum.Facility);
 
-    facility.id = 'facility-test-id';
-    room.id = 'room-test-id';
+    fac1.id = 'test-id-1';
+    fac2.id = 'test-id-2';
+    fac3.id = 'test-id-3';
 
-    const { container } = render(<FacilityList data={[facility, room]} heading="Rooms" />);
+    const { container } = render(
+      <FacilityList
+        heading="Facilities"
+        max={2}
+        data={[fac1, fac2, fac3]}
+        viewAllLink="/facilities"
+      />
+    );
+
+    const link = screen.getByTestId('view-all');
+
+    expect(link).toBeInTheDocument();
+    expect(link.getAttribute('href')).toBe('/facilities');
 
     expect(container).toMatchSnapshot();
   });
