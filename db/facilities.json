@@ -7,8 +7,9 @@
     "name": "Venus Meeting Room",
     "amenities": "Friend ok nation international line another within.\nUp rate when sometimes probably measure with. Product town sort. Include even alone certain.",
     "type": "room",
-    "operationHours": [["8:00", "19:00"]],
-    "offDays": ["2022-04-23T23:18:53Z"]
+    "operationHours": ["8:00", "19:00"],
+    "offDays": ["2022-04-23T23:18:53Z"],
+    "thumbnail": "https://picsum.photos/400/300"
   },
   {
     "phoneNumber": "29260065",
@@ -18,8 +19,9 @@
     "name": "Venus Meeting Room",
     "amenities": "Young expert under consumer record open. Must election east television sport.\nReal fall friend task economy. Enter within throw campaign. American point style black remember letter house.",
     "type": "room",
-    "operationHours": [["8:00", "19:00"]],
-    "offDays": ["2022-04-23T23:18:53Z"]
+    "operationHours": ["8:00", "19:00"],
+    "offDays": ["2022-04-23T23:18:53Z"],
+    "thumbnail": "https://picsum.photos/400/300"
   },
   {
     "phoneNumber": "74450750",
@@ -29,8 +31,9 @@
     "name": "Venus Meeting Room",
     "amenities": "Policy true society professor none. Magazine forget begin which town great fight young. Body blood front check.\nRight if short speak. Rich follow save produce truth.",
     "type": "room",
-    "operationHours": [["8:00", "19:00"]],
-    "offDays": ["2022-04-23T23:18:53Z"]
+    "operationHours": ["8:00", "19:00"],
+    "offDays": ["2022-04-23T23:18:53Z"],
+    "thumbnail": "https://picsum.photos/400/300"
   },
   {
     "phoneNumber": "91531211",
@@ -40,8 +43,9 @@
     "name": "Venus Meeting Room",
     "amenities": "Pretty Republican as writer foreign those could create. Decision financial quickly meeting figure occur opportunity. Last population list although service fill discussion.",
     "type": "room",
-    "operationHours": [["8:00", "19:00"]],
-    "offDays": ["2022-04-23T23:18:53Z"]
+    "operationHours": ["8:00", "19:00"],
+    "offDays": ["2022-04-23T23:18:53Z"],
+    "thumbnail": "https://picsum.photos/400/300"
   },
   {
     "phoneNumber": "86651823",
@@ -51,8 +55,9 @@
     "name": "Southern Islands",
     "amenities": "Note fear him north determine prove collection. Behavior half really for in do. Less appear personal over must then summer.",
     "type": "room",
-    "operationHours": [["8:00", "19:00"]],
-    "offDays": ["2022-04-23T23:18:53Z"]
+    "operationHours": ["8:00", "19:00"],
+    "offDays": ["2022-04-23T23:18:53Z"],
+    "thumbnail": "https://picsum.photos/400/300"
   },
   {
     "phoneNumber": "53675237",
@@ -62,8 +67,9 @@
     "name": "Bukit Merah",
     "amenities": "Moment government edge development least. Color trial father alone. Car leave term public room science during miss.",
     "type": "facility",
-    "operationHours": [["8:00", "19:00"]],
-    "offDays": ["2022-04-23T23:18:53Z"]
+    "operationHours": ["8:00", "19:00"],
+    "offDays": ["2022-04-23T23:18:53Z"],
+    "thumbnail": "https://picsum.photos/400/300"
   },
   {
     "phoneNumber": "08366884",
@@ -73,8 +79,9 @@
     "name": "Rochor",
     "amenities": "He contain prove explain official team argue. Sign responsibility indicate news top. Radio type beyond for.",
     "type": "facility",
-    "operationHours": [["8:00", "19:00"]],
-    "offDays": ["2022-04-23T23:18:53Z"]
+    "operationHours": ["8:00", "19:00"],
+    "offDays": ["2022-04-23T23:18:53Z"],
+    "thumbnail": "https://picsum.photos/400/300"
   },
   {
     "phoneNumber": "75659210",
@@ -84,8 +91,9 @@
     "name": "Southern Islands",
     "amenities": "Than street civil season than current. Measure though usually cut. Pull town president example morning act their. Oil film large list.",
     "type": "facility",
-    "operationHours": [["8:00", "19:00"]],
-    "offDays": ["2022-04-23T23:18:53Z"]
+    "operationHours": ["8:00", "19:00"],
+    "offDays": ["2022-04-23T23:18:53Z"],
+    "thumbnail": "https://picsum.photos/400/300"
   },
   {
     "phoneNumber": "28835981",
@@ -95,8 +103,9 @@
     "name": "Clementi",
     "amenities": "Federal spend wait step. Strong popular whether idea. Party message social morning protect call. Enjoy direction southern thing standard.\nSay evening really later it concern.",
     "type": "facility",
-    "operationHours": [["8:00", "19:00"]],
-    "offDays": ["2022-04-23T23:18:53Z"]
+    "operationHours": ["8:00", "19:00"],
+    "offDays": ["2022-04-23T23:18:53Z"],
+    "thumbnail": "https://picsum.photos/400/300"
   },
   {
     "phoneNumber": "79764203",
@@ -106,7 +115,8 @@
     "name": "Sengkang",
     "amenities": "Executive no there growth step economic. Of effect international. Side listen network.\nSmile pass baby whose. Real your me.\nForget situation table suddenly break bad.",
     "type": "facility",
-    "operationHours": [["8:00", "19:00"]],
-    "offDays": ["2022-04-23T23:18:53Z"]
+    "operationHours": ["8:00", "19:00"],
+    "offDays": ["2022-04-23T23:18:53Z"],
+    "thumbnail": "https://picsum.photos/400/300"
   }
 ]
