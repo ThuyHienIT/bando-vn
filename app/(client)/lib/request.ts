@@ -1,6 +1,6 @@
-import { RequestError } from 'pages/lib/errorClasses';
+import { RequestError } from 'lib/errorClasses';
 
-const PREFIX = process.env.API_URL || 'http://localhost:3000';
+const PREFIX = 'http://localhost:3000';
 export default async function request(url: string, options?: RequestInit) {
   const token = '';
   let { headers: optHeaders, ...restOpts } = options || {};

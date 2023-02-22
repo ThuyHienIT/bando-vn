@@ -1,5 +1,5 @@
+import { tryParseJson } from 'lib/tryParseJSON';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { tryParseJson } from 'pages/lib/tryParseJSON';
 
 import { facilityModel } from '@models/facility';
 

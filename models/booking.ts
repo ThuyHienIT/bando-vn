@@ -49,8 +49,8 @@ async function update(data: BookingItem) {
   const booking = await loadById<BookingItem>(data.id);
   if (!booking) throw new RequestError(400, 'Booking is not found');
 
-  booking.from = data.from as string;
-  booking.to = data.to as string;
+  booking.from = data.from;
+  booking.to = data.to;
 
   // insert to booking
   const inserted = await dbModel.update<BookingItem>(DB_NAME, booking);

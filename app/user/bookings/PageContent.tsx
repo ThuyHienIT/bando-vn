@@ -1,8 +1,8 @@
 'use client';
 
-import { Modal, notification, Typography } from 'antd';
+import { Divider, Modal, notification, Typography } from 'antd';
+import request from 'app/(client)/lib/request';
 import { BookingModal } from 'app/facility/[id]/components/BookingModal';
-import request from 'app/lib/request';
 import dayjs from 'dayjs';
 import { memo, useCallback, useState } from 'react';
 

@@ -1,5 +1,5 @@
+import { RequestError } from 'lib/errorClasses';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { RequestError } from 'pages/lib/errorClasses';
 
 import { bookingModel } from '@models/booking';
 

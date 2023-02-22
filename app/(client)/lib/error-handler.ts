@@ -1,4 +1,7 @@
-export async function errorHandler<T>(fn: Function, defaultValue?: T): Promise<T | undefined> {
+export async function errorHandler<T>(
+  fn: Function,
+  defaultValue: T
+): Promise<T> {
   try {
     return await fn();
   } catch (e: any) {

@@ -1,5 +1,6 @@
 'use client';
 
+// https://github.com/vercel/next.js/issues/44125#issuecomment-1372270391
 import { useServerInsertedHTML } from 'next/navigation';
 import React, { useState } from 'react';
 

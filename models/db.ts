@@ -1,7 +1,7 @@
 import { randomUUID } from 'crypto';
 import dayjs from 'dayjs';
 import { promises as fs } from 'fs';
-import { RequestError } from 'pages/lib/errorClasses';
+import { RequestError } from 'lib/errorClasses';
 import path from 'path';
 
 import { tryParseJson } from '../lib/tryParseJSON';
@@ -13,7 +13,13 @@ const TEST_UTILS_DB: Record<string, string> = {};
 
 async function readFile(dbName: string) {
   if (IS_TEST) return TEST_UTILS_DB[dbName];
-  return await fs.readFile(path.resolve(DB_DIR, dbName), 'utf-8');
+  try {
+    return await fs.readFile(path.resolve(DB_DIR, dbName), 'utf-8');
+  } catch (e: any) {
+    await writeFile(dbName, '[]');
+
+    return '[]';
+  }
 }
 
 async function writeFile(dbName: string, data: string) {

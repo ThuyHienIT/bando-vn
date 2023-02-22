@@ -1,5 +1,7 @@
-import { FacilityTypeEnum } from '@enums';
 import { FacilityList } from '@components/FacilityList';
+import { FacilityTypeEnum } from '@enums';
+import { facilityModel } from '@models/facility';
+
 import styles from './page.module.css';
 
 export default async function Home() {
