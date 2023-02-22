@@ -4,6 +4,13 @@ import dayjs, { Dayjs } from 'dayjs';
 import React, { memo, useCallback, useEffect, useMemo, useRef } from 'react';
 import styled, { css } from 'styled-components';
 
+import {
+  BookedSlot,
+  durationToHeight,
+  positionToTime,
+  timeToPosition,
+} from './BookedSlot';
+
 const ColStyle = styled.div<{ $disabled?: boolean }>`
   width: 80px;
   min-width: 80px;
@@ -43,14 +50,18 @@ interface Props {
   disabledSlots?: [string, string][];
   occupiedSlots?: [string, string][];
   operationHours?: [string, string];
-
+  occupiedSlots2?: BookingItem[];
+  onEdit?(item: BookingItem): void;
   onClick?([from, to]: [Dayjs, Dayjs]): void;
 }
 
 function disabledClick(e: React.MouseEvent) {
   e.stopPropagation();
 }
-export const DaySelectionCol = memo(function DaySelectionCol(props: Props) {
+export const DaySelectionCol = memo(function DaySelectionCol({
+  onEdit,
+  ...props
+}: Props) {
   const scrollerRef = useRef<HTMLDivElement>();
 
   const handleClick = useCallback<React.MouseEventHandler<HTMLDivElement>>(
@@ -74,26 +85,12 @@ export const DaySelectionCol = memo(function DaySelectionCol(props: Props) {
   );
 
   const occupiedSlots = useMemo(() => {
-    return props.occupiedSlots
-      ?.filter(([from]) => props.date.isSame(from, 'date'))
-      .map(([from, to]) => {
-        const fromDayjs = dayjs(from);
-        const toDayjs = dayjs(to);
-
-        return (
-          <SlotStyle
-            key={from + to}
-            style={{
-              top: timeToPosition(fromDayjs.format('HH:mm'), 40),
-              height: durationToHeight(toDayjs.diff(fromDayjs, 'minute')),
-            }}
-            onClick={disabledClick}
-          >
-            Booked
-          </SlotStyle>
-        );
+    return props.occupiedSlots2
+      ?.filter((item) => props.date.isSame(item.from, 'date'))
+      .map((item) => {
+        return <BookedSlot key={item.id} data={item} onClick={onEdit} />;
       });
-  }, [props.date, props.occupiedSlots]);
+  }, [props.date, props.occupiedSlots2, onEdit]);
 
   const notWorkingSlots = useMemo(() => {
     if (!props.operationHours || props.disabled) return null;
@@ -148,34 +145,3 @@ export const DaySelectionCol = memo(function DaySelectionCol(props: Props) {
     </ColStyle>
   );
 });
-
-/**
- * Convert position in pixels to time
- * @param pos number position of mouse
- * @param gap hour gap in pixels
- * @returns [hour: number, min: number]
- */
-function positionToTime(pos: number, hourGap: number = 40) {
-  const val = pos / hourGap;
-  const hour = Math.floor(val);
-  return [hour, val - hour >= 0.5 ? 30 : 0];
-}
-
-/**
- * Convert Time to position
- * @param time string [hh:mm]
- * @param hourGap: number in pixels
- */
-function timeToPosition(time: string, hourGap: number = 40) {
-  const [hour, min] = time.split(':').map((i) => parseInt(i, 10));
-  return hour * hourGap + (min / 60) * hourGap;
-}
-
-/**
- *
- * @param duration number in minutes
- * @param hourGap number pixels per hour
- */
-function durationToHeight(duration: number, hourGap: number = 40) {
-  return (duration * hourGap) / 60;
-}

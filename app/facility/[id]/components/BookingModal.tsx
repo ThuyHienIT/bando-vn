@@ -7,6 +7,8 @@ import { Dayjs } from 'dayjs';
 import { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
+import { ExclamationCircleFilled } from '@ant-design/icons';
+
 const Inputs = styled(Form.Item)`
   .ant-form-item-control-input-content {
     display: flex;
@@ -24,6 +26,7 @@ interface Props {
   bookingId?: string;
   onClose(): void;
   onDone?(item?: BookingItem): void;
+  onCancelled?(bookingId?: string): void;
 }
 
 type FormValues = {
@@ -31,7 +34,12 @@ type FormValues = {
   from: Dayjs;
   to: Dayjs;
 };
-export function BookingModal({ onClose, onDone, ...props }: Props) {
+export function BookingModal({
+  onClose,
+  onDone,
+  onCancelled,
+  ...props
+}: Props) {
   const [form] = useForm<FormValues>();
   const [loading, setLoading] = useState(false);
   const [api, contextHolder] = notification.useNotification();
@@ -92,6 +100,34 @@ export function BookingModal({ onClose, onDone, ...props }: Props) {
     form.submit();
   }, [form]);
 
+  const cancelBooking = useCallback(() => {
+    Modal.confirm({
+      title: `Cancel your booking`,
+      icon: <ExclamationCircleFilled />,
+      content: `Are you sure you want to cancel your booking of ${props.data?.name}?`,
+      onOk: async () => {
+        try {
+          await request(`/api/booking/cancel/${props.bookingId}`);
+          api.success({ message: 'Cancel booking successful' });
+
+          onCancelled?.(props.bookingId);
+        } catch (e: any) {}
+      },
+      onCancel() {},
+      okText: 'Yes',
+      cancelText: 'No',
+    });
+  }, [api, onCancelled, props.bookingId, props.data?.name]);
+
+  const handleCancel = useCallback(() => {
+    if (!props.isUpdate) {
+      onClose();
+      return;
+    }
+
+    if (props.data) cancelBooking();
+  }, [cancelBooking, onClose, props.data, props.isUpdate]);
+
   useEffect(() => {
     if (props.opened)
       form.setFieldsValue({ from: props.from, to: props.to, date: props.from });
@@ -103,9 +139,10 @@ export function BookingModal({ onClose, onDone, ...props }: Props) {
       {contextHolder}
       <Modal
         open={props.opened}
-        onCancel={onClose}
+        onCancel={handleCancel}
         title={`Booking this slot of ${props.data?.name}`}
-        okText="Book"
+        okText={props.isUpdate ? 'Update' : 'Book'}
+        cancelText={props.isUpdate ? 'Cancel this booking' : 'Cancel'}
         destroyOnClose
         onOk={handleOK}
         okButtonProps={{ loading }}

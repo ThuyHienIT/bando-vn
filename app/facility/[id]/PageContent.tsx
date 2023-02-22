@@ -2,7 +2,7 @@
 
 import { Col, Row, Typography } from 'antd';
 import { Dayjs } from 'dayjs';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import styled from 'styled-components';
 
 import { MonthCalendar } from './components/MonthCalendar';
@@ -22,10 +22,34 @@ const WeekViewContainer = styled(Col)`
 interface Props {
   data: FacilityItem;
   occupiedSlots?: [string, string][];
+  occupiedSlots2?: BookingItem[];
 }
 
 export function PageContent(props: Props) {
+  const [occupiedSlots, setOccupiedSlots] = useState(props.occupiedSlots2);
   const [selectedDate, setSelectedDate] = useState<Dayjs>();
+
+  const handleBooked = useCallback((item: BookingItem) => {
+    setOccupiedSlots((slots) => {
+      if (!slots) return [item];
+
+      const idx = slots?.findIndex((i) => i.id === item.id);
+      if (idx >= 0) {
+        slots.splice(idx, 1, item);
+        return slots;
+      }
+
+      return [...slots, item];
+    });
+  }, []);
+
+  const handleCancelled = useCallback((bookingId: string) => {
+    setOccupiedSlots((slots) => {
+      if (!slots) return [];
+
+      return slots?.filter((i) => i.id !== bookingId);
+    });
+  }, []);
 
   return (
     <>
@@ -47,7 +71,10 @@ export function PageContent(props: Props) {
           <WeekView
             selectedDate={selectedDate}
             data={props.data}
-            disabledSlots={props.occupiedSlots}
+            // occupiedSlots={occupiedSlots}
+            occupiedSlots2={occupiedSlots}
+            onBooked={handleBooked}
+            onCancalled={handleCancelled}
           />
         </WeekViewContainer>
       </CalendarContainer>

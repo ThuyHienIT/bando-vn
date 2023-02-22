@@ -40,8 +40,8 @@ async function loadById<T>(id: string) {
   return data as T;
 }
 
-async function update(data: Partial<BookingItem>) {
-  const errMessage = verifyFromTo(data.from, data.to);
+async function update(data: BookingItem) {
+  const errMessage = await verifyBooking(data);
 
   if (errMessage) throw new RequestError(400, errMessage);
   if (!data.id) throw new RequestError(400, 'Booking is not found');
@@ -113,11 +113,7 @@ async function verifyBooking(payload: BookingItem) {
     return 'Facility cannot be found ' + payload.facilityId;
 
   // verify if the slot is occupied
-  const slotValidateMsg = verifySlot(
-    payload.facilityId,
-    payload.from,
-    payload.to
-  );
+  const slotValidateMsg = verifySlot(payload);
   if (slotValidateMsg) return slotValidateMsg;
 
   return '';
@@ -135,13 +131,15 @@ function verifyFromTo(from: string = '', to: string = '') {
   return '';
 }
 
-async function verifySlot(facilityId: string, from: string, to: string) {
-  const bookings = await loadByFacilityId(facilityId);
+async function verifySlot(item: BookingItem) {
+  const bookings = await loadByFacilityId(item.facilityId);
 
-  const fromDayjs = dayjs(from);
-  const toDayjs = dayjs(to);
+  const fromDayjs = dayjs(item.from);
+  const toDayjs = dayjs(item.to);
 
   const isOverlap = bookings.some((b) => {
+    if (item.id === b.id) return false;
+
     return (
       fromDayjs.isSame(b.from) ||
       fromDayjs.isSame(b.to) ||

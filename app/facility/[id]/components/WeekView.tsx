@@ -58,13 +58,17 @@ const TimeDatesContainer = styled.div`
 interface Props {
   data: FacilityItem;
   selectedDate?: Dayjs;
-  disabledSlots?: [string, string][];
+  occupiedSlots?: [string, string][];
+  occupiedSlots2?: BookingItem[];
+  onBooked?(item: BookingItem): void;
+  onCancalled?(bookingId: string): void;
 }
 
-export function WeekView(props: Props) {
+export function WeekView({ onBooked, onCancalled, ...props }: Props) {
   const [opened, setOpened] = useState(false);
   const [from, setFrom] = useState<Dayjs>();
   const [to, setTo] = useState<Dayjs>();
+  const [editingBooking, setEditingBooking] = useState<BookingItem>();
 
   const handleClose = useCallback(() => {
     setOpened(false);
@@ -76,7 +80,9 @@ export function WeekView(props: Props) {
     const today = props.selectedDate || dayjs();
     const firstDate = today.date() - today.day();
 
-    return Array.from({ length: 7 }).map((_, idx) => today.clone().set('date', firstDate + idx));
+    return Array.from({ length: 7 }).map((_, idx) =>
+      today.clone().set('date', firstDate + idx)
+    );
   }, [props.selectedDate]);
 
   const handleSlotClick = useCallback(([from, to]: [Dayjs, Dayjs]) => {
@@ -85,6 +91,35 @@ export function WeekView(props: Props) {
     setOpened(true);
   }, []);
 
+  const handleBooked = useCallback(
+    (item: BookingItem) => {
+      onBooked?.(item);
+      setOpened(false);
+      setEditingBooking(undefined);
+      setFrom(undefined);
+      setTo(undefined);
+    },
+    [onBooked]
+  );
+
+  const handleEdit = useCallback((booking: BookingItem) => {
+    setEditingBooking(booking);
+    setFrom(dayjs(booking.from));
+    setTo(dayjs(booking.to));
+    setOpened(true);
+  }, []);
+
+  const handleCancelled = useCallback(
+    (bookingId: string) => {
+      onCancalled?.(bookingId);
+      setOpened(false);
+      setEditingBooking(undefined);
+      setFrom(undefined);
+      setTo(undefined);
+    },
+    [onCancalled]
+  );
+
   return (
     <>
       <Wrapper>
@@ -92,7 +127,11 @@ export function WeekView(props: Props) {
           <span>00:00</span>
         </TimeColStyle>
         {days.map((d) => (
-          <DayHeadingColStyle key={d.toString()} day={d.format('ddd')} date={d.date()} />
+          <DayHeadingColStyle
+            key={d.toString()}
+            day={d.format('ddd')}
+            date={d.date()}
+          />
         ))}
       </Wrapper>
 
@@ -108,7 +147,9 @@ export function WeekView(props: Props) {
                   date={d.clone()}
                   disabled={d.isBefore(dayjs(), 'date')}
                   onClick={handleSlotClick}
-                  occupiedSlots={props.disabledSlots}
+                  onEdit={handleEdit}
+                  occupiedSlots={props.occupiedSlots}
+                  occupiedSlots2={props.occupiedSlots2}
                   operationHours={props.data.operationHours}
                 />
               ))}
@@ -117,7 +158,17 @@ export function WeekView(props: Props) {
         </TimeDatesContainer>
       </DateSelectionScroller>
 
-      <BookingModal opened={opened} onClose={handleClose} from={from} to={to} data={props.data} />
+      <BookingModal
+        opened={opened}
+        onClose={handleClose}
+        from={from}
+        to={to}
+        data={props.data}
+        onDone={handleBooked}
+        bookingId={editingBooking?.id}
+        isUpdate={Boolean(editingBooking?.id)}
+        onCancelled={handleCancelled}
+      />
     </>
   );
 }
