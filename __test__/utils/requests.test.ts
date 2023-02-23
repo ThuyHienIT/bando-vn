@@ -28,12 +28,8 @@ describe('/requests', () => {
   test('return 200', async () => {
     mockFetch.mockImplementationOnce(() =>
       Promise.resolve({
+        status: 200,
         json: () => Promise.resolve({ name: 'T' }),
-        text: () => Promise.resolve(''),
-        clone: () => ({
-          json: () => Promise.resolve({ name: 'T' }),
-          text: () => Promise.resolve(''),
-        }),
       })
     );
 
@@ -51,11 +47,6 @@ describe('/requests', () => {
       Promise.resolve({
         status: 400,
         json: () => Promise.resolve({ message: 'Bad Request' }),
-        text: () => Promise.resolve(''),
-        clone: () => ({
-          json: () => Promise.resolve({ name: 'T' }),
-          text: () => Promise.resolve(''),
-        }),
       })
     );
 

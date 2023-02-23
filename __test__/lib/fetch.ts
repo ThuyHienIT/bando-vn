@@ -1,16 +1,10 @@
 const mockFetch = jest.fn(() =>
   Promise.resolve({
+    status: 200,
     json: () => Promise.resolve({}),
-    text: () => Promise.resolve(''),
-    clone: () => ({
-      json: () => Promise.resolve({}),
-      text: () => Promise.resolve(''),
-    }),
   })
 );
 
-if (!global.fetch) {
-  (global as any).fetch = mockFetch;
-}
+(global as any).fetch = mockFetch;
 
 export { mockFetch };

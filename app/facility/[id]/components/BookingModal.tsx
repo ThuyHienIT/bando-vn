@@ -112,6 +112,7 @@ export function BookingModal({
       title: `Cancel your booking`,
       icon: <ExclamationCircleFilled />,
       content: `Are you sure you want to cancel your booking of ${props.data?.name}?`,
+      className: 'booking-confirm-modal',
       onOk: async () => {
         try {
           await request(`/api/booking/cancel/${props.bookingId}`);
@@ -120,7 +121,8 @@ export function BookingModal({
           onCancelled?.(props.bookingId);
         } catch (e: any) {}
       },
-      onCancel() {},
+      cancelButtonProps: { className: 'booking-confirm-modal-no-btn' },
+      okButtonProps: { className: 'booking-confirm-modal-yes-btn' },
       okText: 'Yes',
       cancelText: 'No',
     });

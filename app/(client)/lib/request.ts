@@ -1,7 +1,7 @@
 import { RequestError } from 'lib/errorClasses';
 
 const PREFIX = '';
-export default async function request(url: string, options?: RequestInit) {
+async function request(url: string, options?: RequestInit) {
   let { headers: optHeaders, ...restOpts } = options || {};
   const fullUrl = url.startsWith('http') ? url : `${PREFIX}${url}`;
 
@@ -24,3 +24,5 @@ export default async function request(url: string, options?: RequestInit) {
   // Success
   return resp.json();
 }
+
+export default request;

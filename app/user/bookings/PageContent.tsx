@@ -27,9 +27,7 @@ export const PageContent = memo<Props>(function PageContent(props) {
   const cancelBooking = useCallback(
     async (data: BookingItem) => {
       try {
-        console.log('requesting');
         await request(`/api/booking/cancel/${data.id}`);
-        console.log('successful');
 
         api.success({ message: 'Cancel booking successful' });
 
@@ -61,7 +59,7 @@ export const PageContent = memo<Props>(function PageContent(props) {
         okText: 'Yes',
         cancelText: 'No',
         cancelButtonProps: { className: 'confirm-modal-no-btn' },
-        okButtonProps: { className: 'confirm-modal-no-btn' },
+        okButtonProps: { className: 'confirm-modal-yes-btn' },
         onOk: async () => await cancelBooking(data),
       });
     },

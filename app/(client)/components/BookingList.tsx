@@ -33,7 +33,7 @@ interface Props {
 
 export function BookingList(props: Props) {
   const listData = useMemo(() => {
-    if (!props.max) return props.data;
+    if (!props.max || !props.data || props.data.length === 0) return props.data;
 
     return props.data.slice(0, props.max);
   }, [props.data, props.max]);

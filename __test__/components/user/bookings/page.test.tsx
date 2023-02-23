@@ -1,15 +1,21 @@
 import '@testing-library/jest-dom';
 
 import { generateBooking, generateFacility } from '__test__/helpers';
-import { server } from '__test__/lib/server';
+import { mockFetch } from '__test__/lib/fetch';
 import { PageContent } from 'app/user/bookings/PageContent';
 
 import { FacilityTypeEnum } from '@enums';
 import { fireEvent, render, screen } from '@testing-library/react';
 
-beforeAll(() => server.listen());
-afterEach(() => server.resetHandlers());
-afterAll(() => server.close());
+beforeEach(() => {
+  mockFetch.mockClear();
+  mockFetch.mockReturnValueOnce(
+    Promise.resolve({
+      status: 200,
+      json: () => Promise.resolve({ hello: 'dd' }),
+    })
+  );
+});
 
 describe("User's bookings", () => {
   it('renders container unchanged', () => {
@@ -43,14 +49,14 @@ describe("User's bookings", () => {
     expect(bookingFormEl).toBeInTheDocument();
   });
 
-  it('trigger cancel', async () => {
-    const fac = generateBooking(FacilityTypeEnum.Facility);
-    fac.facility = generateFacility(FacilityTypeEnum.Facility);
+  it('trigger cancel room', async () => {
+    const fac = generateFacility(FacilityTypeEnum.Room);
+    const booking = generateBooking(fac.id);
+    booking.facility = fac;
 
-    const room = generateBooking(FacilityTypeEnum.Room);
-    room.facility = generateFacility(FacilityTypeEnum.Room);
-
-    render(<PageContent bookedFacilities={[fac]} bookedRooms={[room]} />);
+    const { unmount } = render(
+      <PageContent bookedFacilities={[]} bookedRooms={[booking]} />
+    );
 
     const cancelBtn = screen.queryAllByTestId('booking-cancel-btn');
 
@@ -61,54 +67,16 @@ describe("User's bookings", () => {
 
     const modal = screen.getByRole('dialog');
 
-    // server.use(
-    //   rest.get('/api/booking/cancel/*', (req, res, ctx) => {
-    //     console.log('api called');
-
-    //     return res(ctx.json({}));
-    //   })
-    // );
-    const yesbtn = modal.querySelector('.confirm-modal-no-btn');
+    const yesbtn = modal.querySelector('.confirm-modal-yes-btn');
     expect(yesbtn).toBeInTheDocument();
     if (yesbtn) fireEvent.click(yesbtn);
+
+    expect(mockFetch).toBeCalled();
 
     const noBtn = modal.querySelector('.confirm-modal-no-btn');
     expect(noBtn).toBeInTheDocument();
     if (noBtn) fireEvent.click(noBtn);
+
+    unmount();
   });
-
-  // it('trigger edit', async () => {
-  //   const container = document.createElement('div');
-
-  //   const fac = generateBooking(FacilityTypeEnum.Facility);
-  //   fac.facility = generateFacility(FacilityTypeEnum.Facility);
-
-  //   const room = generateBooking(FacilityTypeEnum.Room);
-  //   room.facility = generateFacility(FacilityTypeEnum.Room);
-
-  //   act(() => {
-  //     render(<PageContent bookedFacilities={[fac]} bookedRooms={[room]} />);
-  //   });
-
-  //   const editBtn = screen.getAllByTestId('booking-edit-btn');
-  //   fireEvent.click(editBtn[0]);
-
-  //   const modal = await screen.findByRole('dialog');
-  //   expect(modal).toBeInTheDocument();
-
-  //   expect(await screen.findByTestId('booking-form')).toBeInTheDocument();
-
-  //   server.use(
-  //     rest.get('/api/booking/update', (req, res, ctx) => {
-  //       console.log('api called');
-
-  //       return res(ctx.json({}));
-  //     })
-  //   );
-  //   const yesbtn = screen.queryAllByTestId('booking-modal-yes-btn');
-  //   expect(yesbtn[0]).toBeInTheDocument();
-  //   act(() => {
-  //     fireEvent.click(yesbtn[0]);
-  //   });
-  // });
 });
