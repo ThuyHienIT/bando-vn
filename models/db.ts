@@ -4,6 +4,8 @@ import { promises as fs } from 'fs';
 import { RequestError } from 'lib/errorClasses';
 import path from 'path';
 
+import { Sentry } from '@lib/sentry-config';
+
 import { tryParseJson } from '../lib/tryParseJSON';
 
 const IS_TEST = process.env.NODE_ENV === 'test';
@@ -68,7 +70,12 @@ async function insertOne<T extends RecordType>(dbName: string, payload: T) {
 
   data.push(dataToInsert);
 
-  await writeFile(dbName, JSON.stringify(data, null, 2));
+  try {
+    await writeFile(dbName, JSON.stringify(data, null, 2));
+  } catch (e: any) {
+    Sentry.captureException(e);
+    Sentry.captureMessage(e.message);
+  }
 
   return dataToInsert;
 }
