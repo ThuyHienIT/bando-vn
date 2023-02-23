@@ -23,12 +23,11 @@ const WeekViewContainer = styled(Col)`
 
 interface Props {
   data: FacilityItem;
-  occupiedSlots?: [string, string][];
-  occupiedSlots2?: BookingItem[];
+  occupiedSlots?: BookingItem[];
 }
 
 export function PageContent(props: Props) {
-  const [occupiedSlots, setOccupiedSlots] = useState(props.occupiedSlots2);
+  const [occupiedSlots, setOccupiedSlots] = useState(props.occupiedSlots);
   const [selectedDate, setSelectedDate] = useState<Dayjs>();
 
   const handleBooked = useCallback((item: BookingItem) => {
@@ -73,8 +72,7 @@ export function PageContent(props: Props) {
           <WeekView
             selectedDate={selectedDate}
             data={props.data}
-            // occupiedSlots={occupiedSlots}
-            occupiedSlots2={occupiedSlots}
+            occupiedSlots={occupiedSlots}
             onBooked={handleBooked}
             onCancalled={handleCancelled}
           />

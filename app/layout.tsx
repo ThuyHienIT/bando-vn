@@ -3,7 +3,6 @@ import './globals.css';
 import React from 'react';
 
 import { App } from '@components/App';
-import { BasicLayout } from '@components/Layout/Layout';
 
 import { AntdStyleRegistry } from './(client)/lib/antd-registry';
 import StyledComponentsRegistry from './(client)/lib/registry';
@@ -23,12 +22,15 @@ export default function RootLayout({
       <body>
         <StyledComponentsRegistry>
           <AntdStyleRegistry>
-            <App>
-              <BasicLayout>{children}</BasicLayout>
-            </App>
+            <App>{children}</App>
           </AntdStyleRegistry>
         </StyledComponentsRegistry>
       </body>
     </html>
   );
 }
+
+// Static metadata
+export const metadata = {
+  title: 'Facility Booking',
+};

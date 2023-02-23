@@ -15,7 +15,7 @@ describe('WeekView List', () => {
       <WeekView
         data={fac}
         selectedDate={dayjs()}
-        occupiedSlots2={[generateBooking(fac.id)]}
+        occupiedSlots={[generateBooking(fac.id)]}
       />
     );
 
@@ -46,5 +46,25 @@ describe('WeekView List', () => {
 
     expect(scrollEl).toBeInTheDocument();
     expect(scrollEl.getAttribute('id')).toBe('js-weekview-container');
+  });
+
+  it('has booked slots', async () => {
+    const fac = generateFacility(FacilityTypeEnum.Room);
+    fac.id = 'test';
+    const booking = generateBooking(FacilityTypeEnum.Room);
+    booking.from = dayjs().format();
+    booking.to = dayjs().add(30, 'minute').format();
+
+    render(
+      <WeekView data={fac} selectedDate={undefined} occupiedSlots={[booking]} />
+    );
+
+    const bookedEl = await screen.findByText('Booked');
+    expect(bookedEl).toBeInTheDocument();
+
+    fireEvent.click(bookedEl);
+
+    const bookingFormEl = await screen.findByTestId('booking-form');
+    expect(bookingFormEl).toBeInTheDocument();
   });
 });

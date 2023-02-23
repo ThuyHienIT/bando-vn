@@ -8,10 +8,7 @@ import { PageContent } from './PageContent';
 export default async function Facility(props: { params: { id: string } }) {
   const facilityDetails = await facilityModel.loadById(props.params.id);
 
-  // const bookings = await bookingModel.loadByFacilityId(props.params.id);
-  // const occupiedSlots = bookings.map((b) => [b.from, b.to]);
-
-  const occupiedSlots2 = (await bookingModel.loadByFacilityId(
+  const occupiedSlots = (await bookingModel.loadByFacilityId(
     props.params.id
   )) as BookingItem[];
 
@@ -19,11 +16,9 @@ export default async function Facility(props: { params: { id: string } }) {
     notFound();
   }
 
-  return (
-    <PageContent
-      data={facilityDetails}
-      // occupiedSlots={occupiedSlots}
-      occupiedSlots2={occupiedSlots2}
-    />
-  );
+  return <PageContent data={facilityDetails} occupiedSlots={occupiedSlots} />;
 }
+
+export const metadata = {
+  title: 'Details',
+};

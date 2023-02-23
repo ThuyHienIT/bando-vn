@@ -1,22 +1,21 @@
 import '@testing-library/jest-dom';
 
 import { generateBooking, generateFacility } from '__test__/helpers';
-import { rest, server } from '__test__/lib/server';
-// import request from 'app/(client)/lib/request';
+import { mockFetch } from '__test__/lib/fetch';
 import { PageContent } from 'app/user/bookings/PageContent';
-import { act } from 'react-dom/test-utils';
 
 import { FacilityTypeEnum } from '@enums';
 import { fireEvent, render, screen } from '@testing-library/react';
 
-beforeAll(() => server.listen());
-// if you need to add a handler after calling setupServer for some specific test
-// this will remove that handler for the rest of them
-// (which is important for test isolation):
-afterEach(() => server.resetHandlers());
-afterAll(() => server.close());
-
-// jest.mock('app/(client)/lib/request');
+beforeEach(() => {
+  mockFetch.mockClear();
+  mockFetch.mockReturnValueOnce(
+    Promise.resolve({
+      status: 200,
+      json: () => Promise.resolve({ hello: 'dd' }),
+    })
+  );
+});
 
 describe("User's bookings", () => {
   it('renders container unchanged', () => {
@@ -50,40 +49,34 @@ describe("User's bookings", () => {
     expect(bookingFormEl).toBeInTheDocument();
   });
 
-  it('trigger cancel', async () => {
-    const fac = generateBooking(FacilityTypeEnum.Facility);
-    fac.facility = generateFacility(FacilityTypeEnum.Facility);
+  it('trigger cancel room', async () => {
+    const fac = generateFacility(FacilityTypeEnum.Room);
+    const booking = generateBooking(fac.id);
+    booking.facility = fac;
 
-    const room = generateBooking(FacilityTypeEnum.Room);
-    room.facility = generateFacility(FacilityTypeEnum.Room);
-
-    render(<PageContent bookedFacilities={[fac]} bookedRooms={[room]} />);
+    const { unmount } = render(
+      <PageContent bookedFacilities={[]} bookedRooms={[booking]} />
+    );
 
     const cancelBtn = screen.queryAllByTestId('booking-cancel-btn');
 
-    fireEvent(
-      cancelBtn[0],
-      new MouseEvent('click', {
-        bubbles: true,
-        cancelable: true,
-      })
-    );
+    fireEvent.click(cancelBtn[0]);
 
     const confirmmodal = await screen.findByText('Cancel your booking');
     expect(confirmmodal).toBeInTheDocument();
 
-    server.use(
-      rest.get('/api/booking/cancel/*', (req, res, ctx) => {
-        console.log('api called');
+    const modal = screen.getByRole('dialog');
 
-        return res(ctx.json({}));
-      })
-    );
-    const yesbtn = screen.getByTestId('btn-confirm-cancel-booking');
-    act(() => {
-      fireEvent.click(yesbtn);
-    });
+    const yesbtn = modal.querySelector('.confirm-modal-yes-btn');
+    expect(yesbtn).toBeInTheDocument();
+    if (yesbtn) fireEvent.click(yesbtn);
 
-    // expect(request).toBeCalledWith(`/api/booking/cancel/${room.id}`);
+    expect(mockFetch).toBeCalled();
+
+    const noBtn = modal.querySelector('.confirm-modal-no-btn');
+    expect(noBtn).toBeInTheDocument();
+    if (noBtn) fireEvent.click(noBtn);
+
+    unmount();
   });
 });

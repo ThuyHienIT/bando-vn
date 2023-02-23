@@ -10,7 +10,7 @@ export function generateFacility(
     address: '1 JALAN KILANG,S159402',
     description:
       'Current majority suffer hair born.\nReport daughter government item keep political cut. Customer apply couple. Data happen hear must almost.',
-    name,
+    name: name,
     amenities:
       'Friend ok nation international line another within.\nUp rate when sometimes probably measure with. Product town sort. Include even alone certain.',
     type: type,

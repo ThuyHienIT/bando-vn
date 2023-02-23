@@ -48,9 +48,8 @@ interface Props {
   date: Dayjs;
   disabled?: boolean;
   disabledSlots?: [string, string][];
-  occupiedSlots?: [string, string][];
   operationHours?: [string, string];
-  occupiedSlots2?: BookingItem[];
+  occupiedSlots?: BookingItem[];
   onEdit?(item: BookingItem): void;
   onClick?([from, to]: [Dayjs, Dayjs]): void;
 }
@@ -85,12 +84,12 @@ export const DaySelectionCol = memo(function DaySelectionCol({
   );
 
   const occupiedSlots = useMemo(() => {
-    return props.occupiedSlots2
+    return props.occupiedSlots
       ?.filter((item) => props.date.isSame(item.from, 'date'))
       .map((item) => {
         return <BookedSlot key={item.id} data={item} onClick={onEdit} />;
       });
-  }, [props.date, props.occupiedSlots2, onEdit]);
+  }, [props.date, props.occupiedSlots, onEdit]);
 
   const notWorkingSlots = useMemo(() => {
     if (!props.operationHours || props.disabled) return null;

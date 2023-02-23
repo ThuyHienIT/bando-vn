@@ -13,3 +13,7 @@ export default async function Facilities() {
     </>
   );
 }
+
+export const metadata = {
+  title: 'Facilities',
+};

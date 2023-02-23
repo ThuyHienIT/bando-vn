@@ -10,8 +10,10 @@ import {
 } from 'antd';
 import { useForm } from 'antd/lib/form/Form';
 import request from 'app/(client)/lib/request';
+import { userInfoState } from 'app/(client)/recoil/user';
 import { Dayjs } from 'dayjs';
 import { useCallback, useEffect, useState } from 'react';
+import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
 import { ExclamationCircleFilled } from '@ant-design/icons';
@@ -47,6 +49,8 @@ export function BookingModal({
   onCancelled,
   ...props
 }: Props) {
+  const userInfo = useRecoilValue(userInfoState);
+
   const [form] = useForm<FormValues>();
   const [loading, setLoading] = useState(false);
   const [api, contextHolder] = notification.useNotification();
@@ -78,7 +82,7 @@ export function BookingModal({
               .clone()
               .add(values.to.get('hour'), 'hour')
               .add(values.to.get('minute'), 'minute'),
-            userEmail: 'kqthang1505@gmail.com',
+            userEmail: userInfo?.email,
             ...(props.bookingId ? { id: props.bookingId } : {}),
           }),
         });
@@ -100,7 +104,7 @@ export function BookingModal({
         setLoading(false);
       }
     },
-    [props.isUpdate, props.data?.id, props.bookingId, api, onDone]
+    [props.isUpdate, props.data?.id, props.bookingId, api, userInfo, onDone]
   );
 
   const handleOK = useCallback(() => {
@@ -112,6 +116,7 @@ export function BookingModal({
       title: `Cancel your booking`,
       icon: <ExclamationCircleFilled />,
       content: `Are you sure you want to cancel your booking of ${props.data?.name}?`,
+      className: 'booking-confirm-modal',
       onOk: async () => {
         try {
           await request(`/api/booking/cancel/${props.bookingId}`);
@@ -120,7 +125,8 @@ export function BookingModal({
           onCancelled?.(props.bookingId);
         } catch (e: any) {}
       },
-      onCancel() {},
+      cancelButtonProps: { className: 'booking-confirm-modal-no-btn' },
+      okButtonProps: { className: 'booking-confirm-modal-yes-btn' },
       okText: 'Yes',
       cancelText: 'No',
     });
@@ -145,16 +151,26 @@ export function BookingModal({
     <>
       {contextHolder}
       <Modal
+        rootClassName="booking-modal"
         open={props.opened}
         onCancel={onClose}
         title={`Booking this slot of ${props.data?.name}`}
         destroyOnClose
         footer={
           <>
-            <Button onClick={props.isUpdate ? handleCancel : onClose}>
+            <Button
+              data-testid="booking-modal-cancel-btn"
+              className="confirm-modal-no-btn"
+              onClick={props.isUpdate ? handleCancel : onClose}
+            >
               {props.isUpdate ? 'Cancel this booking' : 'Cancel'}
             </Button>
-            <Button type="primary" onClick={handleOK} loading={loading}>
+            <Button
+              data-testid="booking-modal-yes-btn"
+              type="primary"
+              onClick={handleOK}
+              loading={loading}
+            >
               {props.isUpdate ? 'Update' : 'Book'}
             </Button>
           </>

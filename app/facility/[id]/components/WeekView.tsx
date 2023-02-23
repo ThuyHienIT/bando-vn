@@ -58,8 +58,7 @@ const TimeDatesContainer = styled.div`
 interface Props {
   data: FacilityItem;
   selectedDate?: Dayjs;
-  occupiedSlots?: [string, string][];
-  occupiedSlots2?: BookingItem[];
+  occupiedSlots?: BookingItem[];
   onBooked?(item: BookingItem): void;
   onCancalled?(bookingId: string): void;
 }
@@ -149,7 +148,6 @@ export function WeekView({ onBooked, onCancalled, ...props }: Props) {
                   onClick={handleSlotClick}
                   onEdit={handleEdit}
                   occupiedSlots={props.occupiedSlots}
-                  occupiedSlots2={props.occupiedSlots2}
                   operationHours={props.data.operationHours}
                 />
               ))}

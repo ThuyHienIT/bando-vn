@@ -3,6 +3,8 @@ import { createMocks } from 'node-mocks-http';
 
 import handleRoute from '@apis/booking/[id]';
 import { FacilityTypeEnum } from '@enums';
+import { RequestError } from '@lib/errorClasses';
+import { bookingModel } from '@models/booking';
 import { dbModel } from '@models/db';
 
 const FAC_DB_NAME = 'facilities.json';
@@ -18,7 +20,10 @@ beforeAll(async () => {
   const booking1 = generateBooking(fac1.id);
 
   await dbModel.prepareDb(BOOKING_DB_NAME);
-  const insertedBooking = await dbModel.insertOne<BookingItem>(BOOKING_DB_NAME, booking1);
+  const insertedBooking = await dbModel.insertOne<BookingItem>(
+    BOOKING_DB_NAME,
+    booking1
+  );
   BOOKING_ID = insertedBooking.id;
 });
 
@@ -28,6 +33,16 @@ afterAll(async () => {
 });
 
 describe('/api/booking/[id]', () => {
+  test('missing id', async () => {
+    const { req, res } = createMocks({
+      method: 'GET',
+      query: { id: '' },
+    });
+
+    await handleRoute(req, res);
+    expect(res._getStatusCode()).toBe(404);
+  });
+
   test('not found', async () => {
     const { req, res } = createMocks({
       method: 'GET',
@@ -48,5 +63,19 @@ describe('/api/booking/[id]', () => {
 
     expect(res._getStatusCode()).toBe(200);
     expect(JSON.parse(res._getData())).toMatchObject({ id: BOOKING_ID });
+  });
+
+  test('throw error', async () => {
+    jest
+      .spyOn(bookingModel, 'loadById')
+      .mockRejectedValueOnce(new RequestError(500, 'Hello'));
+
+    const { req, res } = createMocks({
+      method: 'GET',
+      query: { id: BOOKING_ID },
+    });
+
+    await handleRoute(req, res);
+    expect(res._getStatusCode()).toBe(500);
   });
 });

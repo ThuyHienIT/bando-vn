@@ -1,30 +1,38 @@
 import { FacilityList } from '@components/FacilityList';
+import { BasicLayout } from '@components/Layout/Layout';
 import { FacilityTypeEnum } from '@enums';
 import { facilityModel } from '@models/facility';
 
+import WithUserProvider from './(server)/WithUserProvider';
 import styles from './page.module.css';
 
-export default async function Home() {
+async function Home() {
   const rooms = await facilityModel.loadFacilities(FacilityTypeEnum.Room);
-  const facilities = await facilityModel.loadFacilities(FacilityTypeEnum.Room);
+  const facilities = await facilityModel.loadFacilities(
+    FacilityTypeEnum.Facility
+  );
 
   return (
-    <>
-      <FacilityList
-        className={styles.list}
-        heading="Rooms"
-        data={rooms}
-        max={4}
-        viewAllLink="/rooms"
-      />
+    <WithUserProvider>
+      <BasicLayout>
+        <FacilityList
+          className={styles.list}
+          heading="Rooms"
+          data={rooms}
+          max={4}
+          viewAllLink="/rooms"
+        />
 
-      <FacilityList
-        className={styles.list}
-        heading="Facilities"
-        data={facilities}
-        max={4}
-        viewAllLink="/facilities"
-      />
-    </>
+        <FacilityList
+          className={styles.list}
+          heading="Facilities"
+          data={facilities}
+          max={4}
+          viewAllLink="/facilities"
+        />
+      </BasicLayout>
+    </WithUserProvider>
   );
 }
+
+export default Home;
