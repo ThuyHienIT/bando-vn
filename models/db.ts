@@ -10,7 +10,11 @@ import { tryParseJson } from '../lib/tryParseJSON';
 
 const IS_TEST = process.env.NODE_ENV === 'test';
 const DB_FOLDER = process.env.NODE_ENV === 'test' ? 'dbtest' : 'db';
-const DB_DIR = path.join(process.cwd(), DB_FOLDER);
+const DB_DIR =
+  process.env.NODE_ENV === 'production'
+    ? '/tmp'
+    : path.join(process.cwd(), DB_FOLDER);
+
 const TEST_UTILS_DB: Record<string, string> = {};
 
 async function readFile(dbName: string) {
