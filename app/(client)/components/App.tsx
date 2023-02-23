@@ -2,6 +2,7 @@
 
 import { ConfigProvider } from 'antd';
 import { memo } from 'react';
+import { RecoilRoot } from 'recoil';
 import { ThemeProvider } from 'styled-components';
 
 import { configProviders } from '../antd-theme';
@@ -12,8 +13,10 @@ interface Props {
 }
 export const App = memo<Props>(function BasicLayout(props) {
   return (
-    <ThemeProvider theme={theme}>
-      <ConfigProvider {...configProviders}>{props.children}</ConfigProvider>
-    </ThemeProvider>
+    <RecoilRoot>
+      <ThemeProvider theme={theme}>
+        <ConfigProvider {...configProviders}>{props.children}</ConfigProvider>
+      </ThemeProvider>
+    </RecoilRoot>
   );
 });

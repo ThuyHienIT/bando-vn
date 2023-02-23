@@ -12,8 +12,10 @@
   "dependencies": {
     "@ant-design/icons": "^5.0.1",
     "@next/font": "13.1.6",
+    "@types/cookie": "^0.5.1",
     "@types/styled-components": "^5.1.26",
     "antd": "^5.2.1",
+    "cookie": "^0.5.0",
     "dayjs": "^1.11.7",
     "http-proxy": "^1.18.1",
     "mongodb": "^5.0.1",

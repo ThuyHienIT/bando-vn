@@ -6,12 +6,14 @@ import {
   Form,
   Modal,
   notification,
-  TimePicker
+  TimePicker,
 } from 'antd';
 import { useForm } from 'antd/lib/form/Form';
 import request from 'app/(client)/lib/request';
+import { userInfoState } from 'app/(client)/recoil/user';
 import { Dayjs } from 'dayjs';
 import { useCallback, useEffect, useState } from 'react';
+import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
 import { ExclamationCircleFilled } from '@ant-design/icons';
@@ -47,6 +49,8 @@ export function BookingModal({
   onCancelled,
   ...props
 }: Props) {
+  const userInfo = useRecoilValue(userInfoState);
+
   const [form] = useForm<FormValues>();
   const [loading, setLoading] = useState(false);
   const [api, contextHolder] = notification.useNotification();
@@ -78,7 +82,7 @@ export function BookingModal({
               .clone()
               .add(values.to.get('hour'), 'hour')
               .add(values.to.get('minute'), 'minute'),
-            userEmail: 'kqthang1505@gmail.com',
+            userEmail: userInfo?.email,
             ...(props.bookingId ? { id: props.bookingId } : {}),
           }),
         });
@@ -100,7 +104,7 @@ export function BookingModal({
         setLoading(false);
       }
     },
-    [props.isUpdate, props.data?.id, props.bookingId, api, onDone]
+    [props.isUpdate, props.data?.id, props.bookingId, api, userInfo, onDone]
   );
 
   const handleOK = useCallback(() => {

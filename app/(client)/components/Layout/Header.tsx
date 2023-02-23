@@ -14,6 +14,7 @@ const HeaderStyle = styled(Layout.Header)`
 
   &&& {
     background-color: #fff;
+    padding-inline: 0;
   }
 `;
 
@@ -41,7 +42,12 @@ export const Header = memo<Props>(function Header(props) {
       <HeaderContent>
         <Link href="/">
           <Logo>
-            <Image src="/logo.png" alt="Facility Booking" width={30} height={30} />
+            <Image
+              src="/logo.png"
+              alt="Facility Booking"
+              width={30}
+              height={30}
+            />
             <Typography.Title level={4}>Facility Booking</Typography.Title>
           </Logo>
         </Link>

@@ -1,7 +1,9 @@
 'use client';
 
 import { Layout } from 'antd';
-import { memo } from 'react';
+import { userInfoState } from 'app/(client)/recoil/user';
+import { memo, useEffect } from 'react';
+import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 
 import { Container } from './Container';
@@ -17,8 +19,17 @@ const LayoutStyle = styled(Layout)`
 
 interface Props {
   children: React.ReactNode;
+  userInfo?: UserInfo;
 }
 export const BasicLayout = memo<Props>(function BasicLayout(props) {
+  const [userInfo, updateUserInfo] = useRecoilState(userInfoState);
+
+  useEffect(() => {
+    if (!userInfo && props.userInfo) {
+      updateUserInfo(props.userInfo);
+    }
+  }, [props.userInfo]);
+
   return (
     <LayoutStyle>
       <Header />
