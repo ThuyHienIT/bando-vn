@@ -1,6 +1,6 @@
 'use client';
 
-import { Divider, Modal, notification, Typography } from 'antd';
+import { Button, Divider, Modal, notification, Typography } from 'antd';
 import request from 'app/(client)/lib/request';
 import { BookingModal } from 'app/facility/[id]/components/BookingModal';
 import dayjs from 'dayjs';
@@ -24,37 +24,57 @@ export const PageContent = memo<Props>(function PageContent(props) {
   const [showEditModal, setShowEditModal] = useState(false);
   const [editingBooking, setEditingBooking] = useState<BookingItem>();
 
+  const cancelBooking = useCallback(
+    async (data: BookingItem) => {
+      try {
+        console.log('requesting');
+        await request(`/api/booking/cancel/${data.id}`);
+        console.log('successful');
+
+        api.success({ message: 'Cancel booking successful' });
+
+        switch (data.facility?.type) {
+          case FacilityTypeEnum.Room:
+            setRooms((rooms) => rooms.filter((r) => r.id !== data.id));
+            break;
+          case FacilityTypeEnum.Facility:
+            setFacilities((facilities) =>
+              facilities.filter((r) => r.id !== data.id)
+            );
+            break;
+        }
+      } catch (e: any) {
+        console.log('error', e.message);
+        api.error({ message: e.message });
+      }
+    },
+    [api]
+  );
+
   const handleCancelBooking = useCallback(
     (data: BookingItem) => {
       Modal.confirm({
         title: `Cancel your booking`,
         icon: <ExclamationCircleFilled />,
         content: `Are you sure you want to cancel your booking of ${data.facility?.name}?`,
-        onOk: async () => {
-          try {
-            await request(`/api/booking/cancel/${data.id}`);
-            api.success({ message: 'Cancel booking successful' });
-
-            switch (data.facility?.type) {
-              case FacilityTypeEnum.Room:
-                setRooms((rooms) => rooms.filter((r) => r.id !== data.id));
-                break;
-              case FacilityTypeEnum.Facility:
-                setFacilities((facilities) =>
-                  facilities.filter((r) => r.id !== data.id)
-                );
-                break;
-            }
-          } catch (e: any) {
-            api.error({ message: e.message });
-          }
-        },
         onCancel() {},
         okText: 'Yes',
         cancelText: 'No',
+        footer: (
+          <>
+            <Button>No</Button>
+            <Button
+              type="primary"
+              data-testid="btn-confirm-cancel-booking"
+              onClick={() => cancelBooking(data)}
+            >
+              Yes
+            </Button>
+          </>
+        ),
       });
     },
-    [api]
+    [cancelBooking]
   );
 
   const handleCloseModal = useCallback(() => {

@@ -38,6 +38,7 @@ export function BookingItem({ onCancel, onEdit, ...props }: Props) {
         }
         actions={[
           <Button
+            data-testid="booking-cancel-btn"
             key="details"
             type="text"
             size="small"
@@ -47,6 +48,7 @@ export function BookingItem({ onCancel, onEdit, ...props }: Props) {
             Cancel
           </Button>,
           <Button
+            data-testid="booking-edit-btn"
             icon={<EditOutlined />}
             type="text"
             size="small"

@@ -45,6 +45,7 @@ exports[`Booking List less than max 1`] = `
               <span>
                 <button
                   class="ant-btn css-dev-only-do-not-override-diro6f ant-btn-text ant-btn-sm ant-btn-dangerous"
+                  data-testid="booking-cancel-btn"
                   type="button"
                 >
                   <span>
@@ -59,6 +60,7 @@ exports[`Booking List less than max 1`] = `
               <span>
                 <button
                   class="ant-btn css-dev-only-do-not-override-diro6f ant-btn-text ant-btn-sm"
+                  data-testid="booking-edit-btn"
                   type="button"
                 >
                   <span
@@ -143,6 +145,7 @@ exports[`Booking List more than max 1`] = `
               <span>
                 <button
                   class="ant-btn css-dev-only-do-not-override-diro6f ant-btn-text ant-btn-sm ant-btn-dangerous"
+                  data-testid="booking-cancel-btn"
                   type="button"
                 >
                   <span>
@@ -157,6 +160,7 @@ exports[`Booking List more than max 1`] = `
               <span>
                 <button
                   class="ant-btn css-dev-only-do-not-override-diro6f ant-btn-text ant-btn-sm"
+                  data-testid="booking-edit-btn"
                   type="button"
                 >
                   <span
@@ -220,6 +224,7 @@ exports[`Booking List more than max 1`] = `
               <span>
                 <button
                   class="ant-btn css-dev-only-do-not-override-diro6f ant-btn-text ant-btn-sm ant-btn-dangerous"
+                  data-testid="booking-cancel-btn"
                   type="button"
                 >
                   <span>
@@ -234,6 +239,7 @@ exports[`Booking List more than max 1`] = `
               <span>
                 <button
                   class="ant-btn css-dev-only-do-not-override-diro6f ant-btn-text ant-btn-sm"
+                  data-testid="booking-edit-btn"
                   type="button"
                 >
                   <span

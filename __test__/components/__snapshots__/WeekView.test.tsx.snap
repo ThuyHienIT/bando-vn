@@ -556,21 +556,12 @@ exports[`WeekView List smapshot 1`] = `
             />
           </div>
           <div
-            class="c14 c13"
+            class="c12 c13"
             data-testid="click-to-book"
           >
             <div
               role="presentation"
-            >
-              <small
-                class="c15"
-                style="top: 0px; height: 320px;"
-              />
-              <small
-                class="c15"
-                style="top: 760px; height: 199.33333333333334px;"
-              />
-            </div>
+            />
           </div>
           <div
             class="c14 c13"

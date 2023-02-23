@@ -8,7 +8,7 @@ import {
   BookedSlot,
   durationToHeight,
   positionToTime,
-  timeToPosition,
+  timeToPosition
 } from './BookedSlot';
 
 const ColStyle = styled.div<{ $disabled?: boolean }>`
@@ -66,7 +66,6 @@ export const DaySelectionCol = memo(function DaySelectionCol({
 
   const handleClick = useCallback<React.MouseEventHandler<HTMLDivElement>>(
     (e) => {
-      console.log('clicked');
       if (!scrollerRef.current) return;
 
       const containerTop = scrollerRef.current.getBoundingClientRect().y;
