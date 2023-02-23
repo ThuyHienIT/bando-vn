@@ -16,6 +16,7 @@ export default async function routeHandler(
       return res.status(e.code).json({ message: e.message });
     }
 
+    console.log('Facility/Reserve::ERROR', e);
     return res
       .status(500)
       .json({ message: 'Something went wrong. Please try again later.' });
