@@ -12,6 +12,8 @@
   "dependencies": {
     "@ant-design/icons": "^5.0.1",
     "@next/font": "13.1.6",
+    "@sentry/node": "^7.38.0",
+    "@sentry/tracing": "^7.38.0",
     "@types/cookie": "^0.5.1",
     "@types/styled-components": "^5.1.26",
     "antd": "^5.2.1",

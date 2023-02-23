@@ -1,6 +1,7 @@
 import { tryParseJson } from 'lib/tryParseJSON';
 import { NextApiRequest, NextApiResponse } from 'next';
 
+import { Sentry } from '@lib/sentry-config';
 import { facilityModel } from '@models/facility';
 
 export default async function routeHandler(
@@ -16,7 +17,8 @@ export default async function routeHandler(
       return res.status(e.code).json({ message: e.message });
     }
 
-    console.log('Facility/Reserve::ERROR', e);
+    Sentry.captureException(e);
+    console.error('Facility/Reserve::ERROR', e);
     return res
       .status(500)
       .json({ message: 'Something went wrong. Please try again later.' });
