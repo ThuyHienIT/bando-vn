@@ -20,3 +20,7 @@ export default async function Home() {
     </>
   );
 }
+
+export const metadata = {
+  title: 'Your Bookings',
+};

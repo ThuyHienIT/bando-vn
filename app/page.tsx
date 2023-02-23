@@ -6,7 +6,9 @@ import styles from './page.module.css';
 
 export default async function Home() {
   const rooms = await facilityModel.loadFacilities(FacilityTypeEnum.Room);
-  const facilities = await facilityModel.loadFacilities(FacilityTypeEnum.Room);
+  const facilities = await facilityModel.loadFacilities(
+    FacilityTypeEnum.Facility
+  );
 
   return (
     <>

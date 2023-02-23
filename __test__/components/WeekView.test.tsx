@@ -15,7 +15,7 @@ describe('WeekView List', () => {
       <WeekView
         data={fac}
         selectedDate={dayjs()}
-        occupiedSlots2={[generateBooking(fac.id)]}
+        occupiedSlots={[generateBooking(fac.id)]}
       />
     );
 
@@ -56,11 +56,7 @@ describe('WeekView List', () => {
     booking.to = dayjs().add(30, 'minute').format();
 
     render(
-      <WeekView
-        data={fac}
-        selectedDate={undefined}
-        occupiedSlots2={[booking]}
-      />
+      <WeekView data={fac} selectedDate={undefined} occupiedSlots={[booking]} />
     );
 
     const bookedEl = await screen.findByText('Booked');

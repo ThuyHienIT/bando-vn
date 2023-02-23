@@ -142,8 +142,6 @@ async function verifySlot(item: BookingItem) {
 
     return (
       fromDayjs.isSame(b.from) ||
-      fromDayjs.isSame(b.to) ||
-      toDayjs.isSame(b.from) ||
       toDayjs.isSame(b.to) ||
       (fromDayjs.isAfter(b.from) && fromDayjs.isBefore(b.to)) ||
       (toDayjs.isBefore(b.from) && toDayjs.isAfter(b.to)) ||

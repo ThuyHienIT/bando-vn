@@ -32,3 +32,8 @@ export default function RootLayout({
     </html>
   );
 }
+
+// Static metadata
+export const metadata = {
+  title: 'Facility Booking',
+};
