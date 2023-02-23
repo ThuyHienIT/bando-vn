@@ -3,6 +3,8 @@ import { createMocks } from 'node-mocks-http';
 import getBookingByIdRoute from '@apis/booking/[id]';
 import cancelBookingRoute from '@apis/booking/cancel/[id]';
 import { FacilityTypeEnum } from '@enums';
+import { RequestError } from '@lib/errorClasses';
+import { bookingModel } from '@models/booking';
 import { dbModel } from '@models/db';
 
 import { generateBooking, generateFacility } from '../../helpers';
@@ -71,5 +73,31 @@ describe('/api/booking/cancel', () => {
 
     await getBookingByIdRoute(req, res);
     expect(res._getStatusCode()).toBe(404);
+  });
+
+  test('cancel invalid booking', async () => {
+    jest.spyOn(dbModel, 'remove').mockReturnValueOnce(Promise.resolve(false));
+
+    const { req, res } = createMocks({
+      method: 'DELETE',
+      query: { id: BOOKING_ID },
+    });
+
+    await cancelBookingRoute(req, res);
+    expect(res._getStatusCode()).toBe(400);
+  });
+
+  test('throw error', async () => {
+    jest
+      .spyOn(bookingModel, 'cancel')
+      .mockRejectedValueOnce(new RequestError(500, 'Hello'));
+
+    const { req, res } = createMocks({
+      method: 'GET',
+      query: { id: BOOKING_ID },
+    });
+
+    await cancelBookingRoute(req, res);
+    expect(res._getStatusCode()).toBe(500);
   });
 });

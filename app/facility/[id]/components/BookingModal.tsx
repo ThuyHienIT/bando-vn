@@ -6,7 +6,7 @@ import {
   Form,
   Modal,
   notification,
-  TimePicker,
+  TimePicker
 } from 'antd';
 import { useForm } from 'antd/lib/form/Form';
 import request from 'app/(client)/lib/request';
@@ -145,16 +145,26 @@ export function BookingModal({
     <>
       {contextHolder}
       <Modal
+        rootClassName="booking-modal"
         open={props.opened}
         onCancel={onClose}
         title={`Booking this slot of ${props.data?.name}`}
         destroyOnClose
         footer={
           <>
-            <Button onClick={props.isUpdate ? handleCancel : onClose}>
+            <Button
+              data-testid="booking-modal-cancel-btn"
+              className="confirm-modal-no-btn"
+              onClick={props.isUpdate ? handleCancel : onClose}
+            >
               {props.isUpdate ? 'Cancel this booking' : 'Cancel'}
             </Button>
-            <Button type="primary" onClick={handleOK} loading={loading}>
+            <Button
+              data-testid="booking-modal-yes-btn"
+              type="primary"
+              onClick={handleOK}
+              loading={loading}
+            >
               {props.isUpdate ? 'Update' : 'Book'}
             </Button>
           </>

@@ -2,6 +2,8 @@ import { createMocks } from 'node-mocks-http';
 
 import handleRoute from '@apis/facility/bookings/[id]';
 import { FacilityTypeEnum } from '@enums';
+import { RequestError } from '@lib/errorClasses';
+import { bookingModel } from '@models/booking';
 import { dbModel } from '@models/db';
 
 import { generateFacility } from '../../helpers';
@@ -59,5 +61,19 @@ describe('/api/facility/bookings/[id]', () => {
     data.forEach((b) => {
       expect(b.facility?.id).toBe(FAC_ID);
     });
+  });
+
+  test('throw error', async () => {
+    jest
+      .spyOn(bookingModel, 'loadByFacilityId')
+      .mockRejectedValueOnce(new RequestError(500, 'Hello'));
+
+    const { req, res } = createMocks({
+      method: 'GET',
+      query: { id: FAC_ID },
+    });
+
+    await handleRoute(req, res);
+    expect(res._getStatusCode()).toBe(500);
   });
 });

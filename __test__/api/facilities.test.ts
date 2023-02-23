@@ -2,6 +2,7 @@ import { createMocks } from 'node-mocks-http';
 
 import handleRoute from '@apis/facilities';
 import { FacilityTypeEnum } from '@enums';
+import { RequestError } from '@lib/errorClasses';
 import { dbModel } from '@models/db';
 import { facilityModel } from '@models/facility';
 
@@ -81,5 +82,21 @@ describe('/api/[facilities]', () => {
 
     expect(res._getStatusCode()).toBe(200);
     expect(JSON.parse(res._getData())).toEqual(data);
+  });
+
+  test('throw error', async () => {
+    jest
+      .spyOn(facilityModel, 'loadFacilities')
+      .mockRejectedValueOnce(new RequestError(500, 'Hello'));
+
+    const { req, res } = createMocks({
+      method: 'GET',
+      query: {
+        type: FacilityTypeEnum.Facility,
+      },
+    });
+
+    await handleRoute(req, res);
+    expect(res._getStatusCode()).toBe(500);
   });
 });

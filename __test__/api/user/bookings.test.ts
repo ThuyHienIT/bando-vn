@@ -2,6 +2,7 @@ import { createMocks } from 'node-mocks-http';
 
 import handleRoute from '@apis/user/bookings';
 import { FacilityTypeEnum } from '@enums';
+import { RequestError } from '@lib/errorClasses';
 import { dbModel } from '@models/db';
 import { userModel } from '@models/user';
 
@@ -19,8 +20,14 @@ describe('/api/[user]/bookings', () => {
     const fac2: FacilityItem = generateFacility(FacilityTypeEnum.Facility);
 
     await dbModel.prepareDb(FAC_DB_NAME);
-    const insertedFac1 = await dbModel.insertOne<FacilityItem>(FAC_DB_NAME, fac1);
-    const insertedFac2 = await dbModel.insertOne<FacilityItem>(FAC_DB_NAME, fac2);
+    const insertedFac1 = await dbModel.insertOne<FacilityItem>(
+      FAC_DB_NAME,
+      fac1
+    );
+    const insertedFac2 = await dbModel.insertOne<FacilityItem>(
+      FAC_DB_NAME,
+      fac2
+    );
 
     const booking1 = generateBooking(insertedFac1.id);
     const booking2 = generateBooking(insertedFac2.id);
@@ -92,9 +99,32 @@ describe('/api/[user]/bookings', () => {
     });
 
     await handleRoute(req, res);
-    const data = await userModel.loadBookings(userEmail, FacilityTypeEnum.Facility);
+    const data = await userModel.loadBookings(
+      userEmail,
+      FacilityTypeEnum.Facility
+    );
 
     expect(res._getStatusCode()).toBe(200);
     expect(JSON.parse(res._getData())).toEqual(data);
+  });
+
+  test('mock throwing error', async () => {
+    jest
+      .spyOn(userModel, 'loadBookings')
+      .mockRejectedValueOnce(new RequestError(500, 'Hello'));
+
+    const { req, res } = createMocks({
+      method: 'GET',
+      query: {
+        email: 'test@gmail.com',
+      },
+    });
+
+    await handleRoute(req, res);
+
+    expect(res._getStatusCode()).toBe(500);
+    expect(JSON.parse(res._getData())).toMatchObject({
+      message: 'Something went wrong. Please try again later.',
+    });
   });
 });

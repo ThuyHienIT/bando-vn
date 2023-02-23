@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, Divider, Modal, notification, Typography } from 'antd';
+import { Divider, Modal, notification, Typography } from 'antd';
 import request from 'app/(client)/lib/request';
 import { BookingModal } from 'app/facility/[id]/components/BookingModal';
 import dayjs from 'dayjs';
@@ -54,24 +54,15 @@ export const PageContent = memo<Props>(function PageContent(props) {
   const handleCancelBooking = useCallback(
     (data: BookingItem) => {
       Modal.confirm({
+        rootClassName: 'confirm-modal',
         title: `Cancel your booking`,
         icon: <ExclamationCircleFilled />,
         content: `Are you sure you want to cancel your booking of ${data.facility?.name}?`,
-        onCancel() {},
         okText: 'Yes',
         cancelText: 'No',
-        footer: (
-          <>
-            <Button>No</Button>
-            <Button
-              type="primary"
-              data-testid="btn-confirm-cancel-booking"
-              onClick={() => cancelBooking(data)}
-            >
-              Yes
-            </Button>
-          </>
-        ),
+        cancelButtonProps: { className: 'confirm-modal-no-btn' },
+        okButtonProps: { className: 'confirm-modal-no-btn' },
+        onOk: async () => await cancelBooking(data),
       });
     },
     [cancelBooking]

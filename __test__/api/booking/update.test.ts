@@ -1,8 +1,9 @@
-import { randomUUID } from 'crypto';
 import { createMocks } from 'node-mocks-http';
 
 import handleRoute from '@apis/booking/update';
 import { FacilityTypeEnum } from '@enums';
+import { RequestError } from '@lib/errorClasses';
+import { bookingModel } from '@models/booking';
 import { dbModel } from '@models/db';
 
 import { generateBooking, generateFacility } from '../../helpers';
@@ -39,7 +40,7 @@ describe('/api/[booking]/[update]', () => {
     const { req, res } = createMocks({
       method: 'POST',
       body: {
-        id: randomUUID(),
+        id: 'invalid-id',
         from: '2022-04-23T23:30:00Z',
         to: '2022-05-23T24:00:00Z',
         facilityId: FAC_ID,
@@ -105,5 +106,21 @@ describe('/api/[booking]/[update]', () => {
       facilityId: FAC_ID,
       userEmail: 'kqthang1505@gmail.com',
     });
+  });
+
+  test('throw error', async () => {
+    jest
+      .spyOn(bookingModel, 'update')
+      .mockRejectedValueOnce(new RequestError(500, 'Hello'));
+
+    const { req, res } = createMocks({
+      method: 'GET',
+      query: {
+        type: FacilityTypeEnum.Facility,
+      },
+    });
+
+    await handleRoute(req, res);
+    expect(res._getStatusCode()).toBe(500);
   });
 });

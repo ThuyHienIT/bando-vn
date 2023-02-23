@@ -1,7 +1,9 @@
 import { createMocks } from 'node-mocks-http';
 
 import handleRoute from '@apis/facility/[id]';
+import { RequestError } from '@lib/errorClasses';
 import { dbModel } from '@models/db';
+import { facilityModel } from '@models/facility';
 
 const DB_NAME = 'facilities.json';
 const FAC_DETAILS: FacilityItem = {
@@ -47,5 +49,19 @@ describe('/api/[facility]/[id]', () => {
 
     expect(res._getStatusCode()).toBe(200);
     expect(JSON.parse(res._getData())).toMatchObject(FAC_DETAILS);
+  });
+
+  test('throw error', async () => {
+    jest
+      .spyOn(facilityModel, 'loadById')
+      .mockRejectedValueOnce(new RequestError(500, 'Hello'));
+
+    const { req, res } = createMocks({
+      method: 'GET',
+      query: { id: FAC_DETAILS.id },
+    });
+
+    await handleRoute(req, res);
+    expect(res._getStatusCode()).toBe(500);
   });
 });

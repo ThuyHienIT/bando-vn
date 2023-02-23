@@ -1,22 +1,15 @@
 import '@testing-library/jest-dom';
 
 import { generateBooking, generateFacility } from '__test__/helpers';
-import { rest, server } from '__test__/lib/server';
-// import request from 'app/(client)/lib/request';
+import { server } from '__test__/lib/server';
 import { PageContent } from 'app/user/bookings/PageContent';
-import { act } from 'react-dom/test-utils';
 
 import { FacilityTypeEnum } from '@enums';
 import { fireEvent, render, screen } from '@testing-library/react';
 
 beforeAll(() => server.listen());
-// if you need to add a handler after calling setupServer for some specific test
-// this will remove that handler for the rest of them
-// (which is important for test isolation):
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
-
-// jest.mock('app/(client)/lib/request');
 
 describe("User's bookings", () => {
   it('renders container unchanged', () => {
@@ -61,29 +54,61 @@ describe("User's bookings", () => {
 
     const cancelBtn = screen.queryAllByTestId('booking-cancel-btn');
 
-    fireEvent(
-      cancelBtn[0],
-      new MouseEvent('click', {
-        bubbles: true,
-        cancelable: true,
-      })
-    );
+    fireEvent.click(cancelBtn[0]);
 
     const confirmmodal = await screen.findByText('Cancel your booking');
     expect(confirmmodal).toBeInTheDocument();
 
-    server.use(
-      rest.get('/api/booking/cancel/*', (req, res, ctx) => {
-        console.log('api called');
+    const modal = screen.getByRole('dialog');
 
-        return res(ctx.json({}));
-      })
-    );
-    const yesbtn = screen.getByTestId('btn-confirm-cancel-booking');
-    act(() => {
-      fireEvent.click(yesbtn);
-    });
+    // server.use(
+    //   rest.get('/api/booking/cancel/*', (req, res, ctx) => {
+    //     console.log('api called');
 
-    // expect(request).toBeCalledWith(`/api/booking/cancel/${room.id}`);
+    //     return res(ctx.json({}));
+    //   })
+    // );
+    const yesbtn = modal.querySelector('.confirm-modal-no-btn');
+    expect(yesbtn).toBeInTheDocument();
+    if (yesbtn) fireEvent.click(yesbtn);
+
+    const noBtn = modal.querySelector('.confirm-modal-no-btn');
+    expect(noBtn).toBeInTheDocument();
+    if (noBtn) fireEvent.click(noBtn);
   });
+
+  // it('trigger edit', async () => {
+  //   const container = document.createElement('div');
+
+  //   const fac = generateBooking(FacilityTypeEnum.Facility);
+  //   fac.facility = generateFacility(FacilityTypeEnum.Facility);
+
+  //   const room = generateBooking(FacilityTypeEnum.Room);
+  //   room.facility = generateFacility(FacilityTypeEnum.Room);
+
+  //   act(() => {
+  //     render(<PageContent bookedFacilities={[fac]} bookedRooms={[room]} />);
+  //   });
+
+  //   const editBtn = screen.getAllByTestId('booking-edit-btn');
+  //   fireEvent.click(editBtn[0]);
+
+  //   const modal = await screen.findByRole('dialog');
+  //   expect(modal).toBeInTheDocument();
+
+  //   expect(await screen.findByTestId('booking-form')).toBeInTheDocument();
+
+  //   server.use(
+  //     rest.get('/api/booking/update', (req, res, ctx) => {
+  //       console.log('api called');
+
+  //       return res(ctx.json({}));
+  //     })
+  //   );
+  //   const yesbtn = screen.queryAllByTestId('booking-modal-yes-btn');
+  //   expect(yesbtn[0]).toBeInTheDocument();
+  //   act(() => {
+  //     fireEvent.click(yesbtn[0]);
+  //   });
+  // });
 });
