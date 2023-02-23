@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer renders footer unchanged 1`] = `
+.c1 {
+  max-width: 1080px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 16px;
+  padding-right: 16px;
+  width: 100%;
+}
+
+.c0 {
+  padding: 8px 0;
+  border-top: 2px solid #dddddd;
+}
+
+<div>
+  <footer
+    class="ant-layout-footer c0"
+    style="padding: 8px 0px;"
+  >
+    <div
+      class="c1"
+    >
+      <span
+        class="ant-typography ant-typography-secondary css-dev-only-do-not-override-diro6f"
+      >
+        <small>
+          © Created by Thang Kieu
+        </small>
+      </span>
+    </div>
+  </footer>
+</div>
+`;
