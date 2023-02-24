@@ -25,7 +25,7 @@ yarn build
 yarn start
 ```
 
-## Development starting
+## Development server
 
 _For developer_
 
@@ -40,6 +40,20 @@ The application is serve at [http://localhost:3000](http://localhost:3000)
 _Ps: Enter any email & password to login to the system_
 
 _NOTE: I'm interact with files system to retrieve/store database. If you face any issue when submit a booking, please create a new file called `bookings.json` with content `[]` and change its permission to be writable: `chmod 755 db/bookings.json`. I face this issue when deploying to Vercel, because it's all readonly files. Need to integrate to MongoDB or other database services before go to production_
+
+## Testing
+
+This project is using Jest JavaScript testing framework along with Testing React Library. To run the test, simply run
+
+```
+yarn test
+
+// or run test and watch files changes
+yarn test --watch
+
+// or generate coverage report
+yarn test --coverage
+```
 
 ## Development Process
 
