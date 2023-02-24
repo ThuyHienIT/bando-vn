@@ -1,4 +1,4 @@
-import dayjs from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 
 import { RequestError } from '../lib/errorClasses';
 import { dbModel } from './db';
@@ -143,8 +143,8 @@ async function verifySlot(item: BookingItem) {
     const facility = b.facility;
     const [fromStr, toStr] = facility?.operationHours || [];
 
-    const openHour = getDayjsFromHour(fromStr);
-    const closeHour = getDayjsFromHour(toStr);
+    const openHour = getDayjsFromHour(fromStr, fromDayjs);
+    const closeHour = getDayjsFromHour(toStr, toDayjs);
 
     return (
       (openHour && fromDayjs.isBefore(openHour)) ||
@@ -167,11 +167,11 @@ async function verifySlot(item: BookingItem) {
  *
  * @param str string HH:mm
  */
-function getDayjsFromHour(str?: string) {
+function getDayjsFromHour(str?: string, day?: Dayjs) {
   if (!str) return null;
 
   const [h, m] = str.split(':');
-  const today = dayjs();
+  const today = day || dayjs();
 
   return today
     .clone()

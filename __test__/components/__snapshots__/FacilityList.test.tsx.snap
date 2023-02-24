@@ -1,6 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Facility List less than max 1`] = `
+.c1 {
+  height: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c1.c1 .ant-card-actions {
+  margin-top: auto;
+}
+
+.c2 {
+  width: auto;
+  height: auto;
+}
+
 .c0 {
   margin-top: 32px;
 }
@@ -23,21 +43,22 @@ exports[`Facility List less than max 1`] = `
         style="padding-left: 8px; padding-right: 8px;"
       >
         <div
-          class="ant-card ant-card-bordered ant-card-small css-dev-only-do-not-override-diro6f"
+          class="ant-card ant-card-bordered ant-card-small c1 css-dev-only-do-not-override-diro6f"
         >
           <div
             class="ant-card-cover"
           >
             <img
               alt="Venus Meeting Room"
+              class="c2"
               data-nimg="1"
               decoding="async"
               height="100"
               loading="lazy"
-              src="/_next/image?url=https%3A%2F%2Fpicsum.photos%2F400%2F200&w=256&q=75"
-              srcset="/_next/image?url=https%3A%2F%2Fpicsum.photos%2F400%2F200&w=128&q=75 1x, /_next/image?url=https%3A%2F%2Fpicsum.photos%2F400%2F200&w=256&q=75 2x"
+              src="/_next/image?url=https%3A%2F%2Fpicsum.photos%2F400%2F200&w=640&q=75"
+              srcset="/_next/image?url=https%3A%2F%2Fpicsum.photos%2F400%2F200&w=256&q=75 1x, /_next/image?url=https%3A%2F%2Fpicsum.photos%2F400%2F200&w=640&q=75 2x"
               style="color: transparent;"
-              width="100"
+              width="240"
             />
           </div>
           <div
@@ -105,6 +126,26 @@ Report daughter government item keep political cut. Customer apply couple. Data 
 
 exports[`Facility List more than max 1`] = `
 .c1 {
+  height: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c1.c1 .ant-card-actions {
+  margin-top: auto;
+}
+
+.c2 {
+  width: auto;
+  height: auto;
+}
+
+.c3 {
   text-align: right;
 }
 
@@ -130,21 +171,22 @@ exports[`Facility List more than max 1`] = `
         style="padding-left: 8px; padding-right: 8px;"
       >
         <div
-          class="ant-card ant-card-bordered ant-card-small css-dev-only-do-not-override-diro6f"
+          class="ant-card ant-card-bordered ant-card-small c1 css-dev-only-do-not-override-diro6f"
         >
           <div
             class="ant-card-cover"
           >
             <img
               alt="Venus Meeting Room"
+              class="c2"
               data-nimg="1"
               decoding="async"
               height="100"
               loading="lazy"
-              src="/_next/image?url=https%3A%2F%2Fpicsum.photos%2F400%2F200&w=256&q=75"
-              srcset="/_next/image?url=https%3A%2F%2Fpicsum.photos%2F400%2F200&w=128&q=75 1x, /_next/image?url=https%3A%2F%2Fpicsum.photos%2F400%2F200&w=256&q=75 2x"
+              src="/_next/image?url=https%3A%2F%2Fpicsum.photos%2F400%2F200&w=640&q=75"
+              srcset="/_next/image?url=https%3A%2F%2Fpicsum.photos%2F400%2F200&w=256&q=75 1x, /_next/image?url=https%3A%2F%2Fpicsum.photos%2F400%2F200&w=640&q=75 2x"
               style="color: transparent;"
-              width="100"
+              width="240"
             />
           </div>
           <div
@@ -210,21 +252,22 @@ Report daughter government item keep political cut. Customer apply couple. Data 
         style="padding-left: 8px; padding-right: 8px;"
       >
         <div
-          class="ant-card ant-card-bordered ant-card-small css-dev-only-do-not-override-diro6f"
+          class="ant-card ant-card-bordered ant-card-small c1 css-dev-only-do-not-override-diro6f"
         >
           <div
             class="ant-card-cover"
           >
             <img
               alt="Venus Meeting Room"
+              class="c2"
               data-nimg="1"
               decoding="async"
               height="100"
               loading="lazy"
-              src="/_next/image?url=https%3A%2F%2Fpicsum.photos%2F400%2F200&w=256&q=75"
-              srcset="/_next/image?url=https%3A%2F%2Fpicsum.photos%2F400%2F200&w=128&q=75 1x, /_next/image?url=https%3A%2F%2Fpicsum.photos%2F400%2F200&w=256&q=75 2x"
+              src="/_next/image?url=https%3A%2F%2Fpicsum.photos%2F400%2F200&w=640&q=75"
+              srcset="/_next/image?url=https%3A%2F%2Fpicsum.photos%2F400%2F200&w=256&q=75 1x, /_next/image?url=https%3A%2F%2Fpicsum.photos%2F400%2F200&w=640&q=75 2x"
               style="color: transparent;"
-              width="100"
+              width="240"
             />
           </div>
           <div
@@ -287,7 +330,7 @@ Report daughter government item keep political cut. Customer apply couple. Data 
       </div>
     </div>
     <div
-      class="c1"
+      class="c3"
     >
       <a
         data-testid="view-all"

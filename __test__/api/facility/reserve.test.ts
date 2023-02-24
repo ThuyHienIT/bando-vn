@@ -32,8 +32,8 @@ describe('/api/[facility]/[reserve]', () => {
       method: 'POST',
       body: {
         facilityId: 'invalid-facility-id',
-        from: '2022-04-23T23:30:00Z',
-        to: '2022-05-23T24:00:00Z',
+        from: '2022-04-23T23:30:00+08:00',
+        to: '2022-05-23T24:00:00+08:00',
         userEmail: '',
       },
     });
@@ -47,8 +47,8 @@ describe('/api/[facility]/[reserve]', () => {
       method: 'POST',
       body: {
         facilityId: 'invalid-facility-id',
-        from: '2022-04-23T23:30:00Z',
-        to: '2022-05-23T24:00:00Z',
+        from: '2022-04-23T23:30:00+08:00',
+        to: '2022-05-23T24:00:00+08:00',
         userEmail: 'kqthang1505@gmail.com',
       },
     });
@@ -62,8 +62,8 @@ describe('/api/[facility]/[reserve]', () => {
       method: 'POST',
       body: {
         facilityId: FAC_ID,
-        from: '2022-04-23T10:30:00Z',
-        to: '2022-04-23T11:00:00Z',
+        from: '2022-04-23T10:30:00+08:00',
+        to: '2022-04-23T11:00:00+08:00',
         userEmail: 'kqthang1505@gmail.com',
       },
     });
@@ -77,8 +77,8 @@ describe('/api/[facility]/[reserve]', () => {
       method: 'POST',
       body: {
         facilityId: FAC_ID,
-        from: '2022-04-23T10:30:00Z',
-        to: '2022-04-23T08:00:00Z',
+        from: '2022-04-23T10:30:00+08:00',
+        to: '2022-04-23T08:00:00+08:00',
         userEmail: 'kqthang1505@gmail.com',
       },
     });
@@ -92,8 +92,8 @@ describe('/api/[facility]/[reserve]', () => {
       method: 'POST',
       body: {
         facilityId: FAC_ID,
-        from: '2023-04-23T10:30:00Z',
-        to: '2023-04-23T11:00:00Z',
+        from: '2023-04-25T10:30:00+08:00',
+        to: '2023-04-25T11:00:00+08:00',
         userEmail: 'kqthang1505@gmail.com',
       },
     });
@@ -106,8 +106,8 @@ describe('/api/[facility]/[reserve]', () => {
 
     expect(updatedData).toMatchObject({
       facilityId: FAC_ID,
-      from: '2023-04-23T10:30:00Z',
-      to: '2023-04-23T11:00:00Z',
+      from: '2023-04-25T10:30:00+08:00',
+      to: '2023-04-25T11:00:00+08:00',
       userEmail: 'kqthang1505@gmail.com',
     });
   });
@@ -147,8 +147,8 @@ describe('update booking valid data: occupied slot', () => {
       method: 'POST',
       body: {
         facilityId: FAC_ID,
-        from: '2023-04-23T10:30:00Z',
-        to: '2023-04-23T11:00:00Z',
+        from: '2023-04-25T10:30:00+08:00',
+        to: '2023-04-25T11:00:00+08:00',
         userEmail: 'kqthang1505@gmail.com',
       },
     });
@@ -161,8 +161,8 @@ describe('update booking valid data: occupied slot', () => {
       method: 'POST',
       body: {
         facilityId: FAC_ID,
-        from: '2023-04-23T10:30:00Z',
-        to: '2023-04-23T11:00:00Z',
+        from: '2023-04-25T10:30:00+08:00',
+        to: '2023-04-25T11:00:00+08:00',
         userEmail: 'kqthang1505@gmail.com',
       },
     });
@@ -176,8 +176,8 @@ describe('update booking valid data: occupied slot', () => {
       method: 'POST',
       body: {
         facilityId: FAC_ID,
-        from: '2023-04-23T09:30:00Z',
-        to: '2023-04-23T10:40:00Z',
+        from: '2023-04-25T09:30:00+08:00',
+        to: '2023-04-25T10:40:00+08:00',
         userEmail: 'kqthang1505@gmail.com',
       },
     });
@@ -191,8 +191,8 @@ describe('update booking valid data: occupied slot', () => {
       method: 'POST',
       body: {
         facilityId: FAC_ID,
-        from: '2023-04-23T10:40:00Z',
-        to: '2023-04-23T12:00:00Z',
+        from: '2023-04-25T10:40:00+08:00',
+        to: '2023-04-25T12:00:00+08:00',
         userEmail: 'kqthang1505@gmail.com',
       },
     });
@@ -206,8 +206,8 @@ describe('update booking valid data: occupied slot', () => {
       method: 'POST',
       body: {
         facilityId: FAC_ID,
-        from: '2023-04-23T09:00:00Z',
-        to: '2023-04-23T12:00:00Z',
+        from: '2023-04-25T09:00:00+08:00',
+        to: '2023-04-25T12:00:00+08:00',
         userEmail: 'kqthang1505@gmail.com',
       },
     });
@@ -221,8 +221,8 @@ describe('update booking valid data: occupied slot', () => {
       method: 'POST',
       body: {
         facilityId: FAC_ID,
-        from: '2023-04-23T10:40:00Z',
-        to: '2023-04-23T10:50:00Z',
+        from: '2023-04-25T10:40:00+08:00',
+        to: '2023-04-25T10:50:00+08:00',
         userEmail: 'kqthang1505@gmail.com',
       },
     });
@@ -236,8 +236,8 @@ describe('update booking valid data: occupied slot', () => {
       method: 'POST',
       body: {
         facilityId: FAC_ID,
-        from: '2023-04-23T13:00:00Z',
-        to: '2023-04-23T14:00:00Z',
+        from: '2023-02-26T13:00:36+08:00',
+        to: '2023-02-26T14:00:36+08:00',
         userEmail: 'kqthang1505@gmail.com',
       },
     });

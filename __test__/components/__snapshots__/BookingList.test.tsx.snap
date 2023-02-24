@@ -1,6 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Booking List less than max 1`] = `
+.c0 {
+  height: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c0 .ant-card-actions {
+  margin-top: auto;
+}
+
 <div>
   <div>
     <h4
@@ -13,11 +28,11 @@ exports[`Booking List less than max 1`] = `
       style="margin-left: -8px; margin-right: -8px;"
     >
       <div
-        class="ant-col ant-col-md-6 css-dev-only-do-not-override-diro6f"
+        class="ant-col ant-col-xs-12 ant-col-sm-8 ant-col-md-6 css-dev-only-do-not-override-diro6f"
         style="padding-left: 8px; padding-right: 8px;"
       >
         <div
-          class="ant-card ant-card-bordered ant-card-small css-dev-only-do-not-override-diro6f"
+          class="ant-card ant-card-bordered ant-card-small c0 css-dev-only-do-not-override-diro6f"
         >
           <div
             class="ant-card-body"
@@ -98,6 +113,21 @@ exports[`Booking List less than max 1`] = `
 
 exports[`Booking List more than max 1`] = `
 .c0 {
+  height: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c0 .ant-card-actions {
+  margin-top: auto;
+}
+
+.c1 {
   text-align: right;
 }
 
@@ -113,11 +143,11 @@ exports[`Booking List more than max 1`] = `
       style="margin-left: -8px; margin-right: -8px;"
     >
       <div
-        class="ant-col ant-col-md-6 css-dev-only-do-not-override-diro6f"
+        class="ant-col ant-col-xs-12 ant-col-sm-8 ant-col-md-6 css-dev-only-do-not-override-diro6f"
         style="padding-left: 8px; padding-right: 8px;"
       >
         <div
-          class="ant-card ant-card-bordered ant-card-small css-dev-only-do-not-override-diro6f"
+          class="ant-card ant-card-bordered ant-card-small c0 css-dev-only-do-not-override-diro6f"
         >
           <div
             class="ant-card-body"
@@ -192,11 +222,11 @@ exports[`Booking List more than max 1`] = `
         </div>
       </div>
       <div
-        class="ant-col ant-col-md-6 css-dev-only-do-not-override-diro6f"
+        class="ant-col ant-col-xs-12 ant-col-sm-8 ant-col-md-6 css-dev-only-do-not-override-diro6f"
         style="padding-left: 8px; padding-right: 8px;"
       >
         <div
-          class="ant-card ant-card-bordered ant-card-small css-dev-only-do-not-override-diro6f"
+          class="ant-card ant-card-bordered ant-card-small c0 css-dev-only-do-not-override-diro6f"
         >
           <div
             class="ant-card-body"
@@ -272,7 +302,7 @@ exports[`Booking List more than max 1`] = `
       </div>
     </div>
     <div
-      class="c0"
+      class="c1"
     >
       <a
         data-testid="view-all"
