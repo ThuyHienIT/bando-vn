@@ -9,11 +9,8 @@ import { Sentry } from '@lib/sentry-config';
 import { tryParseJson } from '../lib/tryParseJSON';
 
 const IS_TEST = process.env.NODE_ENV === 'test';
-const DB_FOLDER = process.env.NODE_ENV === 'test' ? 'dbtest' : 'db';
-const DB_DIR =
-  process.env.NODE_ENV === 'production'
-    ? '/tmp'
-    : path.join(process.cwd(), DB_FOLDER);
+const DB_FOLDER = IS_TEST ? 'dbtest' : 'db';
+const DB_DIR = path.join(process.cwd(), DB_FOLDER);
 
 const TEST_UTILS_DB: Record<string, string> = {};
 

@@ -12,7 +12,7 @@ const CardStyle = styled(Card)`
   display: flex;
   flex-direction: column;
 
-  .ant-card-actions {
+  && .ant-card-actions {
     margin-top: auto;
   }
 `;

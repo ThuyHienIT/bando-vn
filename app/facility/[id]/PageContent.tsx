@@ -9,7 +9,7 @@ import styled from 'styled-components';
 import {
   CalendarOutlined,
   EnvironmentOutlined,
-  PhoneOutlined
+  PhoneOutlined,
 } from '@ant-design/icons';
 import { FacilityTypeEnum } from '@enums';
 
@@ -34,7 +34,9 @@ const ImageStyle = styled(Image)`
   height: auto;
 `;
 const CalendarCol = styled(Col)`
-  overflow: hidden;
+  && {
+    overflow: hidden;
+  }
   display: flex;
   flex-direction: column;
   height: 100%;
