@@ -1,21 +1,30 @@
 import dayjs from 'dayjs';
 import { memo, useCallback } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-const SlotStyle = styled.small`
-  background-color: #509f53;
+const SlotStyle = styled.small<{ disabled?: boolean }>`
+  background-color: ${(p) => (!p.disabled ? '#509f53' : '#dddddd')};
+  color: ${(p) => (!p.disabled ? '#ffffff' : '#333333')};
   border-radius: 2px;
   display: block;
   position: absolute;
   padding: 2px;
-  color: #ffffff;
   width: 80%;
   z-index: 1;
+  ${(p) =>
+    !p.disabled &&
+    css`
+      cursor: pointer;
+      &:hover {
+        opacity: 0.8;
+      }
+    `}
 `;
 
 interface Props {
   data: BookingItem;
   style?: React.CSSProperties;
+  disabled?: boolean;
   onClick?(item: BookingItem): void;
 }
 export const BookedSlot = memo<Props>(function BookedSlot({
@@ -40,6 +49,7 @@ export const BookedSlot = memo<Props>(function BookedSlot({
         top: timeToPosition(fromDayjs.format('HH:mm'), 40),
         height: durationToHeight(toDayjs.diff(fromDayjs, 'minute')),
       }}
+      disabled={props.disabled}
       onClick={handleClick}
     >
       Booked

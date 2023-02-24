@@ -1,7 +1,9 @@
 'use client';
 
+import { userInfoState } from 'app/(client)/recoil/user';
 import dayjs, { Dayjs } from 'dayjs';
 import React, { memo, useCallback, useEffect, useMemo, useRef } from 'react';
+import { useRecoilValue } from 'recoil';
 import styled, { css } from 'styled-components';
 
 import {
@@ -61,6 +63,7 @@ export const DaySelectionCol = memo(function DaySelectionCol({
   onEdit,
   ...props
 }: Props) {
+  const userInfo = useRecoilValue(userInfoState);
   const scrollerRef = useRef<HTMLDivElement>();
 
   const handleClick = useCallback<React.MouseEventHandler<HTMLDivElement>>(
@@ -87,9 +90,16 @@ export const DaySelectionCol = memo(function DaySelectionCol({
     return props.occupiedSlots
       ?.filter((item) => props.date.isSame(item.from, 'date'))
       .map((item) => {
-        return <BookedSlot key={item.id} data={item} onClick={onEdit} />;
+        return (
+          <BookedSlot
+            key={item.id}
+            data={item}
+            disabled={item.userEmail !== userInfo?.email}
+            onClick={item.userEmail === userInfo?.email ? onEdit : undefined}
+          />
+        );
       });
-  }, [props.date, props.occupiedSlots, onEdit]);
+  }, [props.date, props.occupiedSlots, onEdit, userInfo?.email]);
 
   const notWorkingSlots = useMemo(() => {
     if (!props.operationHours || props.disabled) return null;
