@@ -47,7 +47,7 @@ export function BookingList(props: Props) {
       {listData.length > 0 && (
         <ListStyle gutter={16}>
           {listData.map((item) => (
-            <ColStyle key={item.id} md={6}>
+            <ColStyle key={item.id} xs={12} sm={8} md={6}>
               <BookingItem
                 data={item}
                 onCancel={props.onCancel}

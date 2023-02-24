@@ -3,8 +3,24 @@
 import { Button, Card, Typography } from 'antd';
 import Image from 'next/image';
 import Link from 'next/link';
+import styled from 'styled-components';
 
 import { EyeOutlined } from '@ant-design/icons';
+
+const CardStyle = styled(Card)`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .ant-card-actions {
+    margin-top: auto;
+  }
+`;
+
+const ImageStyle = styled(Image)`
+  width: auto;
+  height: auto;
+`;
 
 interface Props {
   data: FacilityItem;
@@ -12,14 +28,14 @@ interface Props {
 
 export function FacilityItemCmp(props: Props) {
   return (
-    <Card
+    <CardStyle
       size="small"
       cover={
         props.data.thumbnail ? (
-          <Image
+          <ImageStyle
             alt={props.data.name}
             src={props.data.thumbnail}
-            width={100}
+            width={240}
             height={100}
           />
         ) : null
@@ -34,6 +50,6 @@ export function FacilityItemCmp(props: Props) {
     >
       <Typography.Title level={4}>{props.data.name}</Typography.Title>
       <Typography.Text ellipsis>{props.data.description}</Typography.Text>
-    </Card>
+    </CardStyle>
   );
 }

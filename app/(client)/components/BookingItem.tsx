@@ -4,8 +4,19 @@ import { Button, Card, Typography } from 'antd';
 import dayjs from 'dayjs';
 import Image from 'next/image';
 import { useCallback } from 'react';
+import styled from 'styled-components';
 
 import { EditOutlined } from '@ant-design/icons';
+
+const CardStyle = styled(Card)`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .ant-card-actions {
+    margin-top: auto;
+  }
+`;
 
 interface Props {
   data: BookingItem;
@@ -24,7 +35,7 @@ export function BookingItem({ onCancel, onEdit, ...props }: Props) {
 
   return (
     <>
-      <Card
+      <CardStyle
         size="small"
         cover={
           props.data.facility?.thumbnail ? (
@@ -68,7 +79,7 @@ export function BookingItem({ onCancel, onEdit, ...props }: Props) {
         <Typography.Text ellipsis>{`To: ${dayjs(props.data.to).format(
           'DD/MM/YYYY HH:mm'
         )}`}</Typography.Text>
-      </Card>
+      </CardStyle>
     </>
   );
 }

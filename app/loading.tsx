@@ -3,5 +3,9 @@
 import { Skeleton } from 'antd';
 
 export default function Loading() {
-  return <Skeleton style={{ marginTop: 32 }} />;
+  return (
+    <div style={{ padding: 32 }}>
+      <Skeleton />
+    </div>
+  );
 }
