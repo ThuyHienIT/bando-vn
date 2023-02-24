@@ -125,7 +125,7 @@ export const DaySelectionCol = memo(function DaySelectionCol({
         />
       </>
     );
-  }, [props.disabled, props.operationHours]);
+  }, [props.date, props.disabled, props.operationHours]);
 
   useEffect(() => {
     const scroller = document.getElementById(

@@ -84,6 +84,16 @@ export function WeekView({ onBooked, onCancalled, ...props }: Props) {
     );
   }, [props.selectedDate]);
 
+  const isDisabledDate = useCallback(
+    (d: Dayjs) => {
+      return (
+        d.isBefore(dayjs(), 'date') ||
+        props.data.offDays?.some((offDate) => d.isSame(offDate, 'date'))
+      );
+    },
+    [props.data.offDays]
+  );
+
   const handleSlotClick = useCallback(([from, to]: [Dayjs, Dayjs]) => {
     setFrom(from);
     setTo(to);
@@ -144,7 +154,7 @@ export function WeekView({ onBooked, onCancalled, ...props }: Props) {
                 <DaySelectionColStyle
                   key={d.toString()}
                   date={d.clone()}
-                  disabled={d.isBefore(dayjs(), 'date')}
+                  disabled={isDisabledDate(d)}
                   onClick={handleSlotClick}
                   onEdit={handleEdit}
                   occupiedSlots={props.occupiedSlots}

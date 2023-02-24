@@ -8,7 +8,7 @@
     "amenities": "The room is equipped with a large table, chairs, and audiovisual equipment such as a screen and a projector. It also has a whiteboard for brainstorming and sharing ideas. The room is bright and airy, with adjustable lighting and temperature control to ensure maximum comfort",
     "type": "room",
     "operationHours": ["08:00", "19:00"],
-    "offDays": ["2022-04-23T23:18:53Z"],
+    "offDays": ["2023-03-02T00:00:00Z"],
     "thumbnail": "/img/facilities/room1.jpg"
   },
   {
@@ -20,7 +20,7 @@
     "amenities": "The room is equipped with a large table, chairs, and audiovisual equipment such as a screen and a projector. It also has a whiteboard for brainstorming and sharing ideas. The room is bright and airy, with adjustable lighting and temperature control to ensure maximum comfort",
     "type": "room",
     "operationHours": ["08:00", "19:00"],
-    "offDays": ["2022-04-23T23:18:53Z"],
+    "offDays": ["2023-03-02T00:00:00Z"],
     "thumbnail": "/img/facilities/room2.jpg"
   },
   {
@@ -32,7 +32,7 @@
     "amenities": "The room is equipped with a large table, chairs, and audiovisual equipment such as a screen and a projector. It also has a whiteboard for brainstorming and sharing ideas. The room is bright and airy, with adjustable lighting and temperature control to ensure maximum comfort",
     "type": "room",
     "operationHours": ["08:00", "19:00"],
-    "offDays": ["2022-04-23T23:18:53Z"],
+    "offDays": ["2023-02-28T00:00:00Z"],
     "thumbnail": "/img/facilities/room3.jpg"
   },
   {
@@ -44,7 +44,7 @@
     "amenities": "The room is equipped with a large table, chairs, and audiovisual equipment such as a screen and a projector. It also has a whiteboard for brainstorming and sharing ideas. The room is bright and airy, with adjustable lighting and temperature control to ensure maximum comfort",
     "type": "room",
     "operationHours": ["08:00", "19:00"],
-    "offDays": ["2022-04-23T23:18:53Z"],
+    "offDays": ["2023-03-02T00:00:00Z"],
     "thumbnail": "/img/facilities/room4.jpg"
   },
   {
@@ -56,7 +56,7 @@
     "amenities": "The room is equipped with a large table, chairs, and audiovisual equipment such as a screen and a projector. It also has a whiteboard for brainstorming and sharing ideas. The room is bright and airy, with adjustable lighting and temperature control to ensure maximum comfort",
     "type": "room",
     "operationHours": ["08:00", "19:00"],
-    "offDays": ["2022-04-23T23:18:53Z"],
+    "offDays": ["2023-03-02T00:00:00Z"],
     "thumbnail": "/img/facilities/room5.jpg"
   },
   {
@@ -68,7 +68,7 @@
     "amenities": "The room is equipped with a large table, chairs, and audiovisual equipment such as a screen and a projector. It also has a whiteboard for brainstorming and sharing ideas. The room is bright and airy, with adjustable lighting and temperature control to ensure maximum comfort",
     "type": "room",
     "operationHours": ["08:00", "19:00"],
-    "offDays": ["2022-04-23T23:18:53Z"],
+    "offDays": ["2023-03-02T00:00:00Z"],
     "thumbnail": "/img/facilities/room6.jpg"
   },
   {
@@ -80,7 +80,7 @@
     "amenities": "The room is equipped with a large table, chairs, and audiovisual equipment such as a screen and a projector. It also has a whiteboard for brainstorming and sharing ideas. The room is bright and airy, with adjustable lighting and temperature control to ensure maximum comfort",
     "type": "room",
     "operationHours": ["08:00", "19:00"],
-    "offDays": ["2022-04-23T23:18:53Z"],
+    "offDays": ["2023-03-02T00:00:00Z"],
     "thumbnail": "/img/facilities/room7.jpg"
   },
   {
@@ -92,7 +92,7 @@
     "amenities": "The room is equipped with a large table, chairs, and audiovisual equipment such as a screen and a projector. It also has a whiteboard for brainstorming and sharing ideas. The room is bright and airy, with adjustable lighting and temperature control to ensure maximum comfort",
     "type": "room",
     "operationHours": ["08:00", "19:00"],
-    "offDays": ["2022-04-23T23:18:53Z"],
+    "offDays": ["2023-03-02T00:00:00Z"],
     "thumbnail": "/img/facilities/room8.jpg"
   },
 
@@ -105,7 +105,7 @@
     "amenities": "The court is in excellent condition and is suitable for Basketball games and other related activities. Please let me know your preferred rental date and time, as well as any specific needs you may have, so that I can provide you with a customized quote. Additionally, I can provide you with any necessary information about the court's rules and regulations. Thank you for your interest, and I look forward to hearing from you soon.",
     "type": "facility",
     "operationHours": ["08:00", "19:00"],
-    "offDays": ["2022-04-23T23:18:53Z"],
+    "offDays": ["2023-03-02T00:00:00Z"],
     "thumbnail": "/img/facilities/basketball.jpg"
   },
   {
@@ -117,7 +117,7 @@
     "amenities": "The court is in excellent condition and is suitable for Basketball games and other related activities. Please let me know your preferred rental date and time, as well as any specific needs you may have, so that I can provide you with a customized quote. Additionally, I can provide you with any necessary information about the court's rules and regulations. Thank you for your interest, and I look forward to hearing from you soon.",
     "type": "facility",
     "operationHours": ["08:00", "19:00"],
-    "offDays": ["2022-04-23T23:18:53Z"],
+    "offDays": ["2023-03-02T00:00:00Z"],
     "thumbnail": "/img/facilities/basketball.jpg"
   },
   {
@@ -129,7 +129,7 @@
     "amenities": "The court is in excellent condition and is suitable for Tennis games and other related activities. Please let me know your preferred rental date and time, as well as any specific needs you may have, so that I can provide you with a customized quote. Additionally, I can provide you with any necessary information about the court's rules and regulations. Thank you for your interest, and I look forward to hearing from you soon.",
     "type": "facility",
     "operationHours": ["08:00", "19:00"],
-    "offDays": ["2022-04-23T23:18:53Z"],
+    "offDays": ["2023-03-02T00:00:00Z"],
     "thumbnail": "/img/facilities/tennis.jpg"
   },
   {
@@ -141,7 +141,7 @@
     "amenities": "The court is in excellent condition and is suitable for Volleyball games and other related activities. Please let me know your preferred rental date and time, as well as any specific needs you may have, so that I can provide you with a customized quote. Additionally, I can provide you with any necessary information about the court's rules and regulations. Thank you for your interest, and I look forward to hearing from you soon.",
     "type": "facility",
     "operationHours": ["08:00", "19:00"],
-    "offDays": ["2022-04-23T23:18:53Z"],
+    "offDays": ["2023-03-02T00:00:00Z"],
     "thumbnail": "/img/facilities/volleyball.jpg"
   },
   {
@@ -153,7 +153,7 @@
     "amenities": "The court is in excellent condition and is suitable for Baseball games and other related activities. Please let me know your preferred rental date and time, as well as any specific needs you may have, so that I can provide you with a customized quote. Additionally, I can provide you with any necessary information about the court's rules and regulations. Thank you for your interest, and I look forward to hearing from you soon.",
     "type": "facility",
     "operationHours": ["08:00", "19:00"],
-    "offDays": ["2022-04-23T23:18:53Z"],
+    "offDays": ["2023-03-02T00:00:00Z"],
     "thumbnail": "/img/facilities/baseball.jpg"
   },
   {
@@ -165,7 +165,7 @@
     "amenities": "The court is in excellent condition and is suitable for Tennis games and other related activities. Please let me know your preferred rental date and time, as well as any specific needs you may have, so that I can provide you with a customized quote. Additionally, I can provide you with any necessary information about the court's rules and regulations. Thank you for your interest, and I look forward to hearing from you soon.",
     "type": "facility",
     "operationHours": ["08:00", "19:00"],
-    "offDays": ["2022-04-23T23:18:53Z"],
+    "offDays": ["2023-03-02T00:00:00Z"],
     "thumbnail": "/img/facilities/tennis.jpg"
   },
   {
@@ -177,7 +177,7 @@
     "amenities": "The court is in excellent condition and is suitable for Volleyball games and other related activities. Please let me know your preferred rental date and time, as well as any specific needs you may have, so that I can provide you with a customized quote. Additionally, I can provide you with any necessary information about the court's rules and regulations. Thank you for your interest, and I look forward to hearing from you soon.",
     "type": "facility",
     "operationHours": ["08:00", "19:00"],
-    "offDays": ["2022-04-23T23:18:53Z"],
+    "offDays": ["2023-03-02T00:00:00Z"],
     "thumbnail": "/img/facilities/volleyball.jpg"
   },
   {
@@ -189,7 +189,7 @@
     "amenities": "The court is in excellent condition and is suitable for Baseball games and other related activities. Please let me know your preferred rental date and time, as well as any specific needs you may have, so that I can provide you with a customized quote. Additionally, I can provide you with any necessary information about the court's rules and regulations. Thank you for your interest, and I look forward to hearing from you soon.",
     "type": "facility",
     "operationHours": ["08:00", "19:00"],
-    "offDays": ["2022-04-23T23:18:53Z"],
+    "offDays": ["2023-03-02T00:00:00Z"],
     "thumbnail": "/img/facilities/baseball.jpg"
   }
 ]
