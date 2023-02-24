@@ -140,7 +140,15 @@ async function verifySlot(item: BookingItem) {
   const isOverlap = bookings.some((b) => {
     if (item.id === b.id) return false;
 
+    const facility = b.facility;
+    const [fromStr, toStr] = facility?.operationHours || [];
+
+    const openHour = getDayjsFromHour(fromStr);
+    const closeHour = getDayjsFromHour(toStr);
+
     return (
+      (openHour && fromDayjs.isBefore(openHour)) ||
+      (closeHour && toDayjs.isAfter(closeHour)) ||
       fromDayjs.isSame(b.from) ||
       toDayjs.isSame(b.to) ||
       (fromDayjs.isAfter(b.from) && fromDayjs.isBefore(b.to)) || // from within
@@ -149,7 +157,24 @@ async function verifySlot(item: BookingItem) {
     );
   });
 
-  if (isOverlap) return 'Your slot selection is overlap with ocuppied slots';
+  if (isOverlap)
+    return 'Your slot selection is overlap with ocuppied slots or over operation hours';
 
   return '';
+}
+
+/**
+ *
+ * @param str string HH:mm
+ */
+function getDayjsFromHour(str?: string) {
+  if (!str) return null;
+
+  const [h, m] = str.split(':');
+  const today = dayjs();
+
+  return today
+    .clone()
+    .set('hour', parseInt(h, 10))
+    .set('minute', parseInt(m, 10));
 }

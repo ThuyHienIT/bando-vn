@@ -9,7 +9,6 @@ export default function WithUserProvider({
   children: React.ReactElement;
 }) {
   const userInfo = getUser();
-  console.log('user info', userInfo);
   if (!userInfo) redirect('/login');
 
   return React.cloneElement(children, {

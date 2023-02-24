@@ -8,7 +8,7 @@ import {
   BookedSlot,
   durationToHeight,
   positionToTime,
-  timeToPosition
+  timeToPosition,
 } from './BookedSlot';
 
 const ColStyle = styled.div<{ $disabled?: boolean }>`
@@ -95,11 +95,14 @@ export const DaySelectionCol = memo(function DaySelectionCol({
     if (!props.operationHours || props.disabled) return null;
 
     const [fromStr, toStr] = props.operationHours;
+    let fromDayjs = dayjs(fromStr, 'HH:mm');
+    const now = dayjs();
+    if (now.isSame(props.date, 'date') && now.isAfter(fromDayjs)) {
+      fromDayjs = now;
+    }
 
-    const fromMin = dayjs(fromStr, 'HH:mm').diff(
-      dayjs('00:00', 'HH:mm'),
-      'minute'
-    );
+    const fromMin = fromDayjs.diff(dayjs('00:00', 'HH:mm'), 'minute');
+
     const toMin = dayjs('23:59', 'HH:mm').diff(dayjs(toStr, 'HH:mm'), 'minute');
 
     return (

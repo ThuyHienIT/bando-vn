@@ -7,7 +7,7 @@
     "name": "The Think Tank Room",
     "amenities": "The room is equipped with a large table, chairs, and audiovisual equipment such as a screen and a projector. It also has a whiteboard for brainstorming and sharing ideas. The room is bright and airy, with adjustable lighting and temperature control to ensure maximum comfort",
     "type": "room",
-    "operationHours": ["8:00", "19:00"],
+    "operationHours": ["08:00", "19:00"],
     "offDays": ["2022-04-23T23:18:53Z"],
     "thumbnail": "/img/facilities/room1.jpg"
   },
@@ -19,7 +19,7 @@
     "name": "The Brainstorm Bunker",
     "amenities": "The room is equipped with a large table, chairs, and audiovisual equipment such as a screen and a projector. It also has a whiteboard for brainstorming and sharing ideas. The room is bright and airy, with adjustable lighting and temperature control to ensure maximum comfort",
     "type": "room",
-    "operationHours": ["8:00", "19:00"],
+    "operationHours": ["08:00", "19:00"],
     "offDays": ["2022-04-23T23:18:53Z"],
     "thumbnail": "/img/facilities/room2.jpg"
   },
@@ -31,7 +31,7 @@
     "name": "The Collaboration Corner",
     "amenities": "The room is equipped with a large table, chairs, and audiovisual equipment such as a screen and a projector. It also has a whiteboard for brainstorming and sharing ideas. The room is bright and airy, with adjustable lighting and temperature control to ensure maximum comfort",
     "type": "room",
-    "operationHours": ["8:00", "19:00"],
+    "operationHours": ["08:00", "19:00"],
     "offDays": ["2022-04-23T23:18:53Z"],
     "thumbnail": "/img/facilities/room3.jpg"
   },
@@ -43,7 +43,7 @@
     "name": "The Idea Lab",
     "amenities": "The room is equipped with a large table, chairs, and audiovisual equipment such as a screen and a projector. It also has a whiteboard for brainstorming and sharing ideas. The room is bright and airy, with adjustable lighting and temperature control to ensure maximum comfort",
     "type": "room",
-    "operationHours": ["8:00", "19:00"],
+    "operationHours": ["08:00", "19:00"],
     "offDays": ["2022-04-23T23:18:53Z"],
     "thumbnail": "/img/facilities/room4.jpg"
   },
@@ -55,7 +55,7 @@
     "name": "The Strategy Suite",
     "amenities": "The room is equipped with a large table, chairs, and audiovisual equipment such as a screen and a projector. It also has a whiteboard for brainstorming and sharing ideas. The room is bright and airy, with adjustable lighting and temperature control to ensure maximum comfort",
     "type": "room",
-    "operationHours": ["8:00", "19:00"],
+    "operationHours": ["08:00", "19:00"],
     "offDays": ["2022-04-23T23:18:53Z"],
     "thumbnail": "/img/facilities/room5.jpg"
   },
@@ -67,7 +67,7 @@
     "name": "The Summit Salon",
     "amenities": "The room is equipped with a large table, chairs, and audiovisual equipment such as a screen and a projector. It also has a whiteboard for brainstorming and sharing ideas. The room is bright and airy, with adjustable lighting and temperature control to ensure maximum comfort",
     "type": "room",
-    "operationHours": ["8:00", "19:00"],
+    "operationHours": ["08:00", "19:00"],
     "offDays": ["2022-04-23T23:18:53Z"],
     "thumbnail": "/img/facilities/room6.jpg"
   },
@@ -79,7 +79,7 @@
     "name": "The Catalyst Chamber",
     "amenities": "The room is equipped with a large table, chairs, and audiovisual equipment such as a screen and a projector. It also has a whiteboard for brainstorming and sharing ideas. The room is bright and airy, with adjustable lighting and temperature control to ensure maximum comfort",
     "type": "room",
-    "operationHours": ["8:00", "19:00"],
+    "operationHours": ["08:00", "19:00"],
     "offDays": ["2022-04-23T23:18:53Z"],
     "thumbnail": "/img/facilities/room7.jpg"
   },
@@ -91,7 +91,7 @@
     "name": "The Progress Parlor",
     "amenities": "The room is equipped with a large table, chairs, and audiovisual equipment such as a screen and a projector. It also has a whiteboard for brainstorming and sharing ideas. The room is bright and airy, with adjustable lighting and temperature control to ensure maximum comfort",
     "type": "room",
-    "operationHours": ["8:00", "19:00"],
+    "operationHours": ["08:00", "19:00"],
     "offDays": ["2022-04-23T23:18:53Z"],
     "thumbnail": "/img/facilities/room8.jpg"
   },
@@ -104,7 +104,7 @@
     "name": "Basketball Court",
     "amenities": "The court is in excellent condition and is suitable for Basketball games and other related activities. Please let me know your preferred rental date and time, as well as any specific needs you may have, so that I can provide you with a customized quote. Additionally, I can provide you with any necessary information about the court's rules and regulations. Thank you for your interest, and I look forward to hearing from you soon.",
     "type": "facility",
-    "operationHours": ["8:00", "19:00"],
+    "operationHours": ["08:00", "19:00"],
     "offDays": ["2022-04-23T23:18:53Z"],
     "thumbnail": "/img/facilities/basketball.jpg"
   },
@@ -116,7 +116,7 @@
     "name": "Basketball Court @ Rochor",
     "amenities": "The court is in excellent condition and is suitable for Basketball games and other related activities. Please let me know your preferred rental date and time, as well as any specific needs you may have, so that I can provide you with a customized quote. Additionally, I can provide you with any necessary information about the court's rules and regulations. Thank you for your interest, and I look forward to hearing from you soon.",
     "type": "facility",
-    "operationHours": ["8:00", "19:00"],
+    "operationHours": ["08:00", "19:00"],
     "offDays": ["2022-04-23T23:18:53Z"],
     "thumbnail": "/img/facilities/basketball.jpg"
   },
@@ -128,7 +128,7 @@
     "name": "Tennis Court @ Southern Islands",
     "amenities": "The court is in excellent condition and is suitable for Tennis games and other related activities. Please let me know your preferred rental date and time, as well as any specific needs you may have, so that I can provide you with a customized quote. Additionally, I can provide you with any necessary information about the court's rules and regulations. Thank you for your interest, and I look forward to hearing from you soon.",
     "type": "facility",
-    "operationHours": ["8:00", "19:00"],
+    "operationHours": ["08:00", "19:00"],
     "offDays": ["2022-04-23T23:18:53Z"],
     "thumbnail": "/img/facilities/tennis.jpg"
   },
@@ -140,7 +140,7 @@
     "name": "Volleyball Court @ Clementi",
     "amenities": "The court is in excellent condition and is suitable for Volleyball games and other related activities. Please let me know your preferred rental date and time, as well as any specific needs you may have, so that I can provide you with a customized quote. Additionally, I can provide you with any necessary information about the court's rules and regulations. Thank you for your interest, and I look forward to hearing from you soon.",
     "type": "facility",
-    "operationHours": ["8:00", "19:00"],
+    "operationHours": ["08:00", "19:00"],
     "offDays": ["2022-04-23T23:18:53Z"],
     "thumbnail": "/img/facilities/volleyball.jpg"
   },
@@ -152,7 +152,7 @@
     "name": "Baseball Court @ Sengkang",
     "amenities": "The court is in excellent condition and is suitable for Baseball games and other related activities. Please let me know your preferred rental date and time, as well as any specific needs you may have, so that I can provide you with a customized quote. Additionally, I can provide you with any necessary information about the court's rules and regulations. Thank you for your interest, and I look forward to hearing from you soon.",
     "type": "facility",
-    "operationHours": ["8:00", "19:00"],
+    "operationHours": ["08:00", "19:00"],
     "offDays": ["2022-04-23T23:18:53Z"],
     "thumbnail": "/img/facilities/baseball.jpg"
   },
@@ -164,7 +164,7 @@
     "name": "Tennis Court @ Downtown",
     "amenities": "The court is in excellent condition and is suitable for Tennis games and other related activities. Please let me know your preferred rental date and time, as well as any specific needs you may have, so that I can provide you with a customized quote. Additionally, I can provide you with any necessary information about the court's rules and regulations. Thank you for your interest, and I look forward to hearing from you soon.",
     "type": "facility",
-    "operationHours": ["8:00", "19:00"],
+    "operationHours": ["08:00", "19:00"],
     "offDays": ["2022-04-23T23:18:53Z"],
     "thumbnail": "/img/facilities/tennis.jpg"
   },
@@ -176,7 +176,7 @@
     "name": "Volleyball Court @ Bedok",
     "amenities": "The court is in excellent condition and is suitable for Volleyball games and other related activities. Please let me know your preferred rental date and time, as well as any specific needs you may have, so that I can provide you with a customized quote. Additionally, I can provide you with any necessary information about the court's rules and regulations. Thank you for your interest, and I look forward to hearing from you soon.",
     "type": "facility",
-    "operationHours": ["8:00", "19:00"],
+    "operationHours": ["08:00", "19:00"],
     "offDays": ["2022-04-23T23:18:53Z"],
     "thumbnail": "/img/facilities/volleyball.jpg"
   },
@@ -188,7 +188,7 @@
     "name": "Baseball Court @ Jurong",
     "amenities": "The court is in excellent condition and is suitable for Baseball games and other related activities. Please let me know your preferred rental date and time, as well as any specific needs you may have, so that I can provide you with a customized quote. Additionally, I can provide you with any necessary information about the court's rules and regulations. Thank you for your interest, and I look forward to hearing from you soon.",
     "type": "facility",
-    "operationHours": ["8:00", "19:00"],
+    "operationHours": ["08:00", "19:00"],
     "offDays": ["2022-04-23T23:18:53Z"],
     "thumbnail": "/img/facilities/baseball.jpg"
   }
