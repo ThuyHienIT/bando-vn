@@ -39,7 +39,7 @@ The application is serve at [http://localhost:3000](http://localhost:3000)
 
 _Ps: Enter any email & password to login to the system_
 
-_NOTE: I'm interact with files system to retrieve/store database. If you face any issue when submit a booking, please create a new file called `bookings.json` with content `[]` and change its permission to be writable: `chmod 755 db/bookings.json`. I face this issue when deploying to Vercel, because it's all readonly files_
+_NOTE: I'm interact with files system to retrieve/store database. If you face any issue when submit a booking, please create a new file called `bookings.json` with content `[]` and change its permission to be writable: `chmod 755 db/bookings.json`. I face this issue when deploying to Vercel, because it's all readonly files, need to integrate to MongoDB or other database services before go to production_
 
 ## Development Process
 
@@ -69,5 +69,5 @@ _NOTE: I'm interact with files system to retrieve/store database. If you face an
 - This app is generally for booking facilities, a facility could be a room, sport court, etc, so it could be quickly expands to support other facility types
 - <img src="https://icons-for-free.com/download-icon-MongoDB-1329545826074381322_16.png" /> Integrate MongoDB to store data
 - Implement a proper Login process
-- <img src="https://icons-for-free.com/download-icon-amazon+aws-1330884263850071431_16.png" /> Deploy the app to AWS Fargate
+- <img src="https://icons-for-free.com/download-icon-amazon+aws-1330884263850071431_16.png" /> Build Docket image and deploy the application to AWS Fargate
 - Enhance and continue writing unit tests
