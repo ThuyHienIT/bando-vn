@@ -1,8 +1,13 @@
 import '@testing-library/jest-dom';
 
-import { generateBooking, generateFacility } from '__test__/helpers';
+import {
+  generateBooking,
+  generateFacility,
+  userInitialState,
+} from '__test__/helpers';
 import { mockFetch } from '__test__/lib/fetch';
 import { PageContent } from 'app/user/bookings/PageContent';
+import { RecoilRoot } from 'recoil';
 
 import { FacilityTypeEnum } from '@enums';
 import { fireEvent, render, screen } from '@testing-library/react';
@@ -18,7 +23,9 @@ describe('cancel facility', () => {
     booking.facility = fac;
 
     const { unmount } = render(
-      <PageContent bookedFacilities={[booking]} bookedRooms={[]} />
+      <RecoilRoot initializeState={userInitialState}>
+        <PageContent bookedFacilities={[booking]} bookedRooms={[]} />
+      </RecoilRoot>
     );
 
     const cancelBtn = screen.queryAllByTestId('booking-cancel-btn');

@@ -1,8 +1,13 @@
 import '@testing-library/jest-dom';
 
-import { generateBooking, generateFacility } from '__test__/helpers';
+import {
+  generateBooking,
+  generateFacility,
+  userInitialState,
+} from '__test__/helpers';
 import { mockFetch } from '__test__/lib/fetch';
 import { PageContent } from 'app/user/bookings/PageContent';
+import { RecoilRoot } from 'recoil';
 
 import { FacilityTypeEnum } from '@enums';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
@@ -17,7 +22,9 @@ describe('cancel booking throught booking form', () => {
     fac.facility = generateFacility(FacilityTypeEnum.Facility);
 
     const { container } = render(
-      <PageContent bookedFacilities={[fac]} bookedRooms={[]} />
+      <RecoilRoot initializeState={userInitialState}>
+        <PageContent bookedFacilities={[fac]} bookedRooms={[]} />
+      </RecoilRoot>
     );
 
     const editBtn = screen.queryAllByTestId('booking-edit-btn');

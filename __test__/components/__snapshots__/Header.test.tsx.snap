@@ -16,6 +16,7 @@ exports[`Header renders header unchanged 1`] = `
 
 .c0.c0.c0 {
   background-color: #fff;
+  padding-inline: 0;
 }
 
 .c2 {

@@ -21,6 +21,7 @@ exports[`Layout renders header unchanged 1`] = `
 
 .c1.c1.c1 {
   background-color: #fff;
+  padding-inline: 0;
 }
 
 .c3 {

@@ -1,9 +1,14 @@
 import '@testing-library/jest-dom';
 
-import { generateBooking, generateFacility } from '__test__/helpers';
+import {
+  generateBooking,
+  generateFacility,
+  userInitialState,
+} from '__test__/helpers';
 import { mockFetch } from '__test__/lib/fetch';
 import { BookingModal } from 'app/facility/[id]/components/BookingModal';
 import dayjs from 'dayjs';
+import { RecoilRoot } from 'recoil';
 
 import { FacilityTypeEnum } from '@enums';
 import { dbModel } from '@models/db';
@@ -12,7 +17,7 @@ import {
   fireEvent,
   render,
   screen,
-  waitFor
+  waitFor,
 } from '@testing-library/react';
 
 const FAC_DB_NAME = 'facilities.json';
@@ -49,15 +54,17 @@ describe('Booking Modal List', () => {
     const fac = generateFacility(FacilityTypeEnum.Room);
     fac.id = 'test';
     const { container } = render(
-      <BookingModal
-        from={dayjs('2022-02-02')}
-        to={dayjs('2022-02-02').add(30, 'minute')}
-        opened
-        bookingId={BOOKING.id}
-        onClose={jest.fn()}
-        onDone={jest.fn()}
-        onCancelled={jest.fn()}
-      />
+      <RecoilRoot initializeState={userInitialState}>
+        <BookingModal
+          from={dayjs('2022-02-02')}
+          to={dayjs('2022-02-02').add(30, 'minute')}
+          opened
+          bookingId={BOOKING.id}
+          onClose={jest.fn()}
+          onDone={jest.fn()}
+          onCancelled={jest.fn()}
+        />
+      </RecoilRoot>
     );
 
     expect(container).toMatchSnapshot();
@@ -72,15 +79,17 @@ describe('Booking Modal List', () => {
 
     act(() => {
       render(
-        <BookingModal
-          from={from}
-          to={to}
-          opened
-          bookingId={BOOKING.id}
-          onClose={onClose}
-          onDone={jest.fn()}
-          onCancelled={jest.fn()}
-        />
+        <RecoilRoot initializeState={userInitialState}>
+          <BookingModal
+            from={from}
+            to={to}
+            opened
+            bookingId={BOOKING.id}
+            onClose={onClose}
+            onDone={jest.fn()}
+            onCancelled={jest.fn()}
+          />
+        </RecoilRoot>
       );
     });
 
@@ -117,17 +126,19 @@ describe('Booking Modal List', () => {
     const onCancelled = jest.fn();
     act(() => {
       render(
-        <BookingModal
-          from={from}
-          to={to}
-          opened
-          bookingId={BOOKING.id}
-          onClose={onClose}
-          onDone={onDone}
-          onCancelled={onCancelled}
-          isUpdate
-          data={fac}
-        />,
+        <RecoilRoot initializeState={userInitialState}>
+          <BookingModal
+            from={from}
+            to={to}
+            opened
+            bookingId={BOOKING.id}
+            onClose={onClose}
+            onDone={onDone}
+            onCancelled={onCancelled}
+            isUpdate
+            data={fac}
+          />
+        </RecoilRoot>,
         { container }
       );
     });

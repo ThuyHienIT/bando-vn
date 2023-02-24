@@ -1,8 +1,13 @@
 import '@testing-library/jest-dom';
 
-import { generateBooking, generateFacility } from '__test__/helpers';
+import {
+  generateBooking,
+  generateFacility,
+  userInitialState,
+} from '__test__/helpers';
 import { mockFetch } from '__test__/lib/fetch';
 import { PageContent } from 'app/user/bookings/PageContent';
+import { RecoilRoot } from 'recoil';
 
 import { FacilityTypeEnum } from '@enums';
 import { fireEvent, render, screen } from '@testing-library/react';
@@ -20,20 +25,24 @@ beforeEach(() => {
 describe("User's bookings", () => {
   it('renders container unchanged', () => {
     const { container } = render(
-      <PageContent
-        bookedFacilities={[generateBooking(FacilityTypeEnum.Facility)]}
-        bookedRooms={[generateBooking(FacilityTypeEnum.Room)]}
-      />
+      <RecoilRoot initializeState={userInitialState}>
+        <PageContent
+          bookedFacilities={[generateBooking(FacilityTypeEnum.Facility)]}
+          bookedRooms={[generateBooking(FacilityTypeEnum.Room)]}
+        />
+      </RecoilRoot>
     );
     expect(container).toMatchSnapshot();
   });
 
   it('trigger edit', () => {
     render(
-      <PageContent
-        bookedFacilities={[generateBooking(FacilityTypeEnum.Facility)]}
-        bookedRooms={[generateBooking(FacilityTypeEnum.Room)]}
-      />
+      <RecoilRoot initializeState={userInitialState}>
+        <PageContent
+          bookedFacilities={[generateBooking(FacilityTypeEnum.Facility)]}
+          bookedRooms={[generateBooking(FacilityTypeEnum.Room)]}
+        />
+      </RecoilRoot>
     );
 
     const editBtn = screen.queryAllByTestId('booking-edit-btn');
@@ -55,7 +64,9 @@ describe("User's bookings", () => {
     booking.facility = fac;
 
     const { unmount } = render(
-      <PageContent bookedFacilities={[]} bookedRooms={[booking]} />
+      <RecoilRoot initializeState={userInitialState}>
+        <PageContent bookedFacilities={[]} bookedRooms={[booking]} />
+      </RecoilRoot>
     );
 
     const cancelBtn = screen.queryAllByTestId('booking-cancel-btn');

@@ -79,6 +79,7 @@ async function insertOne<T extends RecordType>(dbName: string, payload: T) {
   } catch (e: any) {
     Sentry.captureException(e);
     Sentry.captureMessage(e.message);
+    throw new RequestError(500, e.message);
   }
 
   return dataToInsert;

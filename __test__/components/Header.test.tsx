@@ -1,11 +1,19 @@
-import { render, screen } from '@testing-library/react';
 // import Home from '../pages/index'
 import '@testing-library/jest-dom';
+
+import { userInitialState } from '__test__/helpers';
+import { RecoilRoot } from 'recoil';
+
 import { Header } from '@components/Layout/Header';
+import { render, screen } from '@testing-library/react';
 
 describe('Header', () => {
   it('renders a heading', () => {
-    render(<Header />);
+    render(
+      <RecoilRoot initializeState={userInitialState}>
+        <Header />
+      </RecoilRoot>
+    );
 
     const heading = screen.getByRole('heading', {
       name: /facility booking/i,
@@ -15,7 +23,11 @@ describe('Header', () => {
   });
 
   it('renders header unchanged', () => {
-    const { container } = render(<Header />);
+    const { container } = render(
+      <RecoilRoot initializeState={userInitialState}>
+        <Header />
+      </RecoilRoot>
+    );
     expect(container).toMatchSnapshot();
   });
 });

@@ -1,8 +1,13 @@
 import '@testing-library/jest-dom';
 
-import { generateBooking, generateFacility } from '__test__/helpers';
+import {
+  generateBooking,
+  generateFacility,
+  userInitialState,
+} from '__test__/helpers';
 import { WeekView } from 'app/facility/[id]/components/WeekView';
 import dayjs from 'dayjs';
+import { RecoilRoot } from 'recoil';
 
 import { FacilityTypeEnum } from '@enums';
 import { fireEvent, render, screen } from '@testing-library/react';
@@ -12,11 +17,13 @@ describe('WeekView List', () => {
     const fac = generateFacility(FacilityTypeEnum.Room);
     fac.id = 'test';
     const { container } = render(
-      <WeekView
-        data={fac}
-        selectedDate={dayjs()}
-        occupiedSlots={[generateBooking(fac.id)]}
-      />
+      <RecoilRoot initializeState={userInitialState}>
+        <WeekView
+          data={fac}
+          selectedDate={dayjs()}
+          occupiedSlots={[generateBooking(fac.id)]}
+        />
+      </RecoilRoot>
     );
 
     expect(container).toMatchSnapshot();
@@ -27,7 +34,11 @@ describe('WeekView List', () => {
     fac.id = 'test';
     const today = dayjs();
 
-    const { container } = render(<WeekView data={fac} selectedDate={today} />);
+    const { container } = render(
+      <RecoilRoot initializeState={userInitialState}>
+        <WeekView data={fac} selectedDate={today} />
+      </RecoilRoot>
+    );
 
     const scrollEl = screen.getByTestId('scroller');
 
@@ -56,7 +67,13 @@ describe('WeekView List', () => {
     booking.to = dayjs().add(30, 'minute').format();
 
     render(
-      <WeekView data={fac} selectedDate={undefined} occupiedSlots={[booking]} />
+      <RecoilRoot initializeState={userInitialState}>
+        <WeekView
+          data={fac}
+          selectedDate={undefined}
+          occupiedSlots={[booking]}
+        />
+      </RecoilRoot>
     );
 
     const bookedEl = await screen.findByText('Booked');

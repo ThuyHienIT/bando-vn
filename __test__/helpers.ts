@@ -1,3 +1,4 @@
+import { userInfoState } from 'app/(client)/recoil/user';
 import { randomUUID } from 'crypto';
 
 export function generateFacility(
@@ -31,3 +32,6 @@ export function generateBooking(facilityId: string): BookingItem {
     updatedAt: '2023-02-18T22:25:56+08:00',
   };
 }
+
+export const userInitialState = (snap: any) =>
+  snap.set(userInfoState, { email: 'kqthang1505@gmail.com' });

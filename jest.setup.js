@@ -1,3 +1,4 @@
+import '@testing-library/jest-dom';
 import 'jest-styled-components';
 import './__test__/lib/matchMedia.mock';
 
@@ -7,8 +8,8 @@ jest.mock('antd', () => {
   const notification = {
     useNotification: () => [
       {
-        success: jest.fn,
-        error: jest.fn,
+        success: jest.fn(),
+        error: jest.fn(),
       },
       null,
     ],
@@ -23,6 +24,7 @@ jest.mock('antd', () => {
 // ignore this warning due to antd issue
 // the tests are working fine but still get this error
 // find a solution for this later
+const consoleError = console.error;
 jest.spyOn(console, 'error').mockImplementation((...args) => {
   const message = typeof args[0] === 'string' ? args[0] : '';
   if (
@@ -35,4 +37,15 @@ jest.spyOn(console, 'error').mockImplementation((...args) => {
   }
 
   return consoleError.call(console, args);
+});
+
+global.mockRouterPush = jest.fn();
+jest.mock('next/navigation', () => {
+  return {
+    useRouter: () => ({
+      push: global.mockRouterPush,
+    }),
+    redirect: jest.fn(),
+    notFound: jest.fn(),
+  };
 });

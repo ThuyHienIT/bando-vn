@@ -143,9 +143,9 @@ async function verifySlot(item: BookingItem) {
     return (
       fromDayjs.isSame(b.from) ||
       toDayjs.isSame(b.to) ||
-      (fromDayjs.isAfter(b.from) && fromDayjs.isBefore(b.to)) ||
-      (toDayjs.isBefore(b.from) && toDayjs.isAfter(b.to)) ||
-      (fromDayjs.isBefore(b.from) && toDayjs.isAfter(b.to))
+      (fromDayjs.isAfter(b.from) && fromDayjs.isBefore(b.to)) || // from within
+      (toDayjs.isAfter(b.from) && toDayjs.isBefore(b.to)) || // to within
+      (fromDayjs.isBefore(b.from) && toDayjs.isAfter(b.to)) // all over
     );
   });
 
