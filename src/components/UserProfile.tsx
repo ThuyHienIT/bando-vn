@@ -23,7 +23,7 @@ export const UserProfile = memo(function UserProfile() {
 
       router.push('/login');
     } catch (e: any) {}
-  }, []);
+  }, [router]);
 
   const items = useMemo<MenuProps['items']>(
     () => [
@@ -46,7 +46,7 @@ export const UserProfile = memo(function UserProfile() {
         icon: <LogoutOutlined />,
       },
     ],
-    [userInfo]
+    [handleLogout, userInfo?.email]
   );
 
   return (

@@ -1,4 +1,4 @@
-import { RequestError } from 'lib/errorClasses';
+import { RequestError } from '@lib/errorClasses';
 
 const PREFIX = '';
 async function request(url: string, options?: RequestInit) {

@@ -1,13 +1,25 @@
-import { cookies } from 'next/headers';
+import { getIronSession } from 'iron-session';
+import { GetServerSidePropsContext, NextPage } from 'next';
 import { redirect } from 'next/navigation';
 
+import { ironOptions } from '@lib/config';
 import LoginPage from '@pages/LoginPage';
 
-export default function Page(props: any) {
-  const cookieStore = cookies();
-  if (cookieStore.get('token')) {
-    redirect('/');
-  }
-
+const Page: NextPage<any> = (props) => {
   return <LoginPage />;
-}
+};
+
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  const session = await getIronSession(ctx.req, ctx.res, ironOptions);
+
+  if (session.user)
+    return {
+      redirect: {
+        destination: '/',
+      },
+    };
+
+  return { props: {} };
+};
+
+export default Page;
