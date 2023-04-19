@@ -2,6 +2,7 @@
   {
     "id": "5ad487c5-295e-4fee-83f1-ef9a16b8f39c",
     "name": "Price Inc",
+    "type": "restaurant",
     "photos": [
       "https://picsum.photos/300/200?random=95",
       "https://picsum.photos/300/200?random=77",
@@ -19,6 +20,7 @@
   {
     "id": "28031015-2ad8-4f32-acd1-8a4710498484",
     "name": "Bode, Corwin and Mills",
+    "type": "restaurant",
     "photos": [
       "https://picsum.photos/300/200?random=97",
       "https://picsum.photos/300/200?random=48",
@@ -36,6 +38,7 @@
   {
     "id": "2ff3e06c-de04-40f0-8d6c-296dce2a34b8",
     "name": "Hansen-Heaney",
+    "type": "destination",
     "photos": [
       "https://picsum.photos/300/200?random=72",
       "https://picsum.photos/300/200?random=41",
@@ -53,6 +56,7 @@
   {
     "id": "c9a05185-b3c7-4b40-9a93-f18ea6f1e4ff",
     "name": "Gleason-Leffler",
+    "type": "destination",
     "photos": [
       "https://picsum.photos/300/200?random=42",
       "https://picsum.photos/300/200?random=41",
@@ -70,6 +74,7 @@
   {
     "id": "733d0179-1090-4983-a579-903face063ad",
     "name": "Thompson-Hilll",
+    "type": "hotel",
     "photos": [
       "https://picsum.photos/300/200?random=85",
       "https://picsum.photos/300/200?random=54",
@@ -87,6 +92,7 @@
   {
     "id": "d10b4de7-79a1-4728-8372-dc817d052dfb",
     "name": "Wehner, Stehr and Wehner",
+    "type": "hotel",
     "photos": [
       "https://picsum.photos/300/200?random=50",
       "https://picsum.photos/300/200?random=13",
@@ -104,6 +110,7 @@
   {
     "id": "ad5346d2-d63e-49b0-a305-071a1ee25e44",
     "name": "Littel, Kirlin and Muller",
+    "type": "shopping",
     "photos": [
       "https://picsum.photos/300/200?random=41",
       "https://picsum.photos/300/200?random=11",
@@ -121,6 +128,7 @@
   {
     "id": "0fb4ce5c-82e0-4860-9d60-f4b186610487",
     "name": "Stracke and Sons",
+    "type": "shopping",
     "photos": [
       "https://picsum.photos/300/200?random=88",
       "https://picsum.photos/300/200?random=87",
@@ -138,6 +146,7 @@
   {
     "id": "275d67d4-dc1b-4519-8ebf-c95b46c3bd0c",
     "name": "Corwin, Gleason and McDermott",
+    "type": "restaurant",
     "photos": [
       "https://picsum.photos/300/200?random=76",
       "https://picsum.photos/300/200?random=34",
@@ -155,6 +164,7 @@
   {
     "id": "fbecd15f-34ca-43c6-a122-3689424f37d4",
     "name": "Block-Bartell",
+    "type": "restaurant",
     "photos": [
       "https://picsum.photos/300/200?random=44",
       "https://picsum.photos/300/200?random=65",

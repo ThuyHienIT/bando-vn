@@ -1,12 +1,14 @@
 import dynamic from 'next/dynamic';
 import { memo } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import styled, { css } from 'styled-components';
 
 import { LoadingOutlined } from '@ant-design/icons';
 import { Overlay } from '@components/Overlay';
-import { activeItemIdState } from '@recoil/common';
+import { activeAttractionTypeState, activeItemIdState } from '@recoil/common';
 
+import { Attractions } from './components/Attractions';
+import { Categories } from './components/Categories';
 import { Details } from './components/Details';
 import { Search } from './components/Search';
 
@@ -50,6 +52,7 @@ const EsriMapWithNoSSR = dynamic(() => import('./components/Map'), {
 
 export const HomePage = memo(() => {
   const [activeItemId, setActiveItemId] = useRecoilState(activeItemIdState);
+  const activeAttraction = useRecoilValue(activeAttractionTypeState);
 
   return (
     <Wrapper>
@@ -57,8 +60,14 @@ export const HomePage = memo(() => {
 
       <Search />
 
-      <ToolStyle active={Boolean(activeItemId)}>
-        {Boolean(activeItemId) && <Details />}
+      <Categories />
+
+      <ToolStyle active={Boolean(activeItemId) || Boolean(activeAttraction)}>
+        {Boolean(activeItemId) ? (
+          <Details />
+        ) : (
+          Boolean(activeAttraction) && <Attractions />
+        )}
       </ToolStyle>
     </Wrapper>
   );

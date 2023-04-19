@@ -9,3 +9,8 @@ export const activeItemIdState = atom<string>({
   key: 'activeItemIdState',
   default: '',
 });
+
+export const activeAttractionTypeState = atom<string>({
+  key: 'activeAttractionTypeState',
+  default: '',
+});
