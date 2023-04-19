@@ -1,6 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { setCookie } from '@lib/cookies';
 import { tryParseJson } from '@lib/tryParseJSON';
 
 async function routeHandler(req: NextApiRequest, res: NextApiResponse) {
@@ -11,7 +10,6 @@ async function routeHandler(req: NextApiRequest, res: NextApiResponse) {
 
     // Calling our pure function using the `res` object, it will add the `set-cookie` header
     // Add the `set-cookie` header on the main domain and expire after 30 days
-    setCookie(res, 'token', payload.email, { path: '/', maxAge: 2592000 });
 
     return res.json({ message: 'success' });
   } catch (e: any) {

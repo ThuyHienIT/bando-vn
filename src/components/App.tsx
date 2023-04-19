@@ -28,7 +28,6 @@ export const App = memo<Props>(function App(props) {
 function DebugObserver() {
   const snapshot = useRecoilSnapshot();
   useEffect(() => {
-    // eslint-disable-next-line
     for (const node of snapshot.getNodes_UNSTABLE({ isModified: true })) {
       console.debug(node.key, snapshot.getLoadable(node).getValue());
     }

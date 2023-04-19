@@ -3,10 +3,7 @@ import Head from 'next/head';
 
 import HomePage from '@pages/HomePage';
 
-interface Props {
-  rooms?: FacilityItem[];
-  facilities?: FacilityItem[];
-}
+interface Props {}
 
 const NextAppsPage: NextPage<Props> = (props) => {
   return (
