@@ -22,7 +22,7 @@ export function getCityGraphic(data: ItemData) {
 
   const markerSymbol = {
     type: 'picture-marker',
-    url: '/img/map/pin.svg',
+    url: '/img/map/pin-inactive.svg',
     width: '16px',
     height: '22px',
     label: name,

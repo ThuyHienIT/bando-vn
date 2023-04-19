@@ -117,7 +117,6 @@ const MapComp = memo(() => {
             breakpoint: false,
           },
         },
-
         ui: {
           components: [],
         },
@@ -125,9 +124,7 @@ const MapComp = memo(() => {
 
       let zoom = new Zoom({ view: view });
 
-      view.ui.add(zoom, {
-        position: 'bottom-right',
-      });
+      view.ui.add(zoom, { position: 'bottom-right' });
 
       view.when().then(() => {
         setLoading(false);
@@ -135,7 +132,7 @@ const MapComp = memo(() => {
 
       view.on('click', handleClick);
 
-      const graphicLayer = new GraphicsLayer({});
+      const graphicLayer = new GraphicsLayer();
       map.add(graphicLayer);
 
       viewRef.current = view;
@@ -178,8 +175,9 @@ const MapComp = memo(() => {
       if (symbol.type === 'picture-marker') {
         const currId = clonedGraphic.getAttribute('id');
         if (currId === activeItemId) {
-          symbol.set('width', '30px');
-          symbol.set('height', '48px');
+          symbol.set('width', '20px');
+          symbol.set('height', '28px');
+          symbol.set('url', '/img/map/pin.svg');
         } else {
           symbol.set('width', '16px');
           symbol.set('height', '22px');
