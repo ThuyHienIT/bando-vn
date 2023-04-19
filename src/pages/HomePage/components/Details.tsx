@@ -108,8 +108,8 @@ export const Details = memo<Props>((props) => {
 
         <Typography.Title level={5}>Photos Gallery</Typography.Title>
         <Gallery>
-          {details.photos.map((url) => (
-            <Image key={url} src={url} alt={details.name} />
+          {details.photos.map((url, index) => (
+            <Image key={`${url}-${index}`} src={url} alt={details.name} />
           ))}
         </Gallery>
       </Section>

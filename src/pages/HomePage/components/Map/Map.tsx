@@ -1,5 +1,8 @@
-import { memo, useRef, useState } from 'react';
+import { memo, useCallback, useRef, useState } from 'react';
+import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
+
+import { activeItemIdState } from '@recoil/common';
 
 // import { config } from './config';
 
@@ -13,7 +16,11 @@ const MapStyle = styled.div`
 const MapComp = memo(() => {
   const mapRef = useRef<HTMLDivElement>();
   const [loading, setLoading] = useState(false);
-  // const activeItem = useRecoilValue(activeItemState);
+  const [activeItemId, setActiveItemId] = useRecoilState(activeItemIdState);
+
+  const handleClick = useCallback(() => {
+    setActiveItemId('');
+  }, [setActiveItemId]);
 
   // useEffect(() => {
   //   if (mapRef.current) {
@@ -45,7 +52,12 @@ const MapComp = memo(() => {
   //   }
   // }, []);
 
-  return <MapStyle ref={mapRef as any}></MapStyle>;
+  return (
+    <MapStyle
+      ref={mapRef as any}
+      onClick={activeItemId ? handleClick : undefined}
+    ></MapStyle>
+  );
 });
 
 export default MapComp;

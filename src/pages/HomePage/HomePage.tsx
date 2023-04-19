@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic';
 import { memo } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import styled, { css } from 'styled-components';
 
 import { LoadingOutlined } from '@ant-design/icons';
@@ -49,7 +49,7 @@ const EsriMapWithNoSSR = dynamic(() => import('./components/Map'), {
 });
 
 export const HomePage = memo(() => {
-  const activeItemId = useRecoilValue(activeItemIdState);
+  const [activeItemId, setActiveItemId] = useRecoilState(activeItemIdState);
 
   return (
     <Wrapper>
