@@ -1,12 +1,19 @@
 import { randomUUID } from 'crypto';
 import dayjs from 'dayjs';
 import { promises as fs } from 'fs';
-import { RequestError } from 'lib/errorClasses';
 import path from 'path';
+// pages/api/hello_worlds.js
+import postgres from 'postgres';
 
+import { RequestError } from '@lib/errorClasses';
 import { Sentry } from '@lib/sentry-config';
+import { tryParseJson } from '@lib/tryParseJSON';
 
-import { tryParseJson } from '../lib/tryParseJSON';
+const sql = postgres();
+
+function selectAll() {
+  return sql`SELECT * FROM hello_world`;
+}
 
 const IS_TEST = process.env.NODE_ENV === 'test';
 const DB_FOLDER = IS_TEST ? 'dbtest' : 'db';

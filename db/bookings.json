@@ -1,0 +1,234 @@
+[
+  {
+    "facilityId": "11825af9-95bb-453e-9f31-2796598123b5",
+    "from": "2023-04-23T10:30:00Z",
+    "to": "2023-07-23T11:00:00Z",
+    "userEmail": "kqthang1505@gmail.com",
+    "id": "433cb575-4d02-47fb-b738-90bd33c1980a",
+    "createdAt": "2023-02-18T21:46:12+08:00",
+    "updatedAt": "2023-02-18T21:46:12+08:00"
+  },
+  {
+    "from": "2023-04-23T10:30:00.000Z",
+    "to": "2023-04-23T12:00:00.000Z",
+    "userEmail": "kqthang1505@gmail.com",
+    "id": "cc1b29c2-e85d-4d8a-a534-48ce3acbca2a",
+    "createdAt": "2023-02-18T21:46:31+08:00",
+    "updatedAt": "2023-02-21T22:30:11+08:00",
+    "facility": {
+      "phoneNumber": "08366884",
+      "id": "27fbe443-69d2-4ff2-b2bf-7cb9b1229322",
+      "address": "150 SIMEI STREET 1,S520150",
+      "description": "Long ahead by notice. Game rise behind push itself throughout there.",
+      "name": "Rochor",
+      "amenities": "He contain prove explain official team argue. Sign responsibility indicate news top. Radio type beyond for.",
+      "type": "facility",
+      "operationHours": [
+        "8:00",
+        "19:00"
+      ],
+      "offDays": [
+        "2022-04-23T23:18:53Z"
+      ],
+      "thumbnail": "https://picsum.photos/400/300"
+    },
+    "facilityId": "27fbe443-69d2-4ff2-b2bf-7cb9b1229322"
+  },
+  {
+    "from": "2023-04-23T10:30:00.000Z",
+    "to": "2023-04-23T12:00:00.000Z",
+    "userEmail": "kqthang1505@gmail.com",
+    "id": "8d07fe82-04f1-456c-b767-a9cf7e489dba",
+    "createdAt": "2023-02-18T21:46:49+08:00",
+    "updatedAt": "2023-02-21T22:28:44+08:00",
+    "facility": {
+      "phoneNumber": "79764203",
+      "id": "4c8770a5-c5c3-4a94-897d-0d27974f9785",
+      "address": "55 FABER PARK,S129128",
+      "description": "Test million figure leader skin nor individual. Simply difficult east walk down one whatever show.\nDuring gas prove conference town she but. Scene like either join person.",
+      "name": "Sengkang",
+      "amenities": "Executive no there growth step economic. Of effect international. Side listen network.\nSmile pass baby whose. Real your me.\nForget situation table suddenly break bad.",
+      "type": "facility",
+      "operationHours": [
+        "8:00",
+        "19:00"
+      ],
+      "offDays": [
+        "2022-04-23T23:18:53Z"
+      ],
+      "thumbnail": "https://picsum.photos/400/300"
+    }
+  },
+  {
+    "from": "2023-02-23T21:00:00.000Z",
+    "to": "2023-02-24T01:30:00.000Z",
+    "userEmail": "kqthang1505@gmail.com",
+    "id": "1057864c-e3e6-46db-a17d-7fee245b4eb0",
+    "createdAt": "2023-02-20T22:33:52+08:00",
+    "updatedAt": "2023-02-21T22:31:29+08:00",
+    "facility": {
+      "phoneNumber": "24709620",
+      "id": "b29e4210-60d8-45a2-82a1-08cacb745990",
+      "address": "1 JALAN KILANG,S159402",
+      "description": "Current majority suffer hair born.\nReport daughter government item keep political cut. Customer apply couple. Data happen hear must almost.",
+      "name": "Venus Meeting Room",
+      "amenities": "Friend ok nation international line another within.\nUp rate when sometimes probably measure with. Product town sort. Include even alone certain.",
+      "type": "room",
+      "operationHours": [
+        "8:00",
+        "19:00"
+      ],
+      "offDays": [
+        "2022-04-23T23:18:53Z"
+      ],
+      "thumbnail": "https://picsum.photos/400/300"
+    },
+    "facilityId": "b29e4210-60d8-45a2-82a1-08cacb745990"
+  },
+  {
+    "from": "2023-02-21T16:00:00.000Z",
+    "to": "2023-02-21T18:30:00.000Z",
+    "userEmail": "kqthang1505@gmail.com",
+    "id": "c05d15ef-103e-45c9-8eca-ff59777093e5",
+    "createdAt": "2023-02-20T22:44:48+08:00",
+    "updatedAt": "2023-02-21T22:22:06+08:00"
+  },
+  {
+    "from": "2023-02-24T01:00:00.000Z",
+    "to": "2023-02-24T03:30:00.000Z",
+    "userEmail": "kqthang1505@gmail.com",
+    "id": "a88a2652-8b04-4424-9703-aa77ed6d97c9",
+    "createdAt": "2023-02-21T22:05:38+08:00",
+    "updatedAt": "2023-02-21T22:24:11+08:00",
+    "facility": {
+      "phoneNumber": "24709620",
+      "id": "b29e4210-60d8-45a2-82a1-08cacb745990",
+      "address": "1 JALAN KILANG,S159402",
+      "description": "Current majority suffer hair born.\nReport daughter government item keep political cut. Customer apply couple. Data happen hear must almost.",
+      "name": "Venus Meeting Room",
+      "amenities": "Friend ok nation international line another within.\nUp rate when sometimes probably measure with. Product town sort. Include even alone certain.",
+      "type": "room",
+      "operationHours": [
+        "8:00",
+        "19:00"
+      ],
+      "offDays": [
+        "2022-04-23T23:18:53Z"
+      ],
+      "thumbnail": "https://picsum.photos/400/300"
+    }
+  },
+  {
+    "from": "2023-02-22T04:30:00.065Z",
+    "to": "2023-02-22T06:00:00.065Z",
+    "userEmail": "kqthang1505@gmail.com",
+    "id": "95a857ec-ecf1-4b26-b840-ad2199d9a5da",
+    "createdAt": "2023-02-21T22:25:18+08:00",
+    "updatedAt": "2023-02-21T22:27:41+08:00"
+  },
+  {
+    "from": "2023-02-24T08:00:00.831Z",
+    "to": "2023-02-24T09:30:00.831Z",
+    "userEmail": "kqthang1505@gmail.com",
+    "id": "3e41dcb2-3681-4995-8240-2c5eb6b3f496",
+    "createdAt": "2023-02-22T08:33:35+08:00",
+    "updatedAt": "2023-02-22T09:09:25+08:00",
+    "facility": {
+      "phoneNumber": "91531211",
+      "id": "d2c2da8d-1a73-41c3-b901-4e38dea20392",
+      "address": "2A SENNETT ROAD,S466776",
+      "description": "Party then Republican. Staff compare good mother subject. Garden product phone house could.\nThere anyone federal worker. Best style fill oil. Knowledge city really side phone share risk.",
+      "name": "Venus Meeting Room",
+      "amenities": "Pretty Republican as writer foreign those could create. Decision financial quickly meeting figure occur opportunity. Last population list although service fill discussion.",
+      "type": "room",
+      "operationHours": [
+        "8:00",
+        "19:00"
+      ],
+      "offDays": [
+        "2022-04-23T23:18:53Z"
+      ],
+      "thumbnail": "https://picsum.photos/400/300"
+    },
+    "facilityId": "d2c2da8d-1a73-41c3-b901-4e38dea20392"
+  },
+  {
+    "facilityId": "d2c2da8d-1a73-41c3-b901-4e38dea20392",
+    "from": "2023-02-23T01:00:00.281Z",
+    "to": "2023-02-23T01:30:00.281Z",
+    "userEmail": "kqthang1505@gmail.com",
+    "id": "bdc50082-ad6a-4e69-8bc9-244ee19052f3",
+    "createdAt": "2023-02-22T08:41:31+08:00",
+    "updatedAt": "2023-02-22T08:41:31+08:00"
+  },
+  {
+    "facilityId": "d2c2da8d-1a73-41c3-b901-4e38dea20392",
+    "from": "2023-02-24T03:30:00.049Z",
+    "to": "2023-02-24T04:00:00.049Z",
+    "userEmail": "kqthang1505@gmail.com",
+    "id": "0fca5979-712a-4677-990e-d6b167c8eabc",
+    "createdAt": "2023-02-22T08:41:36+08:00",
+    "updatedAt": "2023-02-22T08:41:36+08:00"
+  },
+  {
+    "facilityId": "d2c2da8d-1a73-41c3-b901-4e38dea20392",
+    "from": "2023-02-22T10:00:00.524Z",
+    "to": "2023-02-22T11:30:00.524Z",
+    "userEmail": "kqthang1505@gmail.com",
+    "id": "47031626-fac4-4b65-923b-241bab4ab958",
+    "createdAt": "2023-02-22T08:42:18+08:00",
+    "updatedAt": "2023-02-22T08:42:18+08:00"
+  },
+  {
+    "from": "2023-02-25T01:30:00.155Z",
+    "to": "2023-02-25T02:00:00.155Z",
+    "userEmail": "kqthang1505@gmail.com",
+    "id": "24e559ed-6493-4265-8883-afa72497f8ef",
+    "createdAt": "2023-02-22T08:42:32+08:00",
+    "updatedAt": "2023-02-22T09:06:02+08:00",
+    "facility": {
+      "phoneNumber": "91531211",
+      "id": "d2c2da8d-1a73-41c3-b901-4e38dea20392",
+      "address": "2A SENNETT ROAD,S466776",
+      "description": "Party then Republican. Staff compare good mother subject. Garden product phone house could.\nThere anyone federal worker. Best style fill oil. Knowledge city really side phone share risk.",
+      "name": "Venus Meeting Room",
+      "amenities": "Pretty Republican as writer foreign those could create. Decision financial quickly meeting figure occur opportunity. Last population list although service fill discussion.",
+      "type": "room",
+      "operationHours": [
+        "8:00",
+        "19:00"
+      ],
+      "offDays": [
+        "2022-04-23T23:18:53Z"
+      ],
+      "thumbnail": "https://picsum.photos/400/300"
+    },
+    "facilityId": "d2c2da8d-1a73-41c3-b901-4e38dea20392"
+  },
+  {
+    "from": "2023-02-22T05:00:00.986Z",
+    "to": "2023-02-22T06:30:00.986Z",
+    "userEmail": "kqthang1505@gmail.com",
+    "id": "13659dab-7c01-4696-9c61-f91c313d2093",
+    "createdAt": "2023-02-22T09:02:52+08:00",
+    "updatedAt": "2023-02-22T09:09:29+08:00",
+    "facility": {
+      "phoneNumber": "91531211",
+      "id": "d2c2da8d-1a73-41c3-b901-4e38dea20392",
+      "address": "2A SENNETT ROAD,S466776",
+      "description": "Party then Republican. Staff compare good mother subject. Garden product phone house could.\nThere anyone federal worker. Best style fill oil. Knowledge city really side phone share risk.",
+      "name": "Venus Meeting Room",
+      "amenities": "Pretty Republican as writer foreign those could create. Decision financial quickly meeting figure occur opportunity. Last population list although service fill discussion.",
+      "type": "room",
+      "operationHours": [
+        "8:00",
+        "19:00"
+      ],
+      "offDays": [
+        "2022-04-23T23:18:53Z"
+      ],
+      "thumbnail": "https://picsum.photos/400/300"
+    },
+    "facilityId": "d2c2da8d-1a73-41c3-b901-4e38dea20392"
+  }
+]
