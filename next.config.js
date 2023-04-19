@@ -1,8 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  compiler: {
-    styledComponents: true,
-  },
+  reactStrictMode: true,
   compiler: {
     styledComponents: true,
   },
@@ -15,16 +13,6 @@ const nextConfig = {
         pathname: '/*/**',
       },
     ],
-  },
-  webpack: (config, { isServer }) => {
-    if (!isServer) {
-      // don't resolve 'fs' module on the client to prevent this error on build --> Error: Can't resolve 'fs'
-      config.resolve.fallback = {
-        fs: false,
-      };
-    }
-
-    return config;
   },
   output: 'standalone',
 };

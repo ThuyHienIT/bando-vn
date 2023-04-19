@@ -1,7 +1,10 @@
 import { RequestError } from '@lib/errorClasses';
 
 const PREFIX = '';
-async function request(url: string, options?: RequestInit) {
+async function request<T extends any>(
+  url: string,
+  options?: RequestInit
+): Promise<T> {
   let { headers: optHeaders, ...restOpts } = options || {};
   const fullUrl = url.startsWith('http') ? url : `${PREFIX}${url}`;
 

@@ -3,7 +3,7 @@ import Document, {
   Head,
   Html,
   Main,
-  NextScript,
+  NextScript
 } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 
@@ -46,6 +46,10 @@ export default class MyDocument extends Document {
           <link
             href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap"
             rel="stylesheet"
+          />
+          <link
+            rel="stylesheet"
+            href="https://js.arcgis.com/4.25/@arcgis/core/assets/esri/themes/light/main.css"
           />
         </Head>
         <body>

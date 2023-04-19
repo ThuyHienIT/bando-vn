@@ -6,7 +6,8 @@
 
 html,
 body {
-  max-width: 100vw;
+  width: 100vw;
+  height: 100vh;
   overflow-x: hidden;
 }
 
@@ -17,4 +18,8 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+.ant-input {
+  border-radius: 8px;
 }

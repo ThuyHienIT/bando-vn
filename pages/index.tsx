@@ -19,22 +19,4 @@ const NextAppsPage: NextPage<Props> = (props) => {
   );
 };
 
-NextAppsPage.getInitialProps = async () => {
-  // const roomsResp = await fetch(
-  //   `http://localhost:3000/api/facilities?type=${FacilityTypeEnum.Room}`
-  // );
-  // const rooms: FacilityItem[] = await roomsResp.json();
-
-  // const facilitiesResp = await fetch(
-  //   `http://localhost:3000/api/facilities?type=${FacilityTypeEnum.Facility}`
-  // );
-  // const facilities: FacilityItem[] = await facilitiesResp.json();
-
-  // console.log('rooms', rooms);
-  return {
-    rooms: [],
-    facilities: [],
-  };
-};
-
 export default NextAppsPage;
