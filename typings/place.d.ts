@@ -16,7 +16,7 @@ type CompanyType = {
   url: string;
   created_at: string;
   updated_at: string;
-  geometry: number[];
+  geometry: string;
 };
 
 type TourDetailsType = {

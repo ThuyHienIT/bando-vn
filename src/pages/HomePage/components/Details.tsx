@@ -1,6 +1,6 @@
 import { Empty, Image, Skeleton, Typography } from 'antd';
 import { memo, useCallback, useEffect, useState } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 
 import {
@@ -10,7 +10,7 @@ import {
 } from '@ant-design/icons';
 import { SmallDivider } from '@components/Overlay';
 import request from '@lib/request';
-import { activeItemIdState } from '@recoil/common';
+import { activeItemIdState, activeItemState } from '@recoil/common';
 
 const Section = styled.div`
   padding: 16px;
@@ -29,25 +29,33 @@ export const Details = memo<Props>((props) => {
   const activeItemId = useRecoilValue(activeItemIdState);
   const [details, setDetails] = useState<CompanyType>();
   const [loading, setLoading] = useState<boolean>();
+  const setActiveGeo = useSetRecoilState(activeItemState);
 
-  const loadDetails = useCallback(async (signal: AbortSignal) => {
-    try {
-      setLoading(true);
-      const resp = await request<CompanyType[]>(`/api/search`, {
-        signal,
-      });
+  const loadDetails = useCallback(
+    async (signal: AbortSignal) => {
+      try {
+        setLoading(true);
+        const resp = await request<CompanyType>(
+          `/api/details/${activeItemId}`,
+          {
+            signal,
+          }
+        );
 
-      setDetails(resp[0]);
-      setLoading(false);
-    } catch (e: any) {
-      console.log('FETCH DETAILS ERROR::', e);
-      if (e.message.includes('The user aborted a request.')) {
-        setLoading(undefined);
-      } else {
+        setDetails(resp);
+        setActiveGeo(resp);
         setLoading(false);
+      } catch (e: any) {
+        console.log('FETCH DETAILS ERROR::', e);
+        if (e.message.includes('The user aborted a request.')) {
+          setLoading(undefined);
+        } else {
+          setLoading(false);
+        }
       }
-    }
-  }, []);
+    },
+    [activeItemId, setActiveGeo]
+  );
 
   useEffect(() => {
     const controller = new AbortController();
