@@ -10,6 +10,7 @@ type ItemData = {
   lat: number;
   name: string;
   content: string;
+  id: string;
 };
 export function getCityGraphic(data: ItemData) {
   const { long, lat, name, content = '' } = data;
@@ -31,21 +32,25 @@ export function getCityGraphic(data: ItemData) {
     type: 'text', // autocasts as new TextSymbol()
     color: '#333333',
     text: name,
-    yoffset: -2,
-    xoffset: 8,
+    yoffset: 14,
     font: {
-      size: 12,
+      size: 10,
+      weight: 'bold',
     },
-    horizontalAlignment: 'left',
+    haloColor: '#ffffff',
+    width: 100,
+    horizontalAlignment: 'center',
     verticalAlignment: 'bottom',
   };
 
   const labelGraphic = new Graphic({
+    attributes: { id: data.id },
     geometry: point as any,
     symbol: textSymbol2 as any,
   });
 
   const markerGraphic = new Graphic({
+    attributes: { id: data.id },
     geometry: point as any,
     symbol: markerSymbol as any,
   });
