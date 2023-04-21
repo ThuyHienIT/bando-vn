@@ -25,6 +25,7 @@ import styled from 'styled-components';
 import { BasicLayout } from '@components/Layout/Layout';
 import { MiniMapParams } from '@components/MiniMap';
 import { MiniMapRenderer } from '@components/MiniMapRender';
+import { UploadImage } from '@components/UploadImage';
 import request from '@lib/request';
 import { getLatLong } from '@utils/common';
 
@@ -131,7 +132,7 @@ export const RestaurantEdit = memo<Props>((props) => {
           ? `Edit: ${props.data?.name}`
           : `Add ${HeadingMapping[type] ?? type}`}
       </Typography.Title>
-      <Card>
+      <Card style={{ marginBottom: 32 }}>
         <Row gutter={16}>
           <Col span={12}>
             <Form
@@ -170,7 +171,7 @@ export const RestaurantEdit = memo<Props>((props) => {
                 <Input />
               </Form.Item>
 
-              <Form.Item>
+              <Form.Item style={{ marginBottom: 0 }}>
                 <Space align="center">
                   <Form.Item
                     label="Lattitue"
@@ -188,6 +189,10 @@ export const RestaurantEdit = memo<Props>((props) => {
                     <InputNumber />
                   </Form.Item>
                 </Space>
+              </Form.Item>
+
+              <Form.Item label="Photos" name="photos">
+                <UploadImage />
               </Form.Item>
 
               <RightAction>
