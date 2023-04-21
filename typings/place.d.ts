@@ -7,6 +7,7 @@ type PlaceType = {
 };
 
 type CompanyType = {
+  type: string;
   id: string;
   name: string;
   photos: string[];
@@ -47,3 +48,12 @@ type RestaurantType = CompanyType;
 type ResortType = CompanyType;
 type HotelType = CompanyType;
 type DestinationType = CompanyType;
+
+type PhotoType = {
+  id: string;
+  company_id?: string;
+  tour_id?: string;
+  photo_url: string;
+  created_at: string;
+  updated_at: string;
+};

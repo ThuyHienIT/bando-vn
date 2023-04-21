@@ -1,126 +1,76 @@
 import { randomUUID } from 'crypto';
 import dayjs from 'dayjs';
-import { promises as fs } from 'fs';
-import path from 'path';
-// pages/api/hello_worlds.js
 import postgres from 'postgres';
 
-import { RequestError } from '@lib/errorClasses';
-import { Sentry } from '@lib/sentry-config';
-import { tryParseJson } from '@lib/tryParseJSON';
+const sql = postgres({ ssl: true });
 
-const sql = postgres();
+type DataType = Record<string, string | number | boolean>;
 
-function selectAll() {
-  return sql`SELECT * FROM hello_world`;
+export async function insertOne<T extends any>(table: string, data: DataType) {
+  data.id = randomUUID();
+  data.created_at = dayjs().format();
+  data.updated_at = dayjs().format();
+
+  const resp = await sql`
+    INSERT INTO ${sql(`${table}`)} ${sql(data)}
+    returning *
+  `;
+
+  return resp[0] as T;
 }
 
-const IS_TEST = process.env.NODE_ENV === 'test';
-const DB_FOLDER = IS_TEST ? 'dbtest' : 'db';
-const DB_DIR = path.join(process.cwd(), DB_FOLDER);
+export async function insertMany<T extends any>(
+  table: string,
+  datas: DataType[]
+) {
+  datas.forEach((data) => {
+    data.id = randomUUID();
+    data.created_at = dayjs().format();
+    data.updated_at = dayjs().format();
+  });
 
-const TEST_UTILS_DB: Record<string, string> = {};
+  const resp: unknown = await sql`
+    INSERT INTO ${sql(`${table}`)} ${sql(datas)}
+    returning *
+  `;
 
-async function readFile(dbName: string) {
-  if (IS_TEST) return TEST_UTILS_DB[dbName];
-  try {
-    return await fs.readFile(path.resolve(DB_DIR, dbName), 'utf-8');
-  } catch (e: any) {
-    await writeFile(dbName, '[]');
-
-    return '[]';
-  }
+  return resp as T[];
 }
 
-async function writeFile(dbName: string, data: string) {
-  if (IS_TEST) {
-    TEST_UTILS_DB[dbName] = data;
-    return;
-  }
+export async function queryAll<T extends any>(
+  table: string,
+  fields: string[] = []
+) {
+  const resp: unknown = await sql`
+    SELECT ${fields.length > 0 ? sql(fields) : sql`*`} FROM ${sql(`${table}`)}
+  `;
 
-  return await fs.writeFile(path.resolve(DB_DIR, dbName), data, 'utf-8');
+  return resp as T[];
 }
 
-type RecordType = { id: string; createdAt?: string; updatedAt?: string };
-
-async function prepareDb(dbName: string) {
-  if (IS_TEST) {
-    TEST_UTILS_DB[dbName] = '[]';
-    return;
-  }
-
-  try {
-    await readFile(dbName);
-  } catch (e: any) {
-    await writeFile(dbName, '[]');
-  }
+export async function queryById<T extends any>(table: string, id: string) {
+  const data = await sql`
+    SELECT * FROM ${sql(table)} WHERE id=${id}
+  `;
+  return data[0] as T;
 }
 
-async function clearDb(dbName: string) {
-  await writeFile(dbName, '[]');
-}
-
-async function loadDb<T>(dbName: string) {
-  const fileContent = await readFile(dbName);
-  const data: T[] = tryParseJson(fileContent, []);
-
-  return data;
-}
-
-async function insertOne<T extends RecordType>(dbName: string, payload: T) {
-  const dataToInsert = { ...payload };
-
-  const data = await loadDb<T>(dbName);
-
-  dataToInsert.id = dataToInsert.id || randomUUID();
-  dataToInsert.createdAt = dayjs(new Date()).format();
-  dataToInsert.updatedAt = dayjs(new Date()).format();
-
-  data.push(dataToInsert);
-
-  try {
-    await writeFile(dbName, JSON.stringify(data, null, 2));
-  } catch (e: any) {
-    Sentry.captureException(e);
-    Sentry.captureMessage(e.message);
-    throw new RequestError(500, e.message);
-  }
-
-  return dataToInsert;
-}
-
-async function update<T extends RecordType>(dbName: string, payload: T) {
-  const dataToInsert = { ...payload };
-
-  const data = await loadDb<T>(dbName);
-
-  const foundIdx = data.findIndex((i) => i.id === dataToInsert.id);
-
-  dataToInsert.updatedAt = dayjs(new Date()).format();
-  data.splice(foundIdx, 1, dataToInsert);
-
-  await writeFile(dbName, JSON.stringify(data, null, 2));
-
-  return dataToInsert;
-}
-
-async function remove(dbName: string, id: string) {
-  let data = await loadDb<RecordType>(dbName);
-  const foundItemIdx = data.findIndex((i) => i.id === id);
-
-  if (foundItemIdx < 0) throw new RequestError(400, 'Item not found');
-  data.splice(foundItemIdx, 1);
-
-  await writeFile(dbName, JSON.stringify(data, null, 2));
-
+export async function deleteByIds(table: string, ids: string[]) {
+  await sql`
+    DELETE FROM ${sql(table)} WHERE id in ${sql(ids)}
+  `;
   return true;
 }
 
-export const dbModel = {
-  prepareDb,
-  clearDb,
-  loadDb,
-  insertOne,
-  update,
-  remove,
-};
+export async function updateOne<T extends any>(table: string, data: DataType) {
+  const { id, updated_at, ...d } = data;
+
+  const updated = await sql`
+    UPDATE ${sql(table)} SET ${sql(d)},
+    updated_at=now()
+    WHERE id=${id}`;
+
+  return updated as T;
+}
+
+export { sql };
