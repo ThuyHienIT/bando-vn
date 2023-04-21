@@ -15,6 +15,7 @@ export async function queryCompanies(type?: string) {
     SELECT c.*, p.photo_url FROM 
     ${sql('BaseCompany')} c LEFT JOIN ${sql('Photo')} p 
     ON c.id = p.company_id
+    ${type ? sql`WHERE type=${type}` : ''}
   `;
 
   return transformCompany(companies);
