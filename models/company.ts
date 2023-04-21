@@ -21,6 +21,19 @@ export async function queryCompanies(type?: string) {
   return transformCompany(companies);
 }
 
+export async function queryCompaniesByTypes(types?: string[], limit?: number) {
+  console.log('types', types);
+  const companies: CompanyWithPhotoType[] = await sql`
+    SELECT c.*, p.photo_url FROM 
+    ${sql('BaseCompany')} c LEFT JOIN ${sql('Photo')} p 
+    ON c.id = p.company_id
+    ${types && types?.length > 0 ? sql`WHERE  type in ${sql(types)}` : ''}
+     
+  `;
+
+  return transformCompany(companies);
+}
+
 export async function insertCompany(company: CompanyType) {
   const { photos, ...d } = company;
   const insertedCompany = await insertOne<CompanyType>('BaseCompany', d);

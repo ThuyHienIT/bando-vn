@@ -11,8 +11,6 @@ const CardStyle = styled(Card)`
   display: flex;
   flex-direction: column;
   border-radius: 8px;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03),
-    0 1px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px 0 rgba(0, 0, 0, 0.02);
   overflow: hidden;
 
   && .ant-card-actions {
@@ -29,6 +27,7 @@ interface Props {
 export function FacilityItemCmp(props: Props) {
   return (
     <CardStyle
+      hoverable
       size="small"
       cover={
         props.data.photos?.[0] ? (

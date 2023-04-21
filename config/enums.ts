@@ -1,11 +1,6 @@
-export enum FacilityTypeEnum {
-  Room = 'room',
-  Facility = 'facility',
-}
-
-declare global {
-  enum FacilityTypeEnum {
-    Room = 'room',
-    Facility = 'facility',
-  }
+export enum CompanyTypeEnum {
+  restaurant = 'restaurant',
+  shopping = 'shopping',
+  hotel = 'hotel',
+  attraction = 'attraction',
 }

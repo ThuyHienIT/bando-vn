@@ -17,6 +17,7 @@ export const RestaurantList = memo<Props>((props) => {
   return (
     <BasicLayout>
       <CompanyList
+        type={type}
         heading={`${HeadingMapping[type] ?? type} List`}
         data={props.data}
       />

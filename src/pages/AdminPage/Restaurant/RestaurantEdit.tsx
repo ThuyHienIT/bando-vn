@@ -147,11 +147,19 @@ export const RestaurantEdit = memo<Props>((props) => {
                 <Input />
               </Form.Item>
 
-              <Form.Item label="Sypnosis" name="synopsis">
+              <Form.Item
+                label="Sypnosis"
+                name="synopsis"
+                rules={[{ required: true }]}
+              >
                 <Input.TextArea />
               </Form.Item>
 
-              <Form.Item label="Website" name="url">
+              <Form.Item
+                label="Website"
+                name="url"
+                rules={[{ required: true }]}
+              >
                 <Input />
               </Form.Item>
 

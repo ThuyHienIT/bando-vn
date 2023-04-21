@@ -2,22 +2,33 @@ import { Layout } from 'antd';
 import React, { memo } from 'react';
 import styled from 'styled-components';
 
+import { CompanyList } from '@components/CompanyList';
 import { BasicLayout } from '@components/Layout/Layout';
+
+import { HeadingMapping } from './Restaurant/config';
 
 const LayoutStyle = styled(Layout)`
   .site-layout .site-layout-background {
     background: #fff;
   }
 `;
-export const AdminPage = memo(() => {
+interface Props {
+  data: Record<string, CompanyType[]>;
+}
+
+export const AdminPage = memo<Props>((props) => {
   return (
     <BasicLayout>
-      <div
-        className="site-layout-background"
-        style={{ padding: 24, textAlign: 'center' }}
-      >
-        <p>long content</p>
-      </div>
+      {Object.keys(props.data).map((type) => (
+        <React.Fragment key={type}>
+          <CompanyList
+            data={props.data[type]}
+            heading={HeadingMapping[type]}
+            max={4}
+            viewAllLink={`/admin/${type}`}
+          />
+        </React.Fragment>
+      ))}
     </BasicLayout>
   );
 });
