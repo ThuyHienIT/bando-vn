@@ -24,7 +24,8 @@
       "@enums": ["./config/enums"],
       "@components/*": ["src/components/*"],
       "@pages/*": ["src/pages/*"],
-      "@recoil/*": ["src/recoil/*"]
+      "@recoil/*": ["src/recoil/*"],
+      "@utils/*": ["src/utils/*"]
     }
   },
   "include": [

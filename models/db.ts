@@ -4,9 +4,13 @@ import postgres from 'postgres';
 
 const sql = postgres({ ssl: true });
 
-type DataType = Record<string, string | number | boolean>;
+type BaseType = {};
+type DataType = BaseType & Record<string, string | number | boolean>;
 
-export async function insertOne<T extends any>(table: string, data: DataType) {
+export async function insertOne<T extends BaseType>(
+  table: string,
+  data: DataType
+) {
   data.id = randomUUID();
   data.created_at = dayjs().format();
   data.updated_at = dayjs().format();
@@ -19,7 +23,7 @@ export async function insertOne<T extends any>(table: string, data: DataType) {
   return resp[0] as T;
 }
 
-export async function insertMany<T extends any>(
+export async function insertMany<T extends BaseType>(
   table: string,
   datas: DataType[]
 ) {
@@ -37,7 +41,7 @@ export async function insertMany<T extends any>(
   return resp as T[];
 }
 
-export async function queryAll<T extends any>(
+export async function queryAll<T extends BaseType>(
   table: string,
   fields: string[] = []
 ) {
@@ -48,7 +52,7 @@ export async function queryAll<T extends any>(
   return resp as T[];
 }
 
-export async function queryById<T extends any>(table: string, id: string) {
+export async function queryById<T extends BaseType>(table: string, id: string) {
   const data = await sql`
     SELECT * FROM ${sql(table)} WHERE id=${id}
   `;
@@ -62,7 +66,10 @@ export async function deleteByIds(table: string, ids: string[]) {
   return true;
 }
 
-export async function updateOne<T extends any>(table: string, data: DataType) {
+export async function updateOne<T extends BaseType>(
+  table: string,
+  data: DataType
+) {
   const { id, updated_at, ...d } = data;
 
   const updated = await sql`
@@ -70,7 +77,7 @@ export async function updateOne<T extends any>(table: string, data: DataType) {
     updated_at=now()
     WHERE id=${id}`;
 
-  return updated as T;
+  return updated[0] as T;
 }
 
 export { sql };

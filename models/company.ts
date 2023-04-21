@@ -1,3 +1,5 @@
+import dayjs from 'dayjs';
+
 import { deleteByIds, insertOne, sql, updateOne } from './db';
 import {
   deletePhotosByFieldId,
@@ -8,7 +10,7 @@ import {
 
 type CompanyWithPhotoType = CompanyType & { photo_url: string };
 
-export async function queryCompanies() {
+export async function queryCompanies(type?: string) {
   const companies: CompanyWithPhotoType[] = await sql`
     SELECT c.*, p.photo_url FROM 
     ${sql('BaseCompany')} c LEFT JOIN ${sql('Photo')} p 
@@ -77,6 +79,9 @@ function transformCompany(companies: CompanyWithPhotoType[]) {
   const result: Record<string, CompanyType> = {};
   for (let i = 0; i < companies.length; i++) {
     const { photo_url, ...d } = companies[i];
+    d.created_at = dayjs(d.created_at as any).format();
+    d.updated_at = dayjs(d.updated_at as any).format();
+
     if (result[d.id]) {
       result[d.id].photos.push(photo_url);
     } else {

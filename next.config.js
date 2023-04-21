@@ -12,6 +12,12 @@ const nextConfig = {
         port: '',
         pathname: '/*/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'google.com',
+        port: '',
+        pathname: '/*/**',
+      },
     ],
   },
   output: 'standalone',

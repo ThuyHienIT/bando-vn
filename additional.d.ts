@@ -5,7 +5,9 @@
 
 declare module 'iron-session' {
   interface IronSessionData {
-    user?: UserInfo & { jwt?: string };
+    user?: UserInfo;
+    jwt_token?: string;
+    jwt_expires?: number;
   }
 }
 

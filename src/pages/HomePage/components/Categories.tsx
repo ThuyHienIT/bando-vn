@@ -47,7 +47,7 @@ export const Categories = memo(() => {
         icon={<CoffeeOutlined />}
         size="middle"
       >
-        Restaurant
+        Restaurants
       </ButtonStyle>
       <ButtonStyle
         onClick={handleClick}
@@ -55,7 +55,7 @@ export const Categories = memo(() => {
         icon={<EnvironmentOutlined />}
         size="middle"
       >
-        Destination
+        Attractions
       </ButtonStyle>
       <ButtonStyle
         onClick={handleClick}
@@ -63,7 +63,7 @@ export const Categories = memo(() => {
         icon={<BankOutlined />}
         size="middle"
       >
-        Hotel
+        Hotels
       </ButtonStyle>
       <ButtonStyle
         onClick={handleClick}

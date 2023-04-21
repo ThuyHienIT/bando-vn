@@ -13,6 +13,7 @@ import Zoom from '@arcgis/core/widgets/Zoom';
 import { Overlay } from '@components/Overlay';
 import request from '@lib/request';
 import { activeItemIdState, activeItemState } from '@recoil/common';
+import { getLatLong } from '@utils/common';
 
 import { config } from './config';
 import { getCityGraphic } from './places';
@@ -56,12 +57,9 @@ const MapComp = memo(() => {
     if (!data?.geometry) return;
 
     const geoStr = data?.geometry;
-    let [lat, long] = geoStr.match(/[-+]?[0-9]*\.?[0-9]+/g) ?? [];
+    let [latitude, longitude] = getLatLong(geoStr);
+    if (!latitude || !longitude) return;
 
-    if (!lat || !long) return;
-
-    const latitude = parseFloat(lat);
-    const longitude = parseFloat(long);
     const point = new Point({
       latitude,
       longitude,
