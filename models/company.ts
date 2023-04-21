@@ -25,7 +25,7 @@ export async function insertCompany(company: CompanyType) {
   const insertedCompany = await insertOne<CompanyType>('BaseCompany', d);
 
   // insert photos
-  if (photos.length > 0) {
+  if (photos?.length > 0) {
     const insertedPhotos = await insertPhotos(
       photos.map((url) => ({ photo_url: url, company_id: insertedCompany.id }))
     );
