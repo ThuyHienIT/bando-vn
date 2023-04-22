@@ -28,6 +28,7 @@ a {
   border-radius: 8px;
 }
 
+.ant-input.ant-input,
 .ant-input-affix-wrapper.ant-input-affix-wrapper,
 .ant-tag.ant-tag {
   border-radius: 6px;
