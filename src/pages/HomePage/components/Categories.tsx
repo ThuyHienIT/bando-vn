@@ -51,7 +51,7 @@ export const Categories = memo(() => {
       </ButtonStyle>
       <ButtonStyle
         onClick={handleClick}
-        data-type="destination"
+        data-type="attraction"
         icon={<EnvironmentOutlined />}
         size="middle"
       >

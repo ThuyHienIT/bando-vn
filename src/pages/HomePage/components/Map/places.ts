@@ -1,5 +1,7 @@
 import Graphic from '@arcgis/core/Graphic';
 
+import { randomRgba } from './helper';
+
 // Cities, School,...
 export async function fetchCities() {
   return fetch('/data/cities.json').then((resp) => resp.json());
@@ -30,7 +32,7 @@ export function getCityGraphic(data: ItemData) {
 
   const textSymbol2 = {
     type: 'text', // autocasts as new TextSymbol()
-    color: '#333333',
+    color: randomRgba(), // '#333333',
     text: name,
     yoffset: 14,
     font: {
@@ -50,7 +52,7 @@ export function getCityGraphic(data: ItemData) {
   });
 
   const markerGraphic = new Graphic({
-    attributes: { id: data.id },
+    attributes: { id: data.id, name: 'pin-icon' },
     geometry: point as any,
     symbol: markerSymbol as any,
   });

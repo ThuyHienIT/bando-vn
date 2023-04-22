@@ -1,6 +1,6 @@
 import { Empty, Image, Skeleton, Typography } from 'antd';
 import { memo, useCallback, useEffect, useState } from 'react';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil';
 import styled from 'styled-components';
 
 import {
@@ -27,22 +27,23 @@ const Gallery = styled.div`
 interface Props {}
 export const Details = memo<Props>((props) => {
   const activeItemId = useRecoilValue(activeItemIdState);
-  const [details, setDetails] = useState<CompanyType>();
+  // const [details, setDetails] = useState<CompanyType>();
   const [loading, setLoading] = useState<boolean>();
-  const setActiveGeo = useSetRecoilState(activeItemState);
+  const [details, setActiveGeo] = useRecoilState(activeItemState);
+  const resetActiveGeo = useResetRecoilState(activeItemState);
 
   const loadDetails = useCallback(
     async (signal: AbortSignal) => {
       try {
         setLoading(true);
         const resp = await request<CompanyType>(
-          `/api/details/${activeItemId}`,
+          `/api/company/${activeItemId}`,
           {
             signal,
           }
         );
 
-        setDetails(resp);
+        // setDetails(resp);
         setActiveGeo(resp);
         setLoading(false);
       } catch (e: any) {
@@ -63,7 +64,7 @@ export const Details = memo<Props>((props) => {
 
     return () => {
       setLoading(undefined);
-      setDetails(undefined);
+      resetActiveGeo();
       controller.abort();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps

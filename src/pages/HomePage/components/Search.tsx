@@ -51,8 +51,8 @@ export const Search = memo<Props>((props) => {
   const controller = useRef<AbortController>();
 
   const handleSearch = useCallback(async (text: string) => {
-    if (controller.current) {
-      controller.current.abort();
+    if (controller.current || !text) {
+      controller.current?.abort();
     }
 
     controller.current = new AbortController();

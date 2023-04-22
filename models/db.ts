@@ -20,7 +20,7 @@ export async function insertOne<T extends BaseType>(
     returning *
   `;
 
-  return transformDate(resp[0]);
+  return transformDate<T>(resp[0]);
 }
 
 export async function insertMany<T extends BaseType>(
@@ -56,7 +56,7 @@ export async function queryById<T extends BaseType>(table: string, id: string) {
   const data: T[] = await sql`
     SELECT * FROM ${sql(table)} WHERE id=${id}
   `;
-  return transformDate(data[0]);
+  return transformDate<T>(data[0]);
 }
 
 export async function deleteByIds(table: string, ids: string[]) {
@@ -77,17 +77,17 @@ export async function updateOne<T extends BaseType>(
     updated_at=now()
     WHERE id=${id}`;
 
-  return transformDate(updated[0] as T);
+  return transformDate<T>(updated[0] as T);
 }
 
 export { sql };
 
-export function transformDate(i: DataType) {
+export function transformDate<T>(i: T & DataType) {
   if (!i) return i;
 
   return {
     ...i,
     ...(i.created_at ? { created_at: dayjs(i.created_at).format() } : {}),
     ...(i.updated_at ? { updated_at: dayjs(i.updated_at).format() } : {}),
-  };
+  } as T;
 }

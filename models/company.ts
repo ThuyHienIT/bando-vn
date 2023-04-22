@@ -10,13 +10,20 @@ import {
 
 type CompanyWithPhotoType = CompanyType & { photo_url: string };
 
-export async function queryCompaniesByTypes(types?: string[], limit?: number) {
+export async function queryCompaniesByTypes(
+  types?: string[],
+  keyword?: string
+) {
   const companies: CompanyWithPhotoType[] = await sql`
     SELECT c.*, p.photo_url FROM 
     ${sql('BaseCompany')} c LEFT JOIN ${sql('Photo')} p 
     ON c.id = p.company_id
-    ${types && types?.length > 0 ? sql`WHERE  type in ${sql(types)}` : ''}
-     
+    ${types && types?.length > 0 ? sql`WHERE  c.type in ${sql(types)}` : sql``}
+    ${
+      keyword
+        ? sql`WHERE  upper(c.name) like ${`%${keyword.toUpperCase()}%`}`
+        : sql``
+    }
   `;
 
   return transformCompany(companies);

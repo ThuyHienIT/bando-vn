@@ -80,7 +80,7 @@ const MapComp = memo(() => {
   const loadData = useCallback(async () => {
     try {
       setLoading(true);
-      const resp = await request<CompanyType[]>(`/api/search`);
+      const resp = await request<CompanyType[]>(`/api/search?q=`);
 
       // draw all item
       resp.forEach((i) => {
@@ -144,12 +144,9 @@ const MapComp = memo(() => {
     if (!activeItem?.geometry) return;
 
     const geoStr = activeItem?.geometry;
-    let [lat, long] = geoStr.match(/[-+]?[0-9]*\.?[0-9]+/g) ?? [];
+    let [latitude, longitude] = getLatLong(geoStr);
+    if (!latitude || !longitude) return;
 
-    if (!lat || !long) return;
-
-    const latitude = parseFloat(lat);
-    const longitude = parseFloat(long);
     const point = new Point({
       latitude,
       longitude,
@@ -170,7 +167,7 @@ const MapComp = memo(() => {
       const clonedGraphic = graphic.clone();
       const symbol = clonedGraphic.symbol;
 
-      if (symbol.type === 'picture-marker') {
+      if (clonedGraphic.getAttribute('name') === 'pin-icon') {
         const currId = clonedGraphic.getAttribute('id');
         if (currId === activeItemId) {
           symbol.set('width', '20px');
@@ -183,7 +180,7 @@ const MapComp = memo(() => {
 
         graphicsToAdd.push(
           new Graphic({
-            attributes: { id: currId },
+            attributes: { id: currId, name: 'pin-icon' },
             symbol: symbol as any,
             geometry: clonedGraphic.geometry,
           })
