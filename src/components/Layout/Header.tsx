@@ -1,7 +1,7 @@
 import { Layout, Typography } from 'antd';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { memo, useCallback } from 'react';
+import { memo } from 'react';
 import styled from 'styled-components';
 
 const HeaderStyle = styled(Layout.Header)`
@@ -33,14 +33,6 @@ interface Props {}
 
 export const Header = memo<Props>(function Header(props) {
   const router = useRouter();
-  console.log('router', router);
-
-  const handleClick = useCallback(
-    ({ key }: { key: string }) => {
-      router.push(`/admin/${key}`);
-    },
-    [router]
-  );
 
   return (
     <HeaderStyle>

@@ -4,7 +4,7 @@ import postgres from 'postgres';
 
 const sql = postgres({ ssl: true });
 
-type BaseType = {};
+type BaseType = { created_at?: string; updated_at?: string };
 type DataType = BaseType & Record<string, string | number | boolean>;
 
 export async function insertOne<T extends BaseType>(
@@ -45,11 +45,15 @@ export async function queryAll<T extends BaseType>(
   table: string,
   fields: string[] = []
 ) {
-  const resp: unknown = await sql`
+  const resp: T[] = await sql`
     SELECT ${fields.length > 0 ? sql(fields) : sql`*`} FROM ${sql(`${table}`)}
   `;
 
-  return resp as T[];
+  return resp.map((i) => ({
+    ...i,
+    created_at: dayjs(i.created_at).format(),
+    updated_at: dayjs(i.updated_at).format(),
+  }));
 }
 
 export async function queryById<T extends BaseType>(table: string, id: string) {

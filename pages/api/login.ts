@@ -1,5 +1,7 @@
+import { getIronSession } from 'iron-session';
 import { NextApiRequest, NextApiResponse } from 'next';
 
+import { ironOptions } from '@lib/config';
 import { tryParseJson } from '@lib/tryParseJSON';
 
 async function routeHandler(req: NextApiRequest, res: NextApiResponse) {
@@ -8,10 +10,15 @@ async function routeHandler(req: NextApiRequest, res: NextApiResponse) {
     if (!payload.email || !payload.password)
       return res.status(400).json({ message: 'Email & Password are required' });
 
-    // Calling our pure function using the `res` object, it will add the `set-cookie` header
-    // Add the `set-cookie` header on the main domain and expire after 30 days
+    const session = await getIronSession(req, res, ironOptions);
 
-    return res.json({ message: 'success' });
+    const user = {} as UserInfo; // retrieve user
+    // get user from database then:
+    session.user = user;
+
+    req.session = session;
+
+    await req.session.save();
   } catch (e: any) {
     return res
       .status(500)

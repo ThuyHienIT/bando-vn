@@ -27,3 +27,7 @@ a {
 .ant-btn.ant-btn {
   border-radius: 8px;
 }
+
+.ant-tag.ant-tag {
+  border-radius: 6px;
+}
