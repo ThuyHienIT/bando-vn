@@ -19,5 +19,5 @@ export const middleware = async (req: NextRequest) => {
 };
 
 export const config = {
-  matcher: ['/admin/(.*)'],
+  matcher: ['/admin/(.*)', '/admin'],
 };
