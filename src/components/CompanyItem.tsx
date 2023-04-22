@@ -16,6 +16,19 @@ const CardStyle = styled(Card)`
   && .ant-card-actions {
     margin-top: auto;
   }
+
+  .ant-card-cover {
+    padding-bottom: 60%;
+    overflow: hidden;
+    position: relative;
+
+    .ant-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+  }
 `;
 
 const ImageStyle = styled(Image)``;

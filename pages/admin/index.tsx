@@ -34,7 +34,7 @@ async function getServerSidePropsHandler(ctx: GetServerSidePropsContext) {
       data[item.type].push(item);
     });
   } catch (e: any) {
-    console.log('ERROR:: Cannot retrieve prototype details', e);
+    console.log('ERROR:: Cannot retrieve data', e);
   }
 
   return {

@@ -8,6 +8,7 @@ import { userInfoState } from '@recoil/user';
 import { Container } from './Container';
 import { Footer } from './Footer';
 import { Header } from './Header';
+import { Sider } from './Sider';
 
 const LayoutStyle = styled(Layout)`
   &&& {
@@ -30,42 +31,16 @@ export const BasicLayout = memo<Props>(function BasicLayout(props) {
 
   return (
     <LayoutStyle>
-      <Header />
-      <Layout.Content>
-        <Container className="main-container">{props.children}</Container>
-      </Layout.Content>
-      <Footer />
+      <Layout>
+        <Sider />
+        <Layout>
+          <Header />
+          <Layout.Content>
+            <Container className="main-container">{props.children}</Container>
+          </Layout.Content>
+          <Footer />
+        </Layout>
+      </Layout>
     </LayoutStyle>
   );
 });
-
-/*
-
-
- <Layout>
-    <Header style={{ position: 'sticky', top: 0, zIndex: 1, width: '100%' }}>
-      <div className="logo" />
-      <Menu
-        theme="dark"
-        mode="horizontal"
-        defaultSelectedKeys={['2']}
-        items={new Array(3).fill(null).map((_, index) => ({
-          key: String(index + 1),
-          label: `nav ${index + 1}`,
-        }))}
-      />
-    </Header>
-    <Content className="site-layout" style={{ padding: '0 50px' }}>
-      <Breadcrumb style={{ margin: '16px 0' }}>
-        <Breadcrumb.Item>Home</Breadcrumb.Item>
-        <Breadcrumb.Item>List</Breadcrumb.Item>
-        <Breadcrumb.Item>App</Breadcrumb.Item>
-      </Breadcrumb>
-      <div className="site-layout-background" style={{ padding: 24, minHeight: 380 }}>
-        Content
-      </div>
-    </Content>
-    <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
-  </Layout>
-  
-*/

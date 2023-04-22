@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { queryCompanies } from '@models/company';
+import { queryCompaniesByTypes } from '@models/company';
 
 async function routeHandler(req: NextApiRequest, res: NextApiResponse) {
   try {
@@ -16,7 +16,7 @@ async function routeHandler(req: NextApiRequest, res: NextApiResponse) {
 }
 
 async function get(req: NextApiRequest, res: NextApiResponse) {
-  const data = await queryCompanies();
+  const data = await queryCompaniesByTypes();
   return res.status(200).json(data);
 }
 

@@ -2,6 +2,7 @@ import {
   Button,
   Card,
   Col,
+  Divider,
   Form,
   Input,
   InputNumber,
@@ -22,6 +23,7 @@ import React, {
 } from 'react';
 import styled from 'styled-components';
 
+import { DeleteOutlined, SaveOutlined } from '@ant-design/icons';
 import { BasicLayout } from '@components/Layout/Layout';
 import { MiniMapParams } from '@components/MiniMap';
 import { MiniMapRenderer } from '@components/MiniMapRender';
@@ -199,9 +201,19 @@ export const RestaurantEdit = memo<Props>((props) => {
                 </Space>
               </Form.Item>
 
-              <Form.Item label="Photos" name="photos">
+              <label htmlFor="" className="ant-form-item-label">
+                <span>Photos</span>
+                <br />
+                <Typography.Text italic type="secondary">
+                  Please upload photo with ratio 5:2
+                </Typography.Text>
+              </label>
+
+              <Form.Item name="photos">
                 <UploadImage />
               </Form.Item>
+
+              <Divider />
 
               <RightAction>
                 {isUpdate && (
@@ -213,13 +225,18 @@ export const RestaurantEdit = memo<Props>((props) => {
                     cancelText="No"
                     okButtonProps={{ danger: true }}
                   >
-                    <Button danger type="text">
+                    <Button danger type="text" icon={<DeleteOutlined />}>
                       Delete
                     </Button>
                   </Popconfirm>
                 )}
 
-                <Button loading={loading} type="primary" htmlType="submit">
+                <Button
+                  loading={loading}
+                  type="primary"
+                  htmlType="submit"
+                  icon={<SaveOutlined />}
+                >
                   Submit
                 </Button>
               </RightAction>

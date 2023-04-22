@@ -1,30 +1,22 @@
-import { Layout, Menu, Typography } from 'antd';
+import { Layout, Typography } from 'antd';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { memo, useCallback } from 'react';
 import styled from 'styled-components';
-
-import {
-  BankOutlined,
-  CoffeeOutlined,
-  EnvironmentOutlined,
-  ShoppingCartOutlined,
-} from '@ant-design/icons';
-import { UserProfile } from '@components/UserProfile';
 
 const HeaderStyle = styled(Layout.Header)`
   position: sticky;
   top: 0;
   z-index: 1;
   width: 100%;
-  background-color: #ffffff;
+  background-color: #f0f2f5;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 1px solid #dddddd;
 `;
 
 const LogoStyle = styled(Link)`
-  float: left;
   height: 31px;
   margin: 16px 24px 16px 0;
   background: rgba(255, 255, 255, 0.2);
@@ -52,43 +44,12 @@ export const Header = memo<Props>(function Header(props) {
 
   return (
     <HeaderStyle>
-      <Nav>
-        <LogoStyle href="/admin">
-          <img src="/logo.png" alt="Facility Booking" height={30} />
-          <Typography.Title level={4} style={{ margin: 0 }}>
-            VN Map - Admin
-          </Typography.Title>
-        </LogoStyle>
-
-        <Menu
-          mode="horizontal"
-          selectedKeys={[router.query.type as string]}
-          // onClick={handleClick}
-          items={[
-            {
-              icon: <CoffeeOutlined />,
-              label: <Link href="/admin/restaurant">Restaurant</Link>,
-              key: 'restaurant',
-            },
-            {
-              icon: <ShoppingCartOutlined />,
-              label: 'ShoppingMall',
-              key: 'shopping',
-            },
-            {
-              icon: <BankOutlined />,
-              label: 'Hotel',
-              key: 'hotel',
-            },
-            {
-              icon: <EnvironmentOutlined />,
-              label: 'Attractions',
-              key: 'attraction',
-            },
-          ]}
-        />
-      </Nav>
-      <UserProfile />
+      <LogoStyle href="/admin">
+        <img src="/logo.png" alt="Facility Booking" height={30} />
+        <Typography.Title level={4} style={{ margin: 0 }}>
+          VN Map - Admin
+        </Typography.Title>
+      </LogoStyle>
     </HeaderStyle>
   );
 });

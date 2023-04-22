@@ -23,3 +23,7 @@ a {
 .ant-select.ant-select:not(.ant-select-customize-input) .ant-select-selector {
   border-radius: 8px;
 }
+
+.ant-btn.ant-btn {
+  border-radius: 8px;
+}
