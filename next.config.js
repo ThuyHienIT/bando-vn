@@ -21,6 +21,16 @@ const nextConfig = {
     ],
   },
   output: 'standalone',
+  // webpack5: true,
+  webpack: (config) => {
+    config.resolve.fallback = {
+      tls: false,
+      net: false,
+      fs: false,
+    };
+
+    return config;
+  },
 };
 
 module.exports = nextConfig;

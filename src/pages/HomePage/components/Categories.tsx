@@ -13,7 +13,7 @@ import { activeAttractionTypeState, activeItemIdState } from '@recoil/common';
 
 const Wrapper = styled.div`
   position: absolute;
-  top: 16px;
+  top: 20px;
   display: flex;
   gap: 8px;
   left: 360px;
