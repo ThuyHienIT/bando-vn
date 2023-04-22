@@ -15,7 +15,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   if (session.user)
     return {
       redirect: {
-        destination: '/',
+        destination: '/admin',
       },
     };
 

@@ -15,12 +15,12 @@ export async function insertOne<T extends BaseType>(
   data.created_at = dayjs().format();
   data.updated_at = dayjs().format();
 
-  const resp = await sql`
+  const resp: T[] = await sql`
     INSERT INTO ${sql(`${table}`)} ${sql(data)}
     returning *
   `;
 
-  return resp[0] as T;
+  return transformDate(resp[0]);
 }
 
 export async function insertMany<T extends BaseType>(
@@ -33,12 +33,12 @@ export async function insertMany<T extends BaseType>(
     data.updated_at = dayjs().format();
   });
 
-  const resp: unknown = await sql`
+  const resp: T[] = await sql`
     INSERT INTO ${sql(`${table}`)} ${sql(datas)}
     returning *
   `;
 
-  return resp as T[];
+  return resp.map(transformDate);
 }
 
 export async function queryAll<T extends BaseType>(
@@ -49,18 +49,14 @@ export async function queryAll<T extends BaseType>(
     SELECT ${fields.length > 0 ? sql(fields) : sql`*`} FROM ${sql(`${table}`)}
   `;
 
-  return resp.map((i) => ({
-    ...i,
-    created_at: dayjs(i.created_at).format(),
-    updated_at: dayjs(i.updated_at).format(),
-  }));
+  return resp.map(transformDate) as T[];
 }
 
 export async function queryById<T extends BaseType>(table: string, id: string) {
-  const data = await sql`
+  const data: T[] = await sql`
     SELECT * FROM ${sql(table)} WHERE id=${id}
   `;
-  return data[0] as T;
+  return transformDate(data[0]);
 }
 
 export async function deleteByIds(table: string, ids: string[]) {
@@ -81,7 +77,17 @@ export async function updateOne<T extends BaseType>(
     updated_at=now()
     WHERE id=${id}`;
 
-  return updated[0] as T;
+  return transformDate(updated[0] as T);
 }
 
 export { sql };
+
+export function transformDate(i: DataType) {
+  if (!i) return i;
+
+  return {
+    ...i,
+    ...(i.created_at ? { created_at: dayjs(i.created_at).format() } : {}),
+    ...(i.updated_at ? { updated_at: dayjs(i.updated_at).format() } : {}),
+  };
+}

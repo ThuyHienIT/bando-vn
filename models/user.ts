@@ -1,6 +1,13 @@
 import { encryptToken } from '@lib/gen-token';
 
-import { deleteByIds, insertOne, queryAll, sql, updateOne } from './db';
+import {
+  deleteByIds,
+  insertOne,
+  queryAll,
+  sql,
+  transformDate,
+  updateOne,
+} from './db';
 
 export async function queryUsers() {
   const data: UserInfo[] = await queryAll('User', [
@@ -26,7 +33,7 @@ export async function getUser(id: string) {
     WHERE id=${id}
   `;
 
-  return data[0];
+  return transformDate(data[0]);
 }
 
 export async function updateUser(
@@ -47,4 +54,15 @@ export async function deleteUser(id: string) {
   await deleteByIds('User', [id]);
 
   return true;
+}
+
+export async function loginUser(email: string, password: string) {
+  const encrypted = await encryptToken(password);
+
+  const data: UserInfo[] = await sql`
+    SELECT * FROM  ${sql('User')}
+    WHERE email=${email} AND password=${encrypted}
+  `;
+
+  return transformDate(data[0]);
 }

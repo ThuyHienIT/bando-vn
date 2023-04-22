@@ -8,7 +8,7 @@ async function routeHandler(req: NextApiRequest, res: NextApiResponse) {
 
     return res.status(405).json({ message: 'Method Not Allowed' });
   } catch (e: any) {
-    console.debug('/api/companies/ ERROR::');
+    console.debug('/api/companies/ ERROR::', e);
     return res
       .status(500)
       .json({ message: 'Something went wrong. Please try again later.' });

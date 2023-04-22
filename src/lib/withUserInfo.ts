@@ -1,6 +1,8 @@
 import { getIronSession, IronSession } from 'iron-session';
 import { NextPage, NextPageContext } from 'next';
 
+import { getUser } from '@models/user';
+
 import { ironOptions } from './config';
 
 export const userGetInitialProps = async (ctx: NextPageContext) => {
@@ -12,7 +14,7 @@ export const userGetInitialProps = async (ctx: NextPageContext) => {
     );
     if (!user || !jwt_token) return {};
 
-    const userInfo = await getUserInfo();
+    const userInfo = await getUserInfo(user.id);
     user = { ...user, ...userInfo };
 
     return { user };
@@ -22,8 +24,8 @@ export const userGetInitialProps = async (ctx: NextPageContext) => {
 };
 
 export const userGetServerSideProps = async (session: IronSession) => {
-  if (!session.jwt_token || !session.user) return { props: { user: null } };
-  const user = await getUserInfo();
+  if (!session.user) return { props: { user: null } };
+  const user = await getUserInfo(session.user.id);
   return { props: { user } };
 };
 
@@ -33,6 +35,6 @@ export const withUserInfo = (Component: NextPage) => {
   return Component;
 };
 
-async function getUserInfo() {
-  return {};
+async function getUserInfo(id: string) {
+  return await getUser(id);
 }

@@ -1,10 +1,13 @@
-import { Button, Card, Form, Input, notification, Typography } from 'antd';
+import { Button, Card, Form, Input, Typography } from 'antd';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React, { memo, useCallback, useState } from 'react';
+import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 
 import request from '@lib/request';
+import { userInfoState } from '@recoil/user';
+import { notify } from '@utils/common';
 
 interface Props {}
 
@@ -45,39 +48,42 @@ const Logo = styled.div`
   margin-bottom: 16px;
 `;
 
+const RightAction = styled.div`
+  text-align: right;
+`;
+
 const LoginPage = memo(function LoginPage(props: Props) {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const email = Form.useWatch('email', form);
   const password = Form.useWatch('password', form);
-  const [api, contextHandler] = notification.useNotification();
   const router = useRouter();
+  const updateUserInfo = useSetRecoilState(userInfoState);
 
   const handleSubmit = useCallback(
     async (values: { email: string; password: string }) => {
       try {
         setLoading(true);
-        await request('/api/login', {
+        const resp: UserInfo = await request('/api/login', {
           method: 'POST',
           body: JSON.stringify({
             email: values.email,
             password: values.password,
           }),
         });
-
-        router.push('/');
+        updateUserInfo(resp);
+        router.push('/admin');
       } catch (e: any) {
-        api.error({ message: e.message });
+        notify.error(e.message);
       } finally {
         setLoading(false);
       }
     },
-    [api, router]
+    [router, updateUserInfo]
   );
 
   return (
     <Wrapper>
-      {contextHandler}
       <CardStyle>
         <Logo>
           <Image
@@ -87,7 +93,7 @@ const LoginPage = memo(function LoginPage(props: Props) {
             height={50}
           />
           <Typography.Title level={4} style={{ marginBottom: 0 }}>
-            Facility Booking
+            VN Map
           </Typography.Title>
         </Logo>
         <Form form={form} onFinish={handleSubmit} layout="vertical">
@@ -111,14 +117,16 @@ const LoginPage = memo(function LoginPage(props: Props) {
             <Input type="password" allowClear />
           </Form.Item>
 
-          <Button
-            type="primary"
-            htmlType="submit"
-            loading={loading}
-            disabled={!email || !password}
-          >
-            Login
-          </Button>
+          <RightAction>
+            <Button
+              type="primary"
+              htmlType="submit"
+              loading={loading}
+              disabled={!email || !password}
+            >
+              Login
+            </Button>
+          </RightAction>
         </Form>
       </CardStyle>
     </Wrapper>

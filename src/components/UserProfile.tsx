@@ -1,14 +1,10 @@
-import { Button, Dropdown, MenuProps, Typography } from 'antd';
-import Link from 'next/link';
+import { Button, Dropdown, MenuProps, Tag, Typography } from 'antd';
 import { useRouter } from 'next/navigation';
 import { memo, useCallback, useMemo } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useResetRecoilState } from 'recoil';
 
-import {
-  CalendarOutlined,
-  LogoutOutlined,
-  UserOutlined,
-} from '@ant-design/icons';
+import { LogoutOutlined, UserOutlined } from '@ant-design/icons';
+import { clearSessionSelector } from '@recoil/common';
 
 import request from '../lib/request';
 import { userInfoState } from '../recoil/user';
@@ -16,37 +12,38 @@ import { userInfoState } from '../recoil/user';
 export const UserProfile = memo(function UserProfile() {
   const router = useRouter();
   const userInfo = useRecoilValue(userInfoState);
+  const clearSession = useResetRecoilState(clearSessionSelector);
 
   const handleLogout = useCallback(async () => {
     try {
       await request('/api/logout');
+      clearSession();
 
       router.push('/login');
     } catch (e: any) {}
-  }, [router]);
+  }, [clearSession, router]);
 
   const items = useMemo<MenuProps['items']>(
     () => [
       {
-        label: `Welcome ${userInfo?.email}`,
+        label: (
+          <>
+            Role: <Tag>{userInfo?.role}</Tag>
+          </>
+        ),
         key: 'user',
       },
       {
-        label: <Link href="/user/bookings">Your Bookings</Link>,
-        key: 'bookings',
-        icon: <CalendarOutlined />,
-      },
-      {
         type: 'divider',
-        key: 'divider',
       },
+
       {
         label: <Typography.Text onClick={handleLogout}>Logout</Typography.Text>,
         key: 'logout',
         icon: <LogoutOutlined />,
       },
     ],
-    [handleLogout, userInfo?.email]
+    [handleLogout, userInfo?.role]
   );
 
   return (

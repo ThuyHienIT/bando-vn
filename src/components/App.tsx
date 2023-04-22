@@ -5,16 +5,25 @@ import { memo, useEffect } from 'react';
 import { RecoilRoot, useRecoilSnapshot } from 'recoil';
 import { ThemeProvider } from 'styled-components';
 
+import { userInfoState } from '@recoil/user';
+
 import { configProviders } from '../antd-theme';
 import { theme } from '../theme';
 import { ErrorBoundary } from './ErrorBoundary';
 
 interface Props {
   children: React.ReactNode;
+  user?: UserInfo;
 }
 export const App = memo<Props>(function App(props) {
+  console.log('user', props.user);
   return (
-    <RecoilRoot>
+    <RecoilRoot
+      initializeState={({ set }) => {
+        console.log('init');
+        if (props.user) set(userInfoState, props.user);
+      }}
+    >
       <ErrorBoundary>
         <DebugObserver />
       </ErrorBoundary>

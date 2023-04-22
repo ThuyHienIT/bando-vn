@@ -1,8 +1,15 @@
 import { Layout, Typography } from 'antd';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { userInfo } from 'os';
 import { memo } from 'react';
+import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
+
+import { UserProfile } from '@components/UserProfile';
+import { userInfoState } from '@recoil/user';
+
+import { Container } from './Container';
 
 const HeaderStyle = styled(Layout.Header)`
   position: sticky;
@@ -10,10 +17,14 @@ const HeaderStyle = styled(Layout.Header)`
   z-index: 1;
   width: 100%;
   background-color: #f0f2f5;
+  border-bottom: 1px solid #dddddd;
+  padding: 0;
+`;
+
+const ContainerStyle = styled(Container)`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #dddddd;
 `;
 
 const LogoStyle = styled(Link)`
@@ -33,15 +44,20 @@ interface Props {}
 
 export const Header = memo<Props>(function Header(props) {
   const router = useRouter();
+  const userInfo = useRecoilValue(userInfoState);
 
   return (
     <HeaderStyle>
-      <LogoStyle href="/admin">
-        <img src="/logo.png" alt="Facility Booking" height={30} />
-        <Typography.Title level={4} style={{ margin: 0 }}>
-          VN Map - Admin
-        </Typography.Title>
-      </LogoStyle>
+      <ContainerStyle>
+        <LogoStyle href="/admin">
+          <img src="/logo.png" alt="Facility Booking" height={30} />
+          <Typography.Title level={4} style={{ margin: 0 }}>
+            VN Map - Admin
+          </Typography.Title>
+        </LogoStyle>
+
+        <UserProfile />
+      </ContainerStyle>
     </HeaderStyle>
   );
 });

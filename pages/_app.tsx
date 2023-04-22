@@ -6,6 +6,7 @@ import { App } from '@components/App';
 
 import type { AppProps } from 'next/app';
 const MyApp = ({ Component, pageProps }: AppProps) => {
+  console.log('pageProps', pageProps);
   return (
     <>
       <Head>
@@ -29,7 +30,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         <meta property="og:image" content="/img/Spinarak_OG_image.png" />
         <meta property="og:site_name" content="Spinarak" />
       </Head>
-      <App>
+      <App user={pageProps.user}>
         <Component {...pageProps} />
       </App>
     </>

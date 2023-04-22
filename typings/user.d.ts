@@ -1,3 +1,1 @@
-type UserInfo = {
-  email: string;
-};
+ 
