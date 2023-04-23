@@ -6,39 +6,38 @@ import {
   queryAll,
   sql,
   transformDate,
-  updateOne,
+  updateOne
 } from './db';
 
+const UserPropsToQuery = ['email', 'id', 'role', 'name'];
+
 export async function queryUsers() {
-  const data: UserInfo[] = await queryAll('User', [
-    'email',
-    'id',
-    'role',
-    'name',
-  ]);
+  const data: UserInfo[] = await queryAll('User', UserPropsToQuery);
 
   return data;
 }
 
-export async function insertUser(user: UserInfo & { password: string }) {
+type UserInfoWPass = UserInfo & { password: string };
+export async function insertUser(user: UserInfoWPass) {
   user.password = await encryptToken(user.password);
-  const inserted = await insertOne<CompanyType>('User', user);
+  const { password, ...inserted } = await insertOne<UserInfoWPass>(
+    'User',
+    user
+  );
 
   return inserted;
 }
 
 export async function getUser(id: string) {
   const data: UserInfo[] = await sql`
-    SELECT * FROM  ${sql('User')}
+    SELECT ${sql(UserPropsToQuery)} FROM  ${sql('User')}
     WHERE id=${id}
   `;
 
   return transformDate(data[0]);
 }
 
-export async function updateUser(
-  payload: Partial<UserInfo & { password: string }>
-) {
+export async function updateUser(payload: Partial<UserInfoWPass>) {
   if (!payload.id) throw Error('Missing id');
 
   if (payload.password) {

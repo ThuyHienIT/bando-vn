@@ -6,10 +6,10 @@ import { App } from '@components/App';
 
 import type { AppProps } from 'next/app';
 const MyApp = ({ Component, pageProps }: AppProps) => {
-  console.log('pageProps', pageProps);
   return (
     <>
       <Head>
+        <title>VN Map</title>
         <meta charSet="utf-8" />
         <link rel="icon" href="/favicon.ico?v=2" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />

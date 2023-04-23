@@ -5,15 +5,18 @@ import {
   Form,
   Input,
   notification,
-  Typography,
+  Typography
 } from 'antd';
 import { useRouter } from 'next/router';
+import { userInfo } from 'os';
 import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
+import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 
 import { SaveOutlined } from '@ant-design/icons';
 import { BasicLayout } from '@components/Layout/Layout';
 import request from '@lib/request';
+import { userInfoState } from '@recoil/user';
 
 interface Props {
   user: UserInfo;
@@ -29,6 +32,7 @@ const SettingsPage = memo<Props>((props) => {
   const [form] = Form.useForm<UserInfo>();
 
   const [loading, setLoading] = useState(false);
+  const [userInfo, updateUserInfo] = useRecoilState(userInfoState);
 
   const isUpdate = useMemo(() => Boolean(props.user?.id), [props.user?.id]);
   const type = useMemo(() => router.query.type as string, [router.query.type]);
@@ -38,7 +42,7 @@ const SettingsPage = memo<Props>((props) => {
       try {
         setLoading(true);
         const url = isUpdate ? `/api/user/${props.user?.id}` : '/api/user';
-        await request(url, {
+        const resp: UserInfo = await request(url, {
           method: isUpdate ? 'PUT' : 'POST',
           body: JSON.stringify({
             ...values,
@@ -46,6 +50,7 @@ const SettingsPage = memo<Props>((props) => {
           }),
         });
 
+        updateUserInfo({ ...userInfo, ...resp });
         notification.success({
           message: isUpdate ? 'Update success' : 'Add Success',
         });
@@ -55,7 +60,7 @@ const SettingsPage = memo<Props>((props) => {
         setLoading(false);
       }
     },
-    [isUpdate, props.user?.id]
+    [isUpdate, props.user?.id, updateUserInfo, userInfo]
   );
 
   useEffect(() => {

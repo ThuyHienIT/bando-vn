@@ -2,6 +2,7 @@ import {
   Button,
   Card,
   Col,
+  DatePicker,
   Divider,
   Form,
   Input,
@@ -9,32 +10,23 @@ import {
   notification,
   Popconfirm,
   Row,
-  Space,
   Typography
 } from 'antd';
+import moment, { Moment } from 'moment';
 import { useRouter } from 'next/router';
-import React, {
-  memo,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState
-} from 'react';
+import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 
 import { DeleteOutlined, SaveOutlined } from '@ant-design/icons';
 import { BasicLayout } from '@components/Layout/Layout';
-import { MiniMapParams } from '@components/MiniMap';
-import { MiniMapRenderer } from '@components/MiniMapRender';
 import { UploadImage } from '@components/UploadImage';
 import request from '@lib/request';
-import { getLatLong } from '@utils/common';
+import { notify } from '@utils/common';
 
-import { HeadingMapping } from './config';
+import { CompanySearch } from './CompanySearch';
 
 interface Props {
-  data?: CompanyType;
+  data?: TourDetailsType;
   isAdd?: boolean;
   extra?: React.ReactNode;
 }
@@ -42,60 +34,44 @@ interface Props {
 const RightAction = styled.div`
   text-align: right;
 `;
-type CompanyFormType = CompanyType & { lat: string; long: string };
-export const RestaurantEdit = memo<Props>((props) => {
+type CompanyFormType = Omit<TourDetailsType, 'start_date' | 'end_date'> & {
+  start_date: Moment;
+  end_date: Moment;
+};
+
+export const TourEdit = memo<Props>((props) => {
   const router = useRouter();
-
   const [form] = Form.useForm<CompanyFormType>();
-  const watchLat = Form.useWatch('lat', form);
-  const watchLong = Form.useWatch('long', form);
-
   const [loading, setLoading] = useState(false);
-  const mapRef = useRef<MiniMapParams>();
-
   const isUpdate = useMemo(() => Boolean(props.data?.id), [props.data?.id]);
-  const type = useMemo(() => router.query.type as string, [router.query.type]);
 
   const handleFinish = useCallback(
     async (values: CompanyFormType) => {
-      const { lat, long, ...d } = values;
-      d.geometry = `(${lat}, ${long})`;
-
       try {
         setLoading(true);
-        const url = isUpdate
-          ? `/api/company/${props.data?.id}`
-          : '/api/company';
+        const url = isUpdate ? `/api/tour/${props.data?.id}` : '/api/tour';
         await request(url, {
           method: isUpdate ? 'PUT' : 'POST',
           body: JSON.stringify({
-            ...d,
+            ...values,
             id: props.data?.id ?? '',
-            type,
           }),
         });
 
-        notification.success({
-          message: isUpdate ? 'Update success' : 'Add Success',
-        });
-        router.push(`/admin/${type}`);
+        notify.success(isUpdate ? 'Update success' : 'Add Success');
+        router.push(`/admin/tour`);
       } catch (e: any) {
-        notification.error(e.message);
+        notify.error(e.message);
       } finally {
         setLoading(false);
       }
     },
-    [isUpdate, props.data?.id, router, type]
+    [isUpdate, props.data?.id, router]
   );
-
-  const handleOnLoad = useCallback(() => {
-    const [lat, long] = getLatLong(props.data?.geometry);
-    mapRef.current?.goTo(lat, long);
-  }, [props.data?.geometry]);
 
   const handleDelete = useCallback(async () => {
     try {
-      await request(`/api/company/${props.data?.id}`, {
+      await request(`/api/tour/${props.data?.id}`, {
         method: 'DELETE',
       });
 
@@ -106,34 +82,30 @@ export const RestaurantEdit = memo<Props>((props) => {
     }
   }, [props.data?.id]);
 
+  const handleSelectCompany = useCallback(
+    (id: string) => {
+      form.setFieldValue('company_id', id);
+    },
+    [form]
+  );
+
   useEffect(() => {
     if (!form.isFieldsTouched() && props.data) {
-      form.setFieldsValue(props.data);
+      form.setFieldsValue({
+        ...props.data,
+        start_date: moment(props.data.start_date),
+        end_date: moment(props.data.end_date),
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.data]);
 
-  useEffect(() => {
-    if (props.data?.geometry) {
-      let [lat, long] = getLatLong(props.data.geometry);
-
-      form.setFieldValue('lat', lat);
-      form.setFieldValue('long', long);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.data?.geometry]);
-
-  useEffect(() => {
-    if (!watchLat || !watchLong) return;
-    mapRef.current?.goTo?.(parseFloat(watchLat), parseFloat(watchLong));
-  }, [watchLat, watchLong]);
+  console.log('data form form', props.data);
 
   return (
     <BasicLayout>
       <Typography.Title level={3} style={{ marginTop: 50 }}>
-        {isUpdate
-          ? `Edit: ${props.data?.name}`
-          : `Add ${HeadingMapping[type] ?? type}`}
+        {isUpdate ? `Edit: ${props.data?.name}` : `Add Tour`}
       </Typography.Title>
       <Card style={{ marginBottom: 32 }}>
         <Row gutter={16}>
@@ -142,17 +114,20 @@ export const RestaurantEdit = memo<Props>((props) => {
               form={form}
               layout="vertical"
               name="basic"
-              initialValues={props.data}
               onFinish={handleFinish}
               autoComplete="off"
             >
+              <Form.Item hidden name="company_id">
+                <Input type="hidden" />
+              </Form.Item>
+
               <Form.Item label="Name" name="name" rules={[{ required: true }]}>
                 <Input />
               </Form.Item>
 
               <Form.Item
-                label="Sypnosis"
-                name="synopsis"
+                label="Description"
+                name="description"
                 rules={[{ required: true }]}
               >
                 <Input.TextArea />
@@ -167,39 +142,27 @@ export const RestaurantEdit = memo<Props>((props) => {
               </Form.Item>
 
               <Form.Item
-                label="Address"
-                name="address"
+                label="Start date"
+                name="start_date"
                 rules={[{ required: true }]}
               >
-                <Input />
+                <DatePicker />
               </Form.Item>
 
               <Form.Item
-                label="Phone number"
-                name="tel"
+                label="End date"
+                name="end_date"
                 rules={[{ required: true }]}
               >
-                <Input />
+                <DatePicker />
               </Form.Item>
 
-              <Form.Item style={{ marginBottom: 0 }}>
-                <Space align="center">
-                  <Form.Item
-                    label="Lattitue"
-                    name="lat"
-                    rules={[{ required: true }]}
-                  >
-                    <InputNumber />
-                  </Form.Item>
-                  <span>-</span>
-                  <Form.Item
-                    label="Longtitue"
-                    name="long"
-                    rules={[{ required: true }]}
-                  >
-                    <InputNumber />
-                  </Form.Item>
-                </Space>
+              <Form.Item
+                label="Price"
+                name="price"
+                rules={[{ required: true }]}
+              >
+                <InputNumber />
               </Form.Item>
 
               <label htmlFor="" className="ant-form-item-label">
@@ -213,8 +176,6 @@ export const RestaurantEdit = memo<Props>((props) => {
               <Form.Item name="photos">
                 <UploadImage />
               </Form.Item>
-
-              {props.extra}
               <Divider />
 
               <RightAction>
@@ -245,10 +206,13 @@ export const RestaurantEdit = memo<Props>((props) => {
             </Form>
           </Col>
           <Col span={12}>
-            <Typography.Paragraph>Location</Typography.Paragraph>
-            <div style={{ height: 400 }}>
-              <MiniMapRenderer ref={mapRef as any} onLoad={handleOnLoad} />
-            </div>
+            <Typography.Paragraph style={{ marginBottom: 8 }}>
+              Company Agency
+            </Typography.Paragraph>
+            <CompanySearch
+              defaultValue={props.data?.company}
+              onSelect={handleSelectCompany}
+            />
           </Col>
         </Row>
       </Card>

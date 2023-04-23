@@ -1,40 +1,38 @@
 import { GetServerSidePropsContext, NextPage } from 'next';
-import Error from 'next/error';
 import Head from 'next/head';
 import React, { memo } from 'react';
 
 import { withSessionSsr } from '@lib/withSession';
 import { userGetServerSideProps } from '@lib/withUserInfo';
-import { queryUsers } from '@models/user';
-import SettingsPage from '@pages/AdminPage/SettingsPage';
+import { queryTourByCompanyId } from '@models/tour';
+import { TourList } from '@pages/AdminPage/TourPage/TourList';
 
-const Page: NextPage<{ user?: UserInfo }> = memo((props) => {
-  if (!props.user) return <Error statusCode={403} />;
-
+const Page: NextPage<{ data: CompanyType[] }> = memo((props) => {
   return (
     <>
       <Head>
-        <title>Settings</title>
+        <title>Tour Management</title>
       </Head>
-      <SettingsPage user={props.user} />
+      <TourList {...props} />
     </>
   );
 });
 
 async function getServerSidePropsHandler(ctx: GetServerSidePropsContext) {
   const userProps = await userGetServerSideProps(ctx.req.session);
+  let data: TourDetailsType[] = [];
+  const type = ctx.query.type as string;
 
-  let data: UserInfo[] = [];
   try {
-    data = await queryUsers();
+    data = await queryTourByCompanyId();
   } catch (e: any) {
-    console.log('ERROR:: Cannot retrieve data', e);
+    console.log('ERROR:: Cannot retrieve prototype details', e);
   }
 
   return {
     props: {
       ...userProps.props,
-      users: data,
+      data: data,
     },
   };
 }

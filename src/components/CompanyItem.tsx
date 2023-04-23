@@ -35,6 +35,7 @@ const ImageStyle = styled(Image)``;
 
 interface Props {
   data: CompanyType;
+  type?: string;
 }
 
 export function FacilityItemCmp(props: Props) {
@@ -48,7 +49,7 @@ export function FacilityItemCmp(props: Props) {
         ) : null
       }
       actions={[
-        <Link href={`/admin/restaurant/edit/${props.data.id}`} key="details">
+        <Link href={`/admin/${props.type}/edit/${props.data.id}`} key="details">
           <Button type="text" size="small" icon={<EditOutlined />}>
             Edit
           </Button>

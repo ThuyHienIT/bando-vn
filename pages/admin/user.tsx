@@ -1,4 +1,5 @@
 import { GetServerSidePropsContext, NextPage } from 'next';
+import Head from 'next/head';
 import React, { memo } from 'react';
 
 import { withSessionSsr } from '@lib/withSession';
@@ -8,7 +9,14 @@ import UserPage from '@pages/AdminPage/UserPage';
 
 const Page: NextPage<{ user?: UserInfo; users?: UserInfo[] }> = memo(
   (props) => {
-    return <UserPage {...props} />;
+    return (
+      <>
+        <Head>
+          <title>Users Management</title>
+        </Head>
+        <UserPage {...props} />
+      </>
+    );
   }
 );
 

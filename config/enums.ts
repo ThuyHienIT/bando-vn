@@ -3,4 +3,5 @@ export enum CompanyTypeEnum {
   shopping = 'shopping',
   hotel = 'hotel',
   attraction = 'attraction',
+  agency = 'agency',
 }

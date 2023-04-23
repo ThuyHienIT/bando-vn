@@ -5,7 +5,7 @@ import {
   deletePhotosByFieldId,
   deletePhotosByIds,
   insertPhotos,
-  queryPhotosByFieldId,
+  queryPhotosByFieldId
 } from './photo';
 
 type CompanyWithPhotoType = CompanyType & { photo_url: string };
@@ -14,16 +14,25 @@ export async function queryCompaniesByTypes(
   types?: string[],
   keyword?: string
 ) {
+  let conditions: any = '';
+  if (types && types.length > 0) {
+    conditions = sql`c.type in ${sql(types)}`;
+  }
+
+  if (keyword) {
+    if (conditions) {
+      conditions = sql`${conditions} 
+      AND upper(c.name) like ${`%${keyword.toUpperCase()}%`}`;
+    } else {
+      conditions = sql`upper(c.name) like ${`%${keyword.toUpperCase()}%`}`;
+    }
+  }
+
   const companies: CompanyWithPhotoType[] = await sql`
     SELECT c.*, p.photo_url FROM 
     ${sql('BaseCompany')} c LEFT JOIN ${sql('Photo')} p 
     ON c.id = p.company_id
-    ${types && types?.length > 0 ? sql`WHERE  c.type in ${sql(types)}` : sql``}
-    ${
-      keyword
-        ? sql`WHERE  upper(c.name) like ${`%${keyword.toUpperCase()}%`}`
-        : sql``
-    }
+    ${conditions ? sql`WHERE ${conditions}` : sql``}
   `;
 
   return transformCompany(companies);

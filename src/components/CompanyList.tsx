@@ -60,7 +60,7 @@ export function CompanyList(props: Props) {
         <ListStyle gutter={16} style={{ marginTop: 16 }}>
           {listData.map((item) => (
             <ColStyle key={item.id} md={6}>
-              <FacilityItemCmp data={item} />
+              <FacilityItemCmp data={item} type={props.type} />
             </ColStyle>
           ))}
         </ListStyle>

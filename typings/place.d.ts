@@ -30,6 +30,8 @@ type TourDetailsType = {
   description: string;
   created_at: string;
   updated_at: string;
+  company_id?: string;
+  company?: CompanyType;
 };
 type TouristAgencyType = CompanyType & {
   tours: TourDetailsType[];

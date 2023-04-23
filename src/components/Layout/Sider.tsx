@@ -10,10 +10,12 @@ import {
   ArrowRightOutlined,
   BankOutlined,
   CoffeeOutlined,
+  DollarCircleOutlined,
   EnvironmentOutlined,
+  PictureOutlined,
   ShoppingCartOutlined,
   ToolOutlined,
-  UserOutlined,
+  UserOutlined
 } from '@ant-design/icons';
 import { userInfoState } from '@recoil/user';
 
@@ -77,13 +79,11 @@ export const Sider = memo<Props>(function Sider(props) {
     setCollapsed((c) => !c);
   }, []);
 
-  const type = useMemo(
-    () =>
-      router.pathname === '/admin/user'
-        ? 'user'
-        : (router.query.type as string),
-    [router]
-  );
+  const type = useMemo(() => {
+    if (router.query.type) return router.query.type as string;
+
+    return router.pathname.replace('/admin/', '').split('/')[0];
+  }, [router]);
 
   return (
     <SidebarStyle
@@ -130,6 +130,16 @@ export const Sider = memo<Props>(function Sider(props) {
             icon: <EnvironmentOutlined />,
             label: <Link href="/admin/restaurant">Attractions</Link>,
             key: 'attraction',
+          },
+          {
+            icon: <DollarCircleOutlined />,
+            label: <Link href="/admin/agency">Agency</Link>,
+            key: 'agency',
+          },
+          {
+            icon: <PictureOutlined />,
+            label: <Link href="/admin/tour">Tour</Link>,
+            key: 'tour',
           },
           {
             icon: <ToolOutlined />,

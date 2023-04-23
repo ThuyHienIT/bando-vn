@@ -1,4 +1,5 @@
 import { GetServerSidePropsContext, NextPage } from 'next';
+import Head from 'next/head';
 import { redirect } from 'next/navigation';
 import React, { memo } from 'react';
 
@@ -8,7 +9,14 @@ import { getCompany } from '@models/company';
 import { RestaurantEdit } from '@pages/AdminPage/Restaurant/RestaurantEdit';
 
 const Page: NextPage<{ data: CompanyType }> = memo((props) => {
-  return <RestaurantEdit {...props} />;
+  return (
+    <>
+      <Head>
+        <title>Edit: {props.data.name}</title>
+      </Head>
+      <RestaurantEdit {...props} />
+    </>
+  );
 });
 
 async function getServerSidePropsHandler(ctx: GetServerSidePropsContext) {

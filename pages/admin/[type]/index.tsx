@@ -1,13 +1,25 @@
 import { GetServerSidePropsContext, NextPage } from 'next';
+import Head from 'next/head';
 import React, { memo } from 'react';
 
 import { withSessionSsr } from '@lib/withSession';
 import { userGetServerSideProps } from '@lib/withUserInfo';
 import { queryCompaniesByTypes } from '@models/company';
+import { HeadingMapping } from '@pages/AdminPage/Restaurant/config';
 import { RestaurantList } from '@pages/AdminPage/Restaurant/RestaurantList';
 
-const Page: NextPage<{ data: CompanyType[] }> = memo((props) => {
-  return <RestaurantList {...props} />;
+const Page: NextPage<{ data: CompanyType[]; type?: string }> = memo((props) => {
+  console.log('type', props.type);
+  return (
+    <>
+      <Head>
+        <title>
+          {`${props.type ? HeadingMapping[props.type] : ''} Management`}
+        </title>
+      </Head>
+      <RestaurantList {...props} />
+    </>
+  );
 });
 
 async function getServerSidePropsHandler(ctx: GetServerSidePropsContext) {
@@ -25,6 +37,7 @@ async function getServerSidePropsHandler(ctx: GetServerSidePropsContext) {
     props: {
       ...userProps.props,
       data: data,
+      type,
     },
   };
 }

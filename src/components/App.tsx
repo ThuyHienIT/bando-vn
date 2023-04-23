@@ -16,11 +16,9 @@ interface Props {
   user?: UserInfo;
 }
 export const App = memo<Props>(function App(props) {
-  console.log('user', props.user);
   return (
     <RecoilRoot
       initializeState={({ set }) => {
-        console.log('init');
         if (props.user) set(userInfoState, props.user);
       }}
     >
