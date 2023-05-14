@@ -79,7 +79,7 @@ const MiniMap = memo<MiniMapProps>(({ onLoad, ...props }) => {
 
       const view = new MapView({
         map: map,
-        center: [10.811743, 106.6061775],
+        center: [106.71852990620054, 10.841172223862083],
         zoom: 10,
         background: { color: '#a7d6fe' },
         container: mapElRef.current,
