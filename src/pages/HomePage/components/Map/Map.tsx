@@ -176,6 +176,7 @@ const MapComp = memo(() => {
         } else {
           symbol.set('width', '16px');
           symbol.set('height', '22px');
+          symbol.set('url','/img/map/pin-inactive.svg');
         }
 
         graphicsToAdd.push(
