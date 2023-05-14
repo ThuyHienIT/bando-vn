@@ -105,7 +105,7 @@ const MapComp = memo(() => {
       const view = new MapView({
         map: map,
         center: [106.71852990620054, 10.841172223862083],
-        zoom: 20,
+        zoom: 14,
         background: { color: '#a7d6fe' },
         container: mapElRef.current,
         popup: {
