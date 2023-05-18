@@ -128,7 +128,7 @@ export const Sider = memo<Props>(function Sider(props) {
           },
           {
             icon: <EnvironmentOutlined />,
-            label: <Link href="/admin/attractions">Attractions</Link>,
+            label: <Link href="/admin/attraction">Attraction</Link>,
             key: 'attraction',
           },
           {
