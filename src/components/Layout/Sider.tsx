@@ -140,7 +140,7 @@ export const Sider = memo<Props>(function Sider(props) {
             icon: <PictureOutlined />,
             label: <Link href="/admin/tour">Tour</Link>,
             key: 'tour',
-          },
+          }, // No use
           {
             icon: <ToolOutlined />,
             label: <Link href="/admin/settings">Settings</Link>,
